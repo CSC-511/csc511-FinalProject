@@ -188,13 +188,23 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, AddFriendComponent);
 });
-;define("client/components/friends-list", ["exports"], function (_exports) {
+;define("client/components/friends-list", ["exports", "@glimmer/component"], function (_exports, _component) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
   _exports.default = void 0;
+
+  var _dec, _class, _descriptor, _temp;
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
@@ -224,9 +234,38 @@
   */
   {"id":"oyZFCZQX","block":"{\"symbols\":[\"friendData\"],\"statements\":[[2,\"\\n\"],[2,\"\\n\"],[10,\"div\"],[14,0,\"container\"],[12],[2,\"\\n\"],[10,\"h3\"],[12],[2,\"Friends List\"],[13],[2,\"\\n\"],[6,[37,2],[[32,0,[\"friendsListData\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"    \\n\"],[6,[37,1],[[30,[36,0],[[30,[36,0],[[32,0,[\"friendsListData\"]]],null]],null]],null,[[\"default\"],[{\"statements\":[[2,\"    \\n    \\n    \"],[10,\"img\"],[14,0,\"profile-pic\"],[15,\"src\",[32,1,[\"img\"]]],[15,\"alt\",[32,1,[\"firstName\"]]],[12],[13],[2,\"\\n    \"],[10,\"p\"],[14,0,\"friend-name\"],[12],[2,\" \"],[1,[32,1,[\"firstName\"]]],[2,\" \"],[1,[32,1,[\"lastName\"]]],[13],[2,\"\\n\\n\"]],\"parameters\":[1]}]]],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"    \"],[10,\"p\"],[12],[2,\"This profile does not have any friends yet, try adding some now!\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]}]]],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-track-array\",\"each\",\"if\"]}","meta":{"moduleName":"client/components/friends-list.hbs"}});
 
-  var _default = Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, Ember._templateOnlyComponent());
+  let FriendsListComponent = (_dec = Ember._tracked, (_class = (_temp = class FriendsListComponent extends _component.default {
+    constructor() {
+      super(...arguments);
 
-  _exports.default = _default;
+      _initializerDefineProperty(this, "friendsListData", _descriptor, this);
+
+      let fakeFriendsData = [{
+        firstName: "Jasper",
+        lastName: "Caballero",
+        img: "http://placekitten.com/200/300"
+      }, {
+        firstName: "Daniel",
+        lastName: "Dolan",
+        img: "http://placekitten.com/300/300"
+      }, {
+        firstName: "Victoria",
+        lastName: "Fischer",
+        img: "http://placekitten.com/201/300"
+      }];
+      this.friendsListData = fakeFriendsData;
+      console.log(this.friendsListData);
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "friendsListData", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  })), _class));
+  _exports.default = FriendsListComponent;
+
+  Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, FriendsListComponent);
 });
 >>>>>>> relevant files commit
 ;define("client/components/individual-bet", ["exports", "@glimmer/component"], function (_exports, _component) {
