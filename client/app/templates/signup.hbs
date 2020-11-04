@@ -1,0 +1,30 @@
+<div class="welcome">
+    <h1>Welcome to TEMPNAME</h1>
+</div>
+<div class="signup-box">
+    <h1>Sign Up</h1>
+    <div class="input-box">       
+        <input type="text" placeholder="Username" maxlength="40">
+        <i class="icon fa fa-user"></i>
+    </div>
+    <div class="input-box">        
+        <input type="password" placeholder="Password" maxlength="40">
+        <i class="icon fa fa-lock"></i>  
+    </div>  
+    <div class="input-box">
+        <input type="email" placeholder="Email" maxlength="40">
+        <i class="enve fa fa-envelope"></i>
+    </div>  
+    
+    <button class="btn">Sign Up</button>
+    <div class="sign-up">
+        <p>Already a member? <LinkTo @route="login">Log in now!</LinkTo></p>
+    </div>
+</div>
+
+
+<div class="tom">
+    <img src="/assets/images/tom.png">
+</div>
+
+{{outlet}}
