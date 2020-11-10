@@ -1,0 +1,14 @@
+<div>
+    <h3> Active Bets </h3>
+   
+    {{#each this.aBets key = "@index" as |bets index|}}
+    <li>
+    <b>{{bets.title}}</b>
+    <p>Tag: {{bets.tag}}</p>
+    <p>Description: {{bets.description}}</p>
+    <button onclick={{IndivBets}}>view</button>
+    </li>
+    {{/each}} 
+
+    {{!-- <IndivBets @aBets = {{aBets}}/> --}}
+</div>
