@@ -4,18 +4,18 @@
 <div class="login-box">
     <h1>Login</h1>
     <div class="input-box">       
-        <input type="text" placeholder="Username or Email" maxlength="40" value={{userInput}} oninput={{this.updateUser}}>
+        <input type="text" placeholder="Username or Email" maxlength="40" value={{userName}} onchange={{action getUsername}}>
         <i class="icon fa fa-user"></i>
     </div>
     <div class="input-box">        
-        <input type="password" placeholder="Password" maxlength="40" value={{userPass}}>
+        <input type="password" placeholder="Password" maxlength="40" value={{userPass}} onchange={{action getUserpass}}>
         <i class="icon fa fa-lock"></i>  
     </div>  
     <div class="remember">   
-        <label><input type="checkbox">Remember me</label>
+        <label><input type="checkbox" onchange={{action checkRemember}}>Remember me</label>
     </div>
     
-    <button class="btn">Log In</button>
+    <button class="btn" onclick={{action checkInfo}}>Log In</button>
     <div class="sign-up">
         <p>Not a member? <LinkTo @route="signup">Sign up now!</LinkTo></p>
     </div>
@@ -23,7 +23,6 @@
         <a href="">Forgot your password?</a>
     </div>
 </div>
-
 
 <div class="tom">
     <img src="/assets/images/tom.png">
