@@ -137,7 +137,7 @@ changeUser(){
     this.displayCreateBet = false    
 
 }
-changeAdmin(){/
+changeAdmin(){
     this.newData()
     this.displayCreateBet = true
 }
