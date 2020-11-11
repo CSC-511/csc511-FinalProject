@@ -6,7 +6,7 @@ import ENV from 'client/config/environment';
 const FAKE_COOKIES = 123123123
 
 export default class NavbarComponent extends Component {
-    @service router;
+    // @service router;
 
     // @action
     // redirectToSignInPage(){

@@ -16,10 +16,14 @@
   });
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;define("client/adapters/application", ["exports", "@ember-data/adapter/json-api"], function (_exports, _jsonApi) {
 =======
 ;define("client/adapters/application", ["exports", "ember-data", "client/config/environment"], function (_exports, _emberData, _environment) {
 >>>>>>> Yeting--Navbar and Router added
+=======
+;define("client/adapters/application", ["exports", "@ember-data/adapter/json-api"], function (_exports, _jsonApi) {
+>>>>>>> changes
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -28,6 +32,9 @@
   _exports.default = void 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> changes
   class ApplicationAdapter extends _jsonApi.default {}
 
   _exports.default = ApplicationAdapter;
@@ -37,6 +44,7 @@
 
   Object.defineProperty(_exports, "__esModule", {
     value: true
+<<<<<<< HEAD
   });
   _exports.default = void 0;
 
@@ -56,10 +64,28 @@
   var _default = _emberData.default.RESTAdapter.extend({
     //api endpoint is the localhost
     host: _environment.default.APP.API_ENDPOINT
+=======
+>>>>>>> changes
   });
+  _exports.default = void 0;
 
+<<<<<<< HEAD
   _exports.default = _default;
 >>>>>>> Yeting--Navbar and Router added
+=======
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  class LoginAdapter extends _rest.default {
+    constructor(...args) {
+      super(...args);
+
+      _defineProperty(this, "host", _environment.default.APP.API_ENDPOINT);
+    }
+
+  }
+
+  _exports.default = LoginAdapter;
+>>>>>>> changes
 });
 ;define("client/app", ["exports", "ember-resolver", "ember-load-initializers", "client/config/environment"], function (_exports, _emberResolver, _emberLoadInitializers, _environment) {
   "use strict";
@@ -1022,8 +1048,12 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, IndividualBetComponent);
 });
+<<<<<<< HEAD
 ;define("client/components/navbar", ["exports", "@glimmer/component"], function (_exports, _component) {
 >>>>>>> Yeting--Navbar and Router added
+=======
+;define("client/components/login-ui", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
+>>>>>>> changes
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -1032,10 +1062,14 @@
   _exports.default = void 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _descriptor, _temp;
 =======
   var _dec, _dec2, _dec3, _dec4, _dec5, _class, _descriptor, _temp;
 >>>>>>> Yeting--Navbar and Router added
+=======
+  var _dec, _dec2, _dec3, _dec4, _dec5, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
+>>>>>>> changes
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -1044,6 +1078,156 @@
   function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
 
   function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
+  /*
+    <div style="border: 1px solid orange;">
+      LOGIN COMPONENT
+      <p>Username: <Input @value={{this.username}}/></p>
+      <p>Password: <Input @value={{this.password}}/></p>
+      <button onclick={{this.logIn}}>Log In</button>
+  </div>
+  
+  */
+  {"id":"KtGow+H9","block":"{\"symbols\":[],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid orange;\"],[12],[2,\"\\n    LOGIN COMPONENT\\n    \"],[10,\"p\"],[12],[2,\"Username: \"],[8,\"input\",[],[[\"@value\"],[[32,0,[\"username\"]]]],null],[13],[2,\"\\n    \"],[10,\"p\"],[12],[2,\"Password: \"],[8,\"input\",[],[[\"@value\"],[[32,0,[\"password\"]]]],null],[13],[2,\"\\n    \"],[10,\"button\"],[15,\"onclick\",[32,0,[\"logIn\"]]],[12],[2,\"Log In\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}","meta":{"moduleName":"client/components/login-ui.hbs"}});
+
+  let LoginUIComponent = (_dec = Ember.inject.service, _dec2 = Ember.inject.service, _dec3 = Ember._tracked, _dec4 = Ember._tracked, _dec5 = Ember._action, (_class = (_temp = class LoginUIComponent extends _component.default {
+    constructor(owner, args) {
+      super(owner, args);
+
+      _initializerDefineProperty(this, "store", _descriptor, this);
+
+      _initializerDefineProperty(this, "router", _descriptor2, this);
+
+      _initializerDefineProperty(this, "username", _descriptor3, this);
+
+      _initializerDefineProperty(this, "password", _descriptor4, this);
+    }
+
+    logIn() {
+      if (this.username && this.password) {
+        _jquery.default.post(`${_environment.default.APP.API_ENDPOINT}/members/`).done(data => {
+          if (data && data.didLogOut) {
+            this.router.transitionTo('/');
+          }
+        });
+      }
+
+      this.router.tran;
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "store", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec2], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "username", [_dec3], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "password", [_dec4], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _applyDecoratedDescriptor(_class.prototype, "logIn", [_dec5], Object.getOwnPropertyDescriptor(_class.prototype, "logIn"), _class.prototype)), _class));
+  _exports.default = LoginUIComponent;
+
+  Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, LoginUIComponent);
+});
+;define("client/components/main-application", ["exports", "@glimmer/component"], function (_exports, _component) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _dec, _dec2, _dec3, _dec4, _class, _descriptor, _descriptor2, _temp;
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
+  /*
+    <div>
+      <Navbar
+          @changePage={{this.navigateTo}}
+      />
+      <button onclick={{this.logOut}}>LogOut</button>
+  
+  </div>
+  
+  
+  {{#if this.isProfilePage}}
+      <ProfilePage
+          @model={{@model}}
+      />
+  {{/if}}
+  */
+  {"id":"yVX7ZCF2","block":"{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[12],[2,\"\\n    \"],[8,\"navbar\",[],[[\"@changePage\"],[[32,0,[\"navigateTo\"]]]],null],[2,\"\\n    \"],[10,\"button\"],[15,\"onclick\",[32,0,[\"logOut\"]]],[12],[2,\"LogOut\"],[13],[2,\"\\n\\n\"],[13],[2,\"\\n\\n\\n\"],[6,[37,0],[[32,0,[\"isProfilePage\"]]],null,[[\"default\"],[{\"statements\":[[2,\"    \"],[8,\"profile-page\",[],[[\"@model\"],[[32,1]]],null],[2,\"\\n\"]],\"parameters\":[]}]]]],\"hasEval\":false,\"upvars\":[\"if\"]}","meta":{"moduleName":"client/components/main-application.hbs"}});
+
+  let MainApplicationComponent = (_dec = Ember._tracked, _dec2 = Ember.inject.service, _dec3 = Ember._action, _dec4 = Ember._action, (_class = (_temp = class MainApplicationComponent extends _component.default {
+    constructor(...args) {
+      super(...args);
+
+      _initializerDefineProperty(this, "activePage", _descriptor, this);
+
+      _initializerDefineProperty(this, "router", _descriptor2, this);
+    }
+
+    get isProfilePage() {
+      return this.activePage === 'profile';
+    }
+
+    navigateTo(page) {
+      this.activePage = page;
+    }
+
+    logOut() {
+      //log out request
+      this.router.transitionTo('login');
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "activePage", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return 'profile';
+    }
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec2], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _applyDecoratedDescriptor(_class.prototype, "navigateTo", [_dec3], Object.getOwnPropertyDescriptor(_class.prototype, "navigateTo"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "logOut", [_dec4], Object.getOwnPropertyDescriptor(_class.prototype, "logOut"), _class.prototype)), _class));
+  _exports.default = MainApplicationComponent;
+
+  Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, MainApplicationComponent);
+});
+;define("client/components/navbar", ["exports", "@glimmer/component"], function (_exports, _component) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _dec, _dec2, _dec3, _dec4, _class;
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
@@ -1067,6 +1251,7 @@
   */
   {"id":"J4YFQ4d4","block":"{\"symbols\":[],\"statements\":[[10,\"nav\"],[14,0,\"topnav\"],[12],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnHeader\"],[15,\"onclick\",[34,0]],[12],[2,\"Bet 511\"],[13],[2,\" \"],[3,\" Header button links to Active Bets Page\"],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnHome\"],[15,\"onclick\",[34,0]],[12],[2,\"Home\"],[13],[2,\" \"],[3,\" Home button links to Active Bets Page\"],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnProfile\"],[15,\"onclick\",[34,1]],[12],[2,\"Profile\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnCreateBet\"],[15,\"onclick\",[34,2]],[12],[2,\"Create Bet\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnSignUp\"],[15,\"onclick\",[34,3]],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnSignOut\"],[15,\"onclick\",[34,1]],[12],[2,\"Sign out\"],[13],[2,\" \"],[3,\" Sign out button links to Profile Page\"],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"redirectToActiveBetsPage\",\"redirectToProfilePage\",\"redirectToCreateBetPage\",\"redirectToSignUpPage\"]}","meta":{"moduleName":"client/components/navbar.hbs"}});
 
+<<<<<<< HEAD
   let NavbarComponent = (_dec = Ember.inject.service, _dec2 = Ember._action, _dec3 = Ember._action, _dec4 = Ember._action, _dec5 = Ember._action, (_class = (_temp = class NavbarComponent extends _component.default {
 >>>>>>> Yeting--Navbar and Router added
     constructor(...args) {
@@ -1075,10 +1260,16 @@
       _initializerDefineProperty(this, "router", _descriptor, this);
     }
 
+=======
+  // import { inject as service }from '@ember/service';
+  let NavbarComponent = (_dec = Ember._action, _dec2 = Ember._action, _dec3 = Ember._action, _dec4 = Ember._action, (_class = class NavbarComponent extends _component.default {
+    // @service router;
+>>>>>>> changes
     // @action
     // redirectToSignInPage(){
     //     //this.router.transitionTo('/');
     // }
+<<<<<<< HEAD
 <<<<<<< HEAD
     redirectToSignUpPage() {
       this.args.changePage('signup'); //this.router.transitionTo('signup');
@@ -1109,15 +1300,22 @@
       });
 =======
     redirectToSignUpPage() {//this.router.transitionTo('signup');
+=======
+    redirectToSignUpPage() {
+      this.args.changePage('signup'); //this.router.transitionTo('signup');
+>>>>>>> changes
     }
 
-    redirectToProfilePage() {//this.router.transitionTo('profile');
+    redirectToProfilePage() {
+      this.args.changePage('profile'); //this.router.transitionTo('profile');
     }
 
-    redirectToActiveBetsPage() {//Active Bets Page is the Home Page
+    redirectToActiveBetsPage() {
+      this.args.changePage('activebets'); //Active Bets Page is the Home Page
       //this.router.transitionTo('home');
     }
 
+<<<<<<< HEAD
     redirectToCreateBetPage() {//this.router.transitionTo('createbet');
 >>>>>>> Yeting--Navbar and Router added
     }
@@ -1132,11 +1330,21 @@
 =======
   }), _applyDecoratedDescriptor(_class.prototype, "redirectToSignUpPage", [_dec2], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToSignUpPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToProfilePage", [_dec3], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToProfilePage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToActiveBetsPage", [_dec4], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToActiveBetsPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToCreateBetPage", [_dec5], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToCreateBetPage"), _class.prototype)), _class));
 >>>>>>> Yeting--Navbar and Router added
+=======
+    redirectToCreateBetPage() {
+      this.args.changePage('createbet'); //this.router.transitionTo('createbet');
+    }
+
+  }, (_applyDecoratedDescriptor(_class.prototype, "redirectToSignUpPage", [_dec], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToSignUpPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToProfilePage", [_dec2], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToProfilePage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToActiveBetsPage", [_dec3], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToActiveBetsPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToCreateBetPage", [_dec4], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToCreateBetPage"), _class.prototype)), _class));
+>>>>>>> changes
   _exports.default = NavbarComponent;
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, NavbarComponent);
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> changes
 ;define("client/components/profile-page", ["exports", "@glimmer/component"], function (_exports, _component) {
   "use strict";
 
@@ -1148,8 +1356,12 @@
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
     <div style="border: 1px solid red;">
+<<<<<<< HEAD
       <p>{{@model.username}}'s Profile Page</p>
       <p>Your are {{@model.age}} years old</p>
+=======
+      {{@model.name}}'s Profile Page
+>>>>>>> changes
   </div>
   
   <div>
@@ -1161,7 +1373,11 @@
   </div>
   
   */
+<<<<<<< HEAD
   {"id":"lhGQqVD6","block":"{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid red;\"],[12],[2,\"\\n    \"],[10,\"p\"],[12],[1,[32,1,[\"username\"]]],[2,\"'s Profile Page\"],[13],[2,\"\\n    \"],[10,\"p\"],[12],[2,\"Your are \"],[1,[32,1,[\"age\"]]],[2,\" years old\"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"friends-list\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"add-friend\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}","meta":{"moduleName":"client/components/profile-page.hbs"}});
+=======
+  {"id":"OzsNfNcg","block":"{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid red;\"],[12],[2,\"\\n    \"],[1,[32,1,[\"name\"]]],[2,\"'s Profile Page\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"friends-list\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"add-friend\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}","meta":{"moduleName":"client/components/profile-page.hbs"}});
+>>>>>>> changes
 
   class ProfilePageComponent extends _component.default {}
 
@@ -1169,8 +1385,11 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, ProfilePageComponent);
 });
+<<<<<<< HEAD
 =======
 >>>>>>> Yeting--Navbar and Router added
+=======
+>>>>>>> changes
 ;define("client/components/welcome-page", ["exports", "ember-welcome-page/components/welcome-page"], function (_exports, _welcomePage) {
   "use strict";
 
@@ -1419,6 +1638,7 @@
   _exports.default = Router;
   Router.map(function () {
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.route('login');
     this.route('home');
 =======
@@ -1430,6 +1650,9 @@
     // this.route('activebets');
     // this.route('createbet');
 >>>>>>> Yeting--Navbar and Router added
+=======
+    this.route('login');
+>>>>>>> changes
   });
 });
 ;define("client/routes/home", ["exports"], function (_exports) {
@@ -1445,6 +1668,9 @@
   _exports.default = HomeRoute;
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> changes
 ;define("client/routes/index", ["exports", "jquery", "client/config/environment"], function (_exports, _jquery, _environment) {
   "use strict";
 
@@ -1456,6 +1682,7 @@
 
   class IndexRoute extends Ember.Route {
     model() {
+<<<<<<< HEAD
       return _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/auth/isloggedin?cookie=${FAKE_COOKIES}`);
     }
 
@@ -1464,14 +1691,23 @@
         // if there model is empty, take us to log in route
         this.transitionTo('login');
       }
+=======
+      return _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/members?userCookie=${FAKE_COOKIES}`).done(data => {
+        debugger;
+        return data;
+      });
+>>>>>>> changes
     }
 
   }
 
   _exports.default = IndexRoute;
 });
+<<<<<<< HEAD
 ;define("client/routes/login", ["exports", "jquery", "client/config/environment"], function (_exports, _jquery, _environment) {
 =======
+=======
+>>>>>>> changes
 ;define("client/routes/login", ["exports"], function (_exports) {
 >>>>>>> Yeting--Navbar and Router added
   "use strict";
@@ -1545,6 +1781,9 @@
   });
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> changes
 ;define("client/serializers/application", ["exports", "@ember-data/serializer/json-api"], function (_exports, _jsonApi) {
   "use strict";
 
@@ -1558,9 +1797,12 @@
   _exports.default = ApplicationSerializer;
 });
 ;define("client/serializers/index", ["exports", "ember-data"], function (_exports, _emberData) {
+<<<<<<< HEAD
 =======
 ;define("client/serializers/application", ["exports", "ember-data"], function (_exports, _emberData) {
 >>>>>>> Yeting--Navbar and Router added
+=======
+>>>>>>> changes
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -1609,6 +1851,7 @@
   var _default = Ember.HTMLBars.template({
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "id": "d/Lx0B2v",
     "block": "{\"symbols\":[],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid green;\"],[12],[2,\"\\n    \"],[10,\"p\"],[12],[2,\"Bett Ya!\"],[13],[2,\"\\n    \"],[1,[30,[36,1],[[30,[36,0],null,null]],null]],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
 =======
@@ -1619,6 +1862,10 @@
     "id": "eWrr9YrG",
     "block": "{\"symbols\":[],\"statements\":[[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}",
 >>>>>>> relevant files commit
+=======
+    "id": "d/Lx0B2v",
+    "block": "{\"symbols\":[],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid green;\"],[12],[2,\"\\n    \"],[10,\"p\"],[12],[2,\"Bett Ya!\"],[13],[2,\"\\n    \"],[1,[30,[36,1],[[30,[36,0],null,null]],null]],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
+>>>>>>> changes
     "meta": {
       "moduleName": "client/templates/application.hbs"
     }
@@ -1645,6 +1892,9 @@
   _exports.default = _default;
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> changes
 ;define("client/templates/index", ["exports"], function (_exports) {
   "use strict";
 
@@ -1654,8 +1904,13 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
+<<<<<<< HEAD
     "id": "EqeI2V/P",
     "block": "{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid purple;\"],[12],[2,\"\\n\"],[10,\"p\"],[12],[2,\"WELCOME TO OUR PAGE\"],[13],[2,\"\\n    LOG OUT BUTTON\\n    \"],[10,\"p\"],[12],[2,\"Welcome \"],[1,[32,1,[\"username\"]]],[13],[2,\"\\n    \"],[8,\"main-application\",[],[[\"@model\"],[[34,0]]],null],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"model\"]}",
+=======
+    "id": "NFKhjzE1",
+    "block": "{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid purple;\"],[12],[2,\"\\n\\n\"],[10,\"p\"],[12],[2,\"WELCOME TO OUR PAGE\"],[13],[2,\"\\n\\n\"],[6,[37,1],[[32,0,[\"model\",\"name\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"    LOG OUT BUTTON\\n\\n    \"],[10,\"p\"],[12],[2,\"Welcome \"],[1,[32,1,[\"name\"]]],[13],[2,\"\\n    \"],[8,\"main-application\",[],[[\"@model\"],[[34,0]]],null],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"    Please Log In:\\n    \"],[8,\"login-ui\",[],[[],[]],null],[2,\"\\n\"]],\"parameters\":[]}]]],[1,[30,[36,3],[[30,[36,2],null,null]],null]],[2,\"\\n\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"model\",\"if\",\"-outlet\",\"component\"]}",
+>>>>>>> changes
     "meta": {
       "moduleName": "client/templates/index.hbs"
     }
@@ -1663,8 +1918,11 @@
 
   _exports.default = _default;
 });
+<<<<<<< HEAD
 =======
 >>>>>>> Yeting--Navbar and Router added
+=======
+>>>>>>> changes
 ;define("client/templates/login", ["exports"], function (_exports) {
   "use strict";
 
@@ -1675,12 +1933,17 @@
 
   var _default = Ember.HTMLBars.template({
 <<<<<<< HEAD
+<<<<<<< HEAD
     "id": "XQI7hWbp",
     "block": "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Login Component\"],[13],[2,\"\\n\"],[1,[30,[36,1],[[30,[36,0],null,null]],null]],[2,\"\\n\"],[8,\"login-ui\",[],[[],[]],null],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
 =======
     "id": "9dL65Wmh",
     "block": "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Login Component\"],[13]],\"hasEval\":false,\"upvars\":[]}",
 >>>>>>> Yeting--Navbar and Router added
+=======
+    "id": "9WGbrSNe",
+    "block": "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Login Component\"],[13],[2,\"\\n\"],[1,[30,[36,1],[[30,[36,0],null,null]],null]],[2,\"\\n\"],[8,\"login-ui\",[],[[\"@model\"],[[32,0,[\"model\"]]]],null],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
+>>>>>>> changes
     "meta": {
       "moduleName": "client/templates/login.hbs"
     }
@@ -1764,10 +2027,14 @@ catch(err) {
 ;
           if (!runningTests) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+af4879d6"});
 =======
             require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+dde3bbc9"});
 >>>>>>> Yeting--Navbar and Router added
+=======
+            require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+a999f1e3"});
+>>>>>>> changes
           }
         
 //# sourceMappingURL=client.map
