@@ -1,0 +1,42 @@
+{{#each this.temporaryUser as |tempUser|}}
+
+
+   
+<h1>{{tempUser.username}} #{{tempUser.idNum}}'s Profile <img id='selfie' src={{image}}> </h1>
+
+
+<p>Change Selfie:</p>
+<input type="file" class="form-control" id="image" onchange={{action uploadFile}}/>
+
+
+<br><br><br>
+
+<div>
+  <p id='bio'>{{tempUser.bio}} </p>
+  
+ <br><br>
+</div>
+
+
+<br><br>
+
+<div>
+  <h2>Current Bets {{tempUser.username}} Is a Part Of:</h2>
+  {{!-- The following is just an example as there is no data to pull yet --}}
+  <table>
+    <tr>
+      <td class='betDescription'>Football Game</td>
+      <td class='betAmount'>$100</td>
+      <td class='activityStatusActive'>Active</td>
+  </tr>
+   <tr>
+      <td class='betDescription'>Push Up Contest</td>
+      <td class='betAmount'>$50</td>
+      <td class='activityStatusInactive'>Inactive</td>
+  </tr>
+  </table>
+</div>
+
+ {{/each}}
+  
+

@@ -234,3 +234,10 @@ nav.topnav {
     background-color: #4CAF50;
     color: white;
   } */
+.activityStatusActive{
+    color: green;
+}
+
+.activityStatusInactive{
+    color: red;
+}
