@@ -69,6 +69,129 @@
     }
   });
 });
+;define("client/components/add-friend", ["exports", "@glimmer/component"], function (_exports, _component) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _dec, _dec2, _dec3, _class, _descriptor, _descriptor2, _descriptor3, _temp;
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
+  /*
+    <button onclick={{action addFriendClicked}} disabled={{this.addFriendIsClicked}}> 
+      {{#unless this.addFriendIsClicked}}Add Friend 
+      {{else}} Pending
+      {{/unless}}
+      </button>
+  */
+  {"id":"gY5YfLg5","block":"{\"symbols\":[],\"statements\":[[10,\"button\"],[15,\"onclick\",[30,[36,1],[[32,0],[35,0]],null]],[15,\"disabled\",[32,0,[\"addFriendIsClicked\"]]],[12],[2,\" \\n    \"],[6,[37,2],[[32,0,[\"addFriendIsClicked\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"Add Friend \\n    \"]],\"parameters\":[]},{\"statements\":[[2,\" Pending\\n\"]],\"parameters\":[]}]]],[2,\"    \"],[13]],\"hasEval\":false,\"upvars\":[\"addFriendClicked\",\"action\",\"unless\"]}","meta":{"moduleName":"client/components/add-friend.hbs"}});
+
+  let AddFriendComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, (_class = (_temp = class AddFriendComponent extends _component.default {
+    //current user that is loggedIn
+    //profile that we are currently looking at with the addFriend button
+    constructor() {
+      super(...arguments);
+
+      _initializerDefineProperty(this, "userRequester", _descriptor, this);
+
+      _initializerDefineProperty(this, "userReceiver", _descriptor2, this);
+
+      _initializerDefineProperty(this, "addFriendIsClicked", _descriptor3, this);
+
+      let fakeUserSender = {
+        firstName: "Jasper",
+        lastName: "Caballero"
+      };
+      let fakeUserReceiver = {
+        firstName: "George",
+        lastName: "Chan"
+      };
+      this.userRequester = fakeUserSender;
+      this.userReceiver = fakeUserReceiver;
+    }
+
+    addFriendClicked() {
+      //on addFriend button click, send a request to the user sending the request 
+      //to the other user receiving it. (Do I show that the request is pending? 
+      //Or assume that the other user is automatically added as a friend?)
+      console.log(this.userRequester.firstName + " is sending a friend request to " + this.userReceiver.firstName);
+      this.addFriendIsClicked = true; //add function call here to make request to db to send a request to other user
+      //also maybe update the friends list once friend added is confirmed
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "userRequester", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "userReceiver", [_dec2], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "addFriendIsClicked", [_dec3], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return false;
+    }
+  })), _class));
+  _exports.default = AddFriendComponent;
+
+  Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, AddFriendComponent);
+});
+;define("client/components/friends-list", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
+  /*
+    {{!-- <h1>In Friends List Component</h1>
+  <AddFriend /> --}}
+  
+  {{!-- Right now, this won't be shown anywhere until the hbs file is called in the profile component. --}}
+  
+  <div class="container">
+  <h3>Friends List</h3>
+  {{#if this.friendsListData}}
+      
+      {{#each this.friendsListData as |friendData|}}
+      
+      
+      <img class="profile-pic" src={{friendData.img}} alt={{friendData.firstName}} />
+      <p class="friend-name"> {{friendData.firstName}} {{friendData.lastName}}</p>
+  
+      {{/each}}
+  
+      {{else}}
+      <p>This profile does not have any friends yet, try adding some now!</p>
+  
+  {{/if}}
+  </div>
+  
+  */
+  {"id":"oyZFCZQX","block":"{\"symbols\":[\"friendData\"],\"statements\":[[2,\"\\n\"],[2,\"\\n\"],[10,\"div\"],[14,0,\"container\"],[12],[2,\"\\n\"],[10,\"h3\"],[12],[2,\"Friends List\"],[13],[2,\"\\n\"],[6,[37,2],[[32,0,[\"friendsListData\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"    \\n\"],[6,[37,1],[[30,[36,0],[[30,[36,0],[[32,0,[\"friendsListData\"]]],null]],null]],null,[[\"default\"],[{\"statements\":[[2,\"    \\n    \\n    \"],[10,\"img\"],[14,0,\"profile-pic\"],[15,\"src\",[32,1,[\"img\"]]],[15,\"alt\",[32,1,[\"firstName\"]]],[12],[13],[2,\"\\n    \"],[10,\"p\"],[14,0,\"friend-name\"],[12],[2,\" \"],[1,[32,1,[\"firstName\"]]],[2,\" \"],[1,[32,1,[\"lastName\"]]],[13],[2,\"\\n\\n\"]],\"parameters\":[1]}]]],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"    \"],[10,\"p\"],[12],[2,\"This profile does not have any friends yet, try adding some now!\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]}]]],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-track-array\",\"each\",\"if\"]}","meta":{"moduleName":"client/components/friends-list.hbs"}});
+
+  var _default = Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, Ember._templateOnlyComponent());
+
+  _exports.default = _default;
+});
 ;define("client/components/individual-bet", ["exports", "@glimmer/component"], function (_exports, _component) {
   "use strict";
 
@@ -950,8 +1073,8 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "p7EppQEa",
-    "block": "{\"symbols\":[],\"statements\":[[2,\"\\n\"],[1,[30,[36,1],[[30,[36,0],null,null]],null]]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
+    "id": "eWrr9YrG",
+    "block": "{\"symbols\":[],\"statements\":[[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}",
     "meta": {
       "moduleName": "client/templates/application.hbs"
     }
