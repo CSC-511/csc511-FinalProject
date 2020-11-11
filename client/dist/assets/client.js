@@ -69,6 +69,97 @@
     }
   });
 });
+;define("client/components/Betbase", ["exports", "@glimmer/component"], function (_exports, _component) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _dec, _dec2, _dec3, _dec4, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  let Bets = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember._tracked, (_class = (_temp = class Bets extends _component.default {
+    constructor(user, title, summary, money) {
+      this.user = user;
+      this.title = title;
+      this.summary = summary;
+      this.money = money;
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "user", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "title", [_dec2], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "description", [_dec3], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "money", [_dec4], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  })), _class));
+  _exports.default = Bets;
+});
+;define("client/components/create-bet", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
+  /*
+    <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Create A Bet</title>
+    </head>
+    <body>
+        <h1>Create a Bet</h1>
+  
+        <p>Please create a bet!</p>
+        <form>
+            <input type="text" id = "title" name ="title">
+            <input type="button" id = "title" value = "Add Title" onclick = ""><br><br>
+  
+            <input type="text" id = "summary" name ="summary">
+            <input type="button" id = "summary" size="50" value = "Add Description" onclick = ""><br><br>
+  
+            <input type="text" id = "money" name ="money">
+            <input type="button" id = "money" value = "Add Dollars" onclick = ""><br><br>
+  
+            <input type="button" id = "bet" value = "Display Bet Details" onclick = "display.js"><br><br>
+  
+            <input type="button" id = "bet" value = "Submit Bet" onclick = {{action request.js}}><br><br>
+  
+        </form>
+  
+    </body>
+  </html>
+  */
+  {"id":"T3ZLlc/m","block":"{\"symbols\":[],\"statements\":[[1,[30,[36,1],[[32,0],[35,0,[\"js\"]]],null]]],\"hasEval\":false,\"upvars\":[\"request\",\"action\"]}","meta":{"moduleName":"client/components/create-bet.hbs"}});
+
+  var _default = Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, Ember._templateOnlyComponent());
+
+  _exports.default = _default;
+});
 ;define("client/components/welcome-page", ["exports", "ember-welcome-page/components/welcome-page"], function (_exports, _welcomePage) {
   "use strict";
 
@@ -134,6 +225,23 @@
 
   _exports.default = _default;
 });
+;define("client/helpers/displayBet", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.displayBet = displayBet;
+  _exports.default = void 0;
+
+  function displayBet(bet) {
+    window.alert("Title: ");
+  }
+
+  var _default = Ember.Helper.helper(displayBet);
+
+  _exports.default = _default;
+});
 ;define("client/helpers/pluralize", ["exports", "ember-inflector/lib/helpers/pluralize"], function (_exports, _pluralize) {
   "use strict";
 
@@ -142,6 +250,21 @@
   });
   _exports.default = void 0;
   var _default = _pluralize.default;
+  _exports.default = _default;
+});
+;define("client/helpers/requestBet", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.saveRequest = saveRequest;
+  _exports.default = void 0;
+
+  function saveRequest(bet) {}
+
+  var _default = Ember.Helper.helper(saveRequest);
+
   _exports.default = _default;
 });
 ;define("client/helpers/singularize", ["exports", "ember-inflector/lib/helpers/singularize"], function (_exports, _singularize) {
@@ -390,8 +513,8 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "y1g0H2c6",
-    "block": "{\"symbols\":[],\"statements\":[[8,\"welcome-page\",[],[[],[]],null],[2,\"\\n\"],[2,\"\\n\"],[1,[30,[36,1],[[30,[36,0],null,null]],null]]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
+    "id": "g8WdHUqQ",
+    "block": "{\"symbols\":[],\"statements\":[[10,\"html\"],[12],[2,\"\\n  \"],[10,\"head\"],[12],[2,\"\\n    \"],[10,\"title\"],[12],[2,\"Create A Bet\"],[13],[2,\"\\n  \"],[13],[2,\"\\n  \"],[10,\"body\"],[12],[2,\"\\n      \"],[10,\"h1\"],[12],[2,\"Create a Bet\"],[13],[2,\"\\n\\n      \"],[10,\"p\"],[12],[2,\"Please create a bet!\"],[13],[2,\"\\n      \"],[10,\"form\"],[12],[2,\"\\n          \"],[10,\"input\"],[14,1,\"title\"],[14,3,\"title\"],[14,4,\"text\"],[12],[13],[2,\"\\n          \"],[10,\"input\"],[14,1,\"title\"],[14,2,\"Add Title\"],[14,\"onclick\",\"\"],[14,4,\"button\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n\\n          \"],[10,\"input\"],[14,1,\"summary\"],[14,3,\"summary\"],[14,4,\"text\"],[12],[13],[2,\"\\n          \"],[10,\"input\"],[14,1,\"summary\"],[14,\"size\",\"50\"],[14,2,\"Add Description\"],[14,\"onclick\",\"\"],[14,4,\"button\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n\\n          \"],[10,\"input\"],[14,1,\"money\"],[14,3,\"money\"],[14,4,\"text\"],[12],[13],[2,\"\\n          \"],[10,\"input\"],[14,1,\"money\"],[14,2,\"Add Dollars\"],[14,\"onclick\",\"\"],[14,4,\"button\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n\\n          \"],[10,\"input\"],[14,1,\"bet\"],[14,2,\"Display Bet Details\"],[14,\"onclick\",\"display.js\"],[14,4,\"button\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n\\n          \"],[10,\"input\"],[14,1,\"bet\"],[14,2,\"Submit Bet\"],[14,\"onclick\",\"request.js\"],[14,4,\"button\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n\\n      \"],[13],[2,\"\\n\\n  \"],[13],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}",
     "meta": {
       "moduleName": "client/templates/application.hbs"
     }
@@ -474,7 +597,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+15a0dbf6"});
+            require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+dcc8c75f"});
           }
         
 //# sourceMappingURL=client.map
