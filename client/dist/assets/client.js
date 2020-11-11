@@ -1106,14 +1106,15 @@
 
     logIn() {
       if (this.username && this.password) {
-        _jquery.default.post(`${_environment.default.APP.API_ENDPOINT}/members/`).done(data => {
-          if (data && data.didLogOut) {
+        _jquery.default.post(`${_environment.default.APP.API_ENDPOINT}/auth/login`, {
+          username: this.username,
+          password: this.password
+        }, result => {
+          if (result && result.isLoggedIn) {
             this.router.transitionTo('/');
           }
         });
       }
-
-      this.router.tran;
     }
 
   }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "store", [_dec], {
@@ -1217,7 +1218,7 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, MainApplicationComponent);
 });
-;define("client/components/navbar", ["exports", "@glimmer/component"], function (_exports, _component) {
+;define("client/components/navbar", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -1225,9 +1226,15 @@
   });
   _exports.default = void 0;
 
-  var _dec, _dec2, _dec3, _dec4, _class;
+  var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _descriptor, _temp;
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
   function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
@@ -1238,6 +1245,7 @@
       <button class="btnCreateBet" onclick={{redirectToCreateBetPage}}>Create Bet</button>
       <button class="btnSignUp" onclick={{redirectToSignUpPage}}>Sign Up</button>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <button class="btnSignOut" onclick={{logOut}}>Sign out</button> <!-- Sign out button links to Profile Page-->
   </nav>
   */
@@ -1247,10 +1255,22 @@
   let NavbarComponent = (_dec = Ember.inject.service, _dec2 = Ember._action, _dec3 = Ember._action, _dec4 = Ember._action, _dec5 = Ember._action, _dec6 = Ember._action, (_class = (_temp = class NavbarComponent extends _component.default {
 =======
       <button class="btnSignOut" onclick={{redirectToProfilePage}}>Sign out</button> <!-- Sign out button links to Profile Page-->
+=======
+      <button class="btnSignOut" onclick={{logOut}}>Sign out</button> <!-- Sign out button links to Profile Page-->
+>>>>>>> Backend server working can be ran using node index.js
   </nav>
   */
-  {"id":"J4YFQ4d4","block":"{\"symbols\":[],\"statements\":[[10,\"nav\"],[14,0,\"topnav\"],[12],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnHeader\"],[15,\"onclick\",[34,0]],[12],[2,\"Bet 511\"],[13],[2,\" \"],[3,\" Header button links to Active Bets Page\"],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnHome\"],[15,\"onclick\",[34,0]],[12],[2,\"Home\"],[13],[2,\" \"],[3,\" Home button links to Active Bets Page\"],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnProfile\"],[15,\"onclick\",[34,1]],[12],[2,\"Profile\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnCreateBet\"],[15,\"onclick\",[34,2]],[12],[2,\"Create Bet\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnSignUp\"],[15,\"onclick\",[34,3]],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnSignOut\"],[15,\"onclick\",[34,1]],[12],[2,\"Sign out\"],[13],[2,\" \"],[3,\" Sign out button links to Profile Page\"],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"redirectToActiveBetsPage\",\"redirectToProfilePage\",\"redirectToCreateBetPage\",\"redirectToSignUpPage\"]}","meta":{"moduleName":"client/components/navbar.hbs"}});
+  {"id":"NoVs/OHB","block":"{\"symbols\":[],\"statements\":[[10,\"nav\"],[14,0,\"topnav\"],[12],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnHeader\"],[15,\"onclick\",[34,0]],[12],[2,\"Bet 511\"],[13],[2,\" \"],[3,\" Header button links to Active Bets Page\"],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnHome\"],[15,\"onclick\",[34,0]],[12],[2,\"Home\"],[13],[2,\" \"],[3,\" Home button links to Active Bets Page\"],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnProfile\"],[15,\"onclick\",[34,1]],[12],[2,\"Profile\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnCreateBet\"],[15,\"onclick\",[34,2]],[12],[2,\"Create Bet\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnSignUp\"],[15,\"onclick\",[34,3]],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"button\"],[14,0,\"btnSignOut\"],[15,\"onclick\",[34,4]],[12],[2,\"Sign out\"],[13],[2,\" \"],[3,\" Sign out button links to Profile Page\"],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"redirectToActiveBetsPage\",\"redirectToProfilePage\",\"redirectToCreateBetPage\",\"redirectToSignUpPage\",\"logOut\"]}","meta":{"moduleName":"client/components/navbar.hbs"}});
 
+  const FAKE_COOKIES = 123123123;
+  let NavbarComponent = (_dec = Ember.inject.service, _dec2 = Ember._action, _dec3 = Ember._action, _dec4 = Ember._action, _dec5 = Ember._action, _dec6 = Ember._action, (_class = (_temp = class NavbarComponent extends _component.default {
+    constructor(...args) {
+      super(...args);
+
+      _initializerDefineProperty(this, "router", _descriptor, this);
+    }
+
+<<<<<<< HEAD
 <<<<<<< HEAD
   let NavbarComponent = (_dec = Ember.inject.service, _dec2 = Ember._action, _dec3 = Ember._action, _dec4 = Ember._action, _dec5 = Ember._action, (_class = (_temp = class NavbarComponent extends _component.default {
 >>>>>>> Yeting--Navbar and Router added
@@ -1265,6 +1285,8 @@
   let NavbarComponent = (_dec = Ember._action, _dec2 = Ember._action, _dec3 = Ember._action, _dec4 = Ember._action, (_class = class NavbarComponent extends _component.default {
     // @service router;
 >>>>>>> changes
+=======
+>>>>>>> Backend server working can be ran using node index.js
     // @action
     // redirectToSignInPage(){
     //     //this.router.transitionTo('/');
@@ -1307,7 +1329,7 @@
     }
 
     redirectToProfilePage() {
-      this.args.changePage('profile'); //this.router.transitionTo('profile');
+      this.args.changePage('profile'); // this.router.transitionTo('home');
     }
 
     redirectToActiveBetsPage() {
@@ -1335,8 +1357,29 @@
       this.args.changePage('createbet'); //this.router.transitionTo('createbet');
     }
 
+<<<<<<< HEAD
   }, (_applyDecoratedDescriptor(_class.prototype, "redirectToSignUpPage", [_dec], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToSignUpPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToProfilePage", [_dec2], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToProfilePage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToActiveBetsPage", [_dec3], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToActiveBetsPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToCreateBetPage", [_dec4], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToCreateBetPage"), _class.prototype)), _class));
 >>>>>>> changes
+=======
+    logOut() {
+      _jquery.default.post(`${_environment.default.APP.API_ENDPOINT}/auth/logout`, {
+        cookie: FAKE_COOKIES
+      }).done(didLogOut => {
+        debugger;
+
+        if (didLogOut) {
+          this.router.transitionTo('login');
+        }
+      });
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "router", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _applyDecoratedDescriptor(_class.prototype, "redirectToSignUpPage", [_dec2], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToSignUpPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToProfilePage", [_dec3], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToProfilePage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToActiveBetsPage", [_dec4], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToActiveBetsPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "redirectToCreateBetPage", [_dec5], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToCreateBetPage"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "logOut", [_dec6], Object.getOwnPropertyDescriptor(_class.prototype, "logOut"), _class.prototype)), _class));
+>>>>>>> Backend server working can be ran using node index.js
   _exports.default = NavbarComponent;
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, NavbarComponent);
@@ -1357,11 +1400,16 @@
   /*
     <div style="border: 1px solid red;">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <p>{{@model.username}}'s Profile Page</p>
       <p>Your are {{@model.age}} years old</p>
 =======
       {{@model.name}}'s Profile Page
 >>>>>>> changes
+=======
+      <p>{{@model.username}}'s Profile Page</p>
+      <p>Your are {{@model.age}} years old</p>
+>>>>>>> Backend server working can be ran using node index.js
   </div>
   
   <div>
@@ -1374,10 +1422,14 @@
   
   */
 <<<<<<< HEAD
+<<<<<<< HEAD
   {"id":"lhGQqVD6","block":"{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid red;\"],[12],[2,\"\\n    \"],[10,\"p\"],[12],[1,[32,1,[\"username\"]]],[2,\"'s Profile Page\"],[13],[2,\"\\n    \"],[10,\"p\"],[12],[2,\"Your are \"],[1,[32,1,[\"age\"]]],[2,\" years old\"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"friends-list\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"add-friend\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}","meta":{"moduleName":"client/components/profile-page.hbs"}});
 =======
   {"id":"OzsNfNcg","block":"{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid red;\"],[12],[2,\"\\n    \"],[1,[32,1,[\"name\"]]],[2,\"'s Profile Page\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"friends-list\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"add-friend\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}","meta":{"moduleName":"client/components/profile-page.hbs"}});
 >>>>>>> changes
+=======
+  {"id":"lhGQqVD6","block":"{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid red;\"],[12],[2,\"\\n    \"],[10,\"p\"],[12],[1,[32,1,[\"username\"]]],[2,\"'s Profile Page\"],[13],[2,\"\\n    \"],[10,\"p\"],[12],[2,\"Your are \"],[1,[32,1,[\"age\"]]],[2,\" years old\"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"friends-list\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"add-friend\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}","meta":{"moduleName":"client/components/profile-page.hbs"}});
+>>>>>>> Backend server working can be ran using node index.js
 
   class ProfilePageComponent extends _component.default {}
 
@@ -1652,7 +1704,11 @@
 >>>>>>> Yeting--Navbar and Router added
 =======
     this.route('login');
+<<<<<<< HEAD
 >>>>>>> changes
+=======
+    this.route('home');
+>>>>>>> Backend server working can be ran using node index.js
   });
 });
 ;define("client/routes/home", ["exports"], function (_exports) {
@@ -1683,6 +1739,9 @@
   class IndexRoute extends Ember.Route {
     model() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Backend server working can be ran using node index.js
       return _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/auth/isloggedin?cookie=${FAKE_COOKIES}`);
     }
 
@@ -1691,12 +1750,15 @@
         // if there model is empty, take us to log in route
         this.transitionTo('login');
       }
+<<<<<<< HEAD
 =======
       return _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/members?userCookie=${FAKE_COOKIES}`).done(data => {
         debugger;
         return data;
       });
 >>>>>>> changes
+=======
+>>>>>>> Backend server working can be ran using node index.js
     }
 
   }
@@ -1704,12 +1766,16 @@
   _exports.default = IndexRoute;
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 ;define("client/routes/login", ["exports", "jquery", "client/config/environment"], function (_exports, _jquery, _environment) {
 =======
 =======
 >>>>>>> changes
 ;define("client/routes/login", ["exports"], function (_exports) {
 >>>>>>> Yeting--Navbar and Router added
+=======
+;define("client/routes/login", ["exports", "jquery", "client/config/environment"], function (_exports, _jquery, _environment) {
+>>>>>>> Backend server working can be ran using node index.js
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -1717,6 +1783,9 @@
   });
   _exports.default = void 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Backend server working can be ran using node index.js
   const FAKE_COOKIES = 123123123;
 
   class LoginRoute extends Ember.Route {
@@ -1726,6 +1795,7 @@
 
     afterModel(model, transition) {
       debugger;
+<<<<<<< HEAD
 
       if (model && model.isLoggedin) {
         // if there model is empty, take us to log in route
@@ -1738,6 +1808,16 @@
 
   class LoginRoute extends Ember.Route {}
 >>>>>>> Yeting--Navbar and Router added
+=======
+
+      if (model && model.isLoggedin) {
+        // if there model is empty, take us to log in route
+        this.transitionTo('/');
+      }
+    }
+
+  }
+>>>>>>> Backend server working can be ran using node index.js
 
   _exports.default = LoginRoute;
 });
@@ -1905,12 +1985,17 @@
 
   var _default = Ember.HTMLBars.template({
 <<<<<<< HEAD
+<<<<<<< HEAD
     "id": "EqeI2V/P",
     "block": "{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid purple;\"],[12],[2,\"\\n\"],[10,\"p\"],[12],[2,\"WELCOME TO OUR PAGE\"],[13],[2,\"\\n    LOG OUT BUTTON\\n    \"],[10,\"p\"],[12],[2,\"Welcome \"],[1,[32,1,[\"username\"]]],[13],[2,\"\\n    \"],[8,\"main-application\",[],[[\"@model\"],[[34,0]]],null],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"model\"]}",
 =======
     "id": "NFKhjzE1",
     "block": "{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid purple;\"],[12],[2,\"\\n\\n\"],[10,\"p\"],[12],[2,\"WELCOME TO OUR PAGE\"],[13],[2,\"\\n\\n\"],[6,[37,1],[[32,0,[\"model\",\"name\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"    LOG OUT BUTTON\\n\\n    \"],[10,\"p\"],[12],[2,\"Welcome \"],[1,[32,1,[\"name\"]]],[13],[2,\"\\n    \"],[8,\"main-application\",[],[[\"@model\"],[[34,0]]],null],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"    Please Log In:\\n    \"],[8,\"login-ui\",[],[[],[]],null],[2,\"\\n\"]],\"parameters\":[]}]]],[1,[30,[36,3],[[30,[36,2],null,null]],null]],[2,\"\\n\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"model\",\"if\",\"-outlet\",\"component\"]}",
 >>>>>>> changes
+=======
+    "id": "EqeI2V/P",
+    "block": "{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid purple;\"],[12],[2,\"\\n\"],[10,\"p\"],[12],[2,\"WELCOME TO OUR PAGE\"],[13],[2,\"\\n    LOG OUT BUTTON\\n    \"],[10,\"p\"],[12],[2,\"Welcome \"],[1,[32,1,[\"username\"]]],[13],[2,\"\\n    \"],[8,\"main-application\",[],[[\"@model\"],[[34,0]]],null],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"model\"]}",
+>>>>>>> Backend server working can be ran using node index.js
     "meta": {
       "moduleName": "client/templates/index.hbs"
     }
@@ -1934,6 +2019,7 @@
   var _default = Ember.HTMLBars.template({
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "id": "XQI7hWbp",
     "block": "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Login Component\"],[13],[2,\"\\n\"],[1,[30,[36,1],[[30,[36,0],null,null]],null]],[2,\"\\n\"],[8,\"login-ui\",[],[[],[]],null],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
 =======
@@ -1944,6 +2030,10 @@
     "id": "9WGbrSNe",
     "block": "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Login Component\"],[13],[2,\"\\n\"],[1,[30,[36,1],[[30,[36,0],null,null]],null]],[2,\"\\n\"],[8,\"login-ui\",[],[[\"@model\"],[[32,0,[\"model\"]]]],null],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
 >>>>>>> changes
+=======
+    "id": "XQI7hWbp",
+    "block": "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Login Component\"],[13],[2,\"\\n\"],[1,[30,[36,1],[[30,[36,0],null,null]],null]],[2,\"\\n\"],[8,\"login-ui\",[],[[],[]],null],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-outlet\",\"component\"]}",
+>>>>>>> Backend server working can be ran using node index.js
     "meta": {
       "moduleName": "client/templates/login.hbs"
     }
