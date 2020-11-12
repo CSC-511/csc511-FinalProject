@@ -107,10 +107,17 @@
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
+<<<<<<< HEAD
     <button onclick={{action addFriendClicked}} disabled={{this.addFriendIsClicked}}> 
       {{#unless this.addFriendIsClicked}}Add Friend 
       {{else}} Pending
       {{/unless}}
+=======
+    <button onclick={{action addFriendClicked}} disabled={{this.addFriendIsClicked}}> 
+      {{#unless this.addFriendIsClicked}}Add Friend 
+      {{else}} Pending
+      {{/unless}}
+>>>>>>> you can now login with username daniel password 12345, working on rest wanted people to be able to use db
       </button>
   */
   {"id":"gY5YfLg5","block":"{\"symbols\":[],\"statements\":[[10,\"button\"],[15,\"onclick\",[30,[36,1],[[32,0],[35,0]],null]],[15,\"disabled\",[32,0,[\"addFriendIsClicked\"]]],[12],[2,\" \\n    \"],[6,[37,2],[[32,0,[\"addFriendIsClicked\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"Add Friend \\n    \"]],\"parameters\":[]},{\"statements\":[[2,\" Pending\\n\"]],\"parameters\":[]}]]],[2,\"    \"],[13]],\"hasEval\":false,\"upvars\":[\"addFriendClicked\",\"action\",\"unless\"]}","meta":{"moduleName":"client/components/add-friend.hbs"}});
@@ -190,6 +197,7 @@
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
+<<<<<<< HEAD
     {{!-- <h1>In Friends List Component</h1>
   <AddFriend /> --}}
   
@@ -212,6 +220,30 @@
   
   {{/if}}
   </div>
+=======
+    {{!-- <h1>In Friends List Component</h1>
+  <AddFriend /> --}}
+  
+  {{!-- Right now, this won't be shown anywhere until the hbs file is called in the profile component. --}}
+  
+  <div class="container">
+  <h3>Friends List</h3>
+  {{#if this.friendsListData}}
+      
+      {{#each this.friendsListData as |friendData|}}
+      
+      
+      <img class="profile-pic" src={{friendData.img}} alt={{friendData.firstName}} />
+      <p class="friend-name"> {{friendData.firstName}} {{friendData.lastName}}</p>
+  
+      {{/each}}
+  
+      {{else}}
+      <p>This profile does not have any friends yet, try adding some now!</p>
+  
+  {{/if}}
+  </div>
+>>>>>>> you can now login with username daniel password 12345, working on rest wanted people to be able to use db
   
   */
   {"id":"oyZFCZQX","block":"{\"symbols\":[\"friendData\"],\"statements\":[[2,\"\\n\"],[2,\"\\n\"],[10,\"div\"],[14,0,\"container\"],[12],[2,\"\\n\"],[10,\"h3\"],[12],[2,\"Friends List\"],[13],[2,\"\\n\"],[6,[37,2],[[32,0,[\"friendsListData\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"    \\n\"],[6,[37,1],[[30,[36,0],[[30,[36,0],[[32,0,[\"friendsListData\"]]],null]],null]],null,[[\"default\"],[{\"statements\":[[2,\"    \\n    \\n    \"],[10,\"img\"],[14,0,\"profile-pic\"],[15,\"src\",[32,1,[\"img\"]]],[15,\"alt\",[32,1,[\"firstName\"]]],[12],[13],[2,\"\\n    \"],[10,\"p\"],[14,0,\"friend-name\"],[12],[2,\" \"],[1,[32,1,[\"firstName\"]]],[2,\" \"],[1,[32,1,[\"lastName\"]]],[13],[2,\"\\n\\n\"]],\"parameters\":[1]}]]],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"    \"],[10,\"p\"],[12],[2,\"This profile does not have any friends yet, try adding some now!\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]}]]],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"-track-array\",\"each\",\"if\"]}","meta":{"moduleName":"client/components/friends-list.hbs"}});
@@ -249,6 +281,7 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, FriendsListComponent);
 });
+<<<<<<< HEAD
 ;define("client/components/individual-bet", ["exports", "@glimmer/component"], function (_exports, _component) {
   "use strict";
 
@@ -699,6 +732,8 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, IndividualBetComponent);
 });
+=======
+>>>>>>> you can now login with username daniel password 12345, working on rest wanted people to be able to use db
 ;define("client/components/login-ui", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
   "use strict";
 
@@ -1521,7 +1556,11 @@ catch(err) {
 
 ;
           if (!runningTests) {
+<<<<<<< HEAD
             require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+a999f1e3"});
+=======
+            require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+af4879d6"});
+>>>>>>> you can now login with username daniel password 12345, working on rest wanted people to be able to use db
           }
         
 //# sourceMappingURL=client.map
