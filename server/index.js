@@ -161,6 +161,8 @@ mongo.connect(url, {
     });
 })
 
+
+
 //Routers for coinsiding requests
 //Add if I missed yours
 var homeRouter = require('./routes/home');
