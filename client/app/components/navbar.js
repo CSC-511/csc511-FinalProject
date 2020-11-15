@@ -27,7 +27,7 @@ export default class NavbarComponent extends Component {
 
     @action
     redirectToActiveBetsPage(){
-        this.args.changePage('activebets')
+        this.args.changePage('activebet')
         //Active Bets Page is the Home Page
         //this.router.transitionTo('home');
     }
