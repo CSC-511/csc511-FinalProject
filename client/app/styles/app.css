@@ -2,6 +2,7 @@
 @import "https://fonts.googleapis.com/css2?family=Raleway:wght@200";
 @import "login.css";
 @import "signup.css";
+<<<<<<< HEAD
 /* Add a black background color to the top navigation */
 nav.topnav {
     background-color: #333;
@@ -95,6 +96,8 @@ nav.topnav {
 .friend-name{
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
+=======
+>>>>>>> acfc5f7144d0ed0ed42cdaa26d1fdb01d6e7a4eb
 
 body{
     margin: 0;
@@ -188,4 +191,8 @@ button:focus{
 
 a{
     color: black;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> acfc5f7144d0ed0ed42cdaa26d1fdb01d6e7a4eb

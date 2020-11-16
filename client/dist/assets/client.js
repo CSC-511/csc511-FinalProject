@@ -1336,7 +1336,11 @@ catch(err) {
 
 ;
           if (!runningTests) {
+<<<<<<< HEAD
             require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0"});
+=======
+            require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+dcc8c75f"});
+>>>>>>> acfc5f7144d0ed0ed42cdaa26d1fdb01d6e7a4eb
           }
         
 //# sourceMappingURL=client.map
