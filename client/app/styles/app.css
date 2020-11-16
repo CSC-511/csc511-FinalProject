@@ -1,9 +1,8 @@
-<<<<<<< HEAD
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import "https://fonts.googleapis.com/css2?family=Raleway:wght@200";
+@import "login.css";
+@import "signup.css";
 /* Add a black background color to the top navigation */
-body{
-    margin: 0;
-}
-
 nav.topnav {
     background-color: #333;
     overflow: hidden;
@@ -97,12 +96,6 @@ nav.topnav {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
-=======
-@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
-@import "https://fonts.googleapis.com/css2?family=Raleway:wght@200";
-@import "login.css";
-@import "signup.css";
-
 body{
     margin: 0;
     padding: 0;
@@ -122,6 +115,10 @@ body{
     font-size: 45px;
     text-align: center;
     width: 600px;
+}
+
+.icon{
+    font-size: 20px;
 }
 
 .input-box{
@@ -192,4 +189,3 @@ button:focus{
 a{
     color: black;
 }
->>>>>>> acfc5f71... Sdf

@@ -8,7 +8,7 @@
  *            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
  * @license   Licensed under MIT license
  *            See https://raw.github.com/emberjs/ember.js/master/LICENSE
- * @version   3.20.5
+ * @version   3.20.6
  */
 /*globals process */
 var define, require, Ember; // Used in @ember/-internals/environment/lib/global.js
@@ -2693,14 +2693,14 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
   }
 })();
 /*!
- * QUnit 2.11.3
+ * QUnit 2.12.0
  * https://qunitjs.com/
  *
  * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-10-05T01:34Z
+ * Date: 2020-11-09T00:20Z
  */
 (function (global$1) {
 	'use strict';
@@ -2887,26 +2887,28 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	var now = Date.now || function () {
 	  return new Date().getTime();
 	};
-	var hasPerformanceApi = detectPerformanceApi();
-	var performance = hasPerformanceApi ? window$1.performance : undefined;
-	var performanceNow = hasPerformanceApi ? performance.now.bind(performance) : now;
+	var nativePerf = getNativePerf();
 
-	function detectPerformanceApi() {
-	  return window$1 && typeof window$1.performance !== "undefined" && typeof window$1.performance.mark === "function" && typeof window$1.performance.measure === "function";
-	}
-
-	function measure(comment, startMark, endMark) {
-	  // `performance.measure` may fail if the mark could not be found.
-	  // reasons a specific mark could not be found include: outside code invoking `performance.clearMarks()`
-	  try {
-	    performance.measure(comment, startMark, endMark);
-	  } catch (ex) {
-	    Logger.warn("performance.measure could not be executed because of ", ex.message);
+	function getNativePerf() {
+	  if (window$1 && typeof window$1.performance !== "undefined" && typeof window$1.performance.mark === "function" && typeof window$1.performance.measure === "function") {
+	    return window$1.performance;
+	  } else {
+	    return undefined;
 	  }
 	}
-	var defined = {
-	  document: window$1 && window$1.document !== undefined,
-	  setTimeout: setTimeout$1 !== undefined
+
+	var performance = {
+	  now: nativePerf ? nativePerf.now.bind(nativePerf) : now,
+	  measure: nativePerf ? function (comment, startMark, endMark) {
+	    // `performance.measure` may fail if the mark could not be found.
+	    // reasons a specific mark could not be found include: outside code invoking `performance.clearMarks()`
+	    try {
+	      nativePerf.measure(comment, startMark, endMark);
+	    } catch (ex) {
+	      Logger.warn("performance.measure could not be executed because of ", ex.message);
+	    }
+	  } : function () {},
+	  mark: nativePerf ? nativePerf.mark.bind(nativePerf) : function () {}
 	}; // Returns a new Array with the elements that are in a but not in b
 
 	function diff(a, b) {
@@ -3712,12 +3714,9 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    key: "start",
 	    value: function start(recordTime) {
 	      if (recordTime) {
-	        this._startTime = performanceNow();
-
-	        if (performance) {
-	          var suiteLevel = this.fullName.length;
-	          performance.mark("qunit_suite_".concat(suiteLevel, "_start"));
-	        }
+	        this._startTime = performance.now();
+	        var suiteLevel = this.fullName.length;
+	        performance.mark("qunit_suite_".concat(suiteLevel, "_start"));
 	      }
 
 	      return {
@@ -3738,14 +3737,11 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    key: "end",
 	    value: function end(recordTime) {
 	      if (recordTime) {
-	        this._endTime = performanceNow();
-
-	        if (performance) {
-	          var suiteLevel = this.fullName.length;
-	          performance.mark("qunit_suite_".concat(suiteLevel, "_end"));
-	          var suiteName = this.fullName.join(" – ");
-	          measure(suiteLevel === 0 ? "QUnit Test Run" : "QUnit Test Suite: ".concat(suiteName), "qunit_suite_".concat(suiteLevel, "_start"), "qunit_suite_".concat(suiteLevel, "_end"));
-	        }
+	        this._endTime = performance.now();
+	        var suiteLevel = this.fullName.length;
+	        var suiteName = this.fullName.join(" – ");
+	        performance.mark("qunit_suite_".concat(suiteLevel, "_end"));
+	        performance.measure(suiteLevel === 0 ? "QUnit Test Run" : "QUnit Test Suite: ".concat(suiteName), "qunit_suite_".concat(suiteLevel, "_start"), "qunit_suite_".concat(suiteLevel, "_end"));
 	      }
 
 	      return {
@@ -5338,7 +5334,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  if (taskQueue.length && !config.blocking) {
 	    var elapsedTime = now() - start;
 
-	    if (!defined.setTimeout || config.updateRate <= 0 || elapsedTime < config.updateRate) {
+	    if (!setTimeout$1 || config.updateRate <= 0 || elapsedTime < config.updateRate) {
 	      var task = taskQueue.shift();
 	      Promise$1.resolve(task()).then(function () {
 	        if (!taskQueue.length) {
@@ -5514,11 +5510,8 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    key: "start",
 	    value: function start(recordTime) {
 	      if (recordTime) {
-	        this._startTime = performanceNow();
-
-	        if (performance) {
-	          performance.mark("qunit_test_start");
-	        }
+	        this._startTime = performance.now();
+	        performance.mark("qunit_test_start");
 	      }
 
 	      return {
@@ -5531,12 +5524,12 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    key: "end",
 	    value: function end(recordTime) {
 	      if (recordTime) {
-	        this._endTime = performanceNow();
+	        this._endTime = performance.now();
 
 	        if (performance) {
 	          performance.mark("qunit_test_end");
 	          var testName = this.fullName.join(" – ");
-	          measure("QUnit Test: ".concat(testName), "qunit_test_start", "qunit_test_end");
+	          performance.measure("QUnit Test: ".concat(testName), "qunit_test_start", "qunit_test_end");
 	        }
 	      }
 
@@ -6193,43 +6186,43 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  });
 	  newTest.queue();
 	}
-	function todo(testName, callback) {
-	  if (focused$1) {
-	    return;
+	extend(test, {
+	  todo: function todo(testName, callback) {
+	    if (focused$1) {
+	      return;
+	    }
+
+	    var newTest = new Test({
+	      testName: testName,
+	      callback: callback,
+	      todo: true
+	    });
+	    newTest.queue();
+	  },
+	  skip: function skip(testName) {
+	    if (focused$1) {
+	      return;
+	    }
+
+	    var test = new Test({
+	      testName: testName,
+	      skip: true
+	    });
+	    test.queue();
+	  },
+	  only: function only(testName, callback) {
+	    if (!focused$1) {
+	      config.queue.length = 0;
+	      focused$1 = true;
+	    }
+
+	    var newTest = new Test({
+	      testName: testName,
+	      callback: callback
+	    });
+	    newTest.queue();
 	  }
-
-	  var newTest = new Test({
-	    testName: testName,
-	    callback: callback,
-	    todo: true
-	  });
-	  newTest.queue();
-	} // Will be exposed as QUnit.skip
-
-	function skip(testName) {
-	  if (focused$1) {
-	    return;
-	  }
-
-	  var test = new Test({
-	    testName: testName,
-	    skip: true
-	  });
-	  test.queue();
-	} // Will be exposed as QUnit.only
-
-	function only(testName, callback) {
-	  if (!focused$1) {
-	    config.queue.length = 0;
-	    focused$1 = true;
-	  }
-
-	  var newTest = new Test({
-	    testName: testName,
-	    callback: callback
-	  });
-	  newTest.queue();
-	} // Resets config.timeout with a new timeout duration.
+	}); // Resets config.timeout with a new timeout duration.
 
 	function resetTestTimeout(timeoutDuration) {
 	  clearTimeout(config.timeout);
@@ -6241,7 +6234,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  test.semaphore += 1;
 	  config.blocking = true; // Set a recovery timeout, if so configured.
 
-	  if (defined.setTimeout) {
+	  if (setTimeout$1) {
 	    var timeoutDuration;
 
 	    if (typeof test.timeout === "number") {
@@ -6303,7 +6296,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  } // Add a slight delay to allow more assertions etc.
 
 
-	  if (defined.setTimeout) {
+	  if (setTimeout$1) {
 	    if (config.timeout) {
 	      clearTimeout(config.timeout);
 	    }
@@ -6673,8 +6666,10 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	        } else if (expectedType === "regexp") {
 	          result = expected.test(errorString(actual)); // Log the string form of the regexp
 
-	          expected = String(expected); // Expected is a constructor, maybe an Error constructor
-	        } else if (expectedType === "function" && actual instanceof expected) {
+	          expected = String(expected); // Expected is a constructor, maybe an Error constructor.
+	          // Note the extra check on its prototype - this is an implicit
+	          // requirement of "instanceof", else it will throw a TypeError.
+	        } else if (expectedType === "function" && expected.prototype !== undefined && actual instanceof expected) {
 	          result = true; // Expected is an Error object
 	        } else if (expectedType === "object") {
 	          result = actual instanceof expected.constructor && actual.name === expected.name && actual.message === expected.message; // Log the string form of the Error object
@@ -6811,7 +6806,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 
 	/* global module, exports, define */
 	function exportQUnit(QUnit) {
-	  if (defined.document) {
+	  if (window$1 && document$1) {
 	    // QUnit may be defined when it is preconfigured but then only QUnit and QUnit.config may be defined.
 	    if (window$1.QUnit && window$1.QUnit.version) {
 	      throw new Error("QUnit has already been defined.");
@@ -6900,16 +6895,18 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	var globalStartCalled = false;
 	var runStarted = false; // Figure out if we're running the tests from a server or not
 
-	QUnit.isLocal = !(defined.document && window$1.location.protocol !== "file:"); // Expose the current QUnit version
+	QUnit.isLocal = window$1 && window$1.location && window$1.location.protocol === "file:"; // Expose the current QUnit version
 
-	QUnit.version = "2.11.3";
+	QUnit.version = "2.12.0";
+
 	extend(QUnit, {
 	  on: on,
 	  module: module$1,
 	  test: test,
-	  todo: todo,
-	  skip: skip,
-	  only: only,
+	  // alias other test flavors for easy access
+	  todo: test.todo,
+	  skip: test.skip,
+	  only: test.only,
 	  start: function start(count) {
 	    var globalStartAlreadyCalled = globalStartCalled;
 
@@ -6928,7 +6925,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	        config.autostart = true; // Starts from Node even if .load was not previously called. We still return
 	        // early otherwise we'll wind up "beginning" twice.
 
-	        if (!defined.document) {
+	        if (!document$1) {
 	          QUnit.load();
 	        }
 
@@ -6943,7 +6940,15 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  config: config,
 	  is: is,
 	  objectType: objectType,
-	  extend: extend,
+	  extend: function extend$1() {
+	    Logger.warn("QUnit.extend is deprecated and will be removed in QUnit 3.0." + " Please use Object.assign instead."); // delegate to utility implementation, which does not warn and can be used elsewhere internally
+
+	    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return extend.apply(this, args);
+	  },
 	  load: function load() {
 	    config.pageLoaded = true; // Initialize the configuration options
 
@@ -6974,6 +6979,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  onError: onError,
 	  onUnhandledRejection: onUnhandledRejection
 	});
+
 	QUnit.pushFailure = pushFailure;
 	QUnit.assert = Assert.prototype;
 	QUnit.equiv = equiv;
@@ -6983,7 +6989,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	function scheduleBegin() {
 	  runStarted = true; // Add a slight delay to allow definition of more modules and tests.
 
-	  if (defined.setTimeout) {
+	  if (setTimeout$1) {
 	    setTimeout$1(function () {
 	      begin();
 	    });
@@ -7031,7 +7037,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	exportQUnit(QUnit);
 
 	(function () {
-	  if (typeof window$1 === "undefined" || typeof document$1 === "undefined") {
+	  if (!window$1 || !document$1) {
 	    return;
 	  }
 
@@ -7959,13 +7965,12 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 
 	(function () {
 	  // Don't load the HTML Reporter on non-browser environments
-	  if (typeof window$1 === "undefined" || !window$1.document) {
+	  if (!window$1 || !document$1) {
 	    return;
 	  }
 
 	  var config = QUnit.config,
 	      hiddenTests = [],
-	      document = window$1.document,
 	      collapseNext = false,
 	      hasOwn = Object.prototype.hasOwnProperty,
 	      unfilteredUrl = setUrl({
@@ -7973,8 +7978,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    module: undefined,
 	    moduleId: undefined,
 	    testId: undefined
-	  }),
-	      modulesList = [];
+	  });
 
 	  function addEvent(elem, type, fn) {
 	    elem.addEventListener(type, fn, false);
@@ -8022,7 +8026,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  }
 
 	  function id(name) {
-	    return document.getElementById && document.getElementById(name);
+	    return document$1.getElementById && document$1.getElementById(name);
 	  }
 
 	  function abortTests() {
@@ -8172,7 +8176,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	        i,
 	        querystring = "?",
 	        location = window$1.location;
-	    params = QUnit.extend(QUnit.extend({}, QUnit.urlParams), params);
+	    params = extend(extend({}, QUnit.urlParams), params);
 
 	    for (key in params) {
 	      // Skip inherited or undefined properties
@@ -8218,7 +8222,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  }
 
 	  function toolbarUrlConfigContainer() {
-	    var urlConfigContainer = document.createElement("span");
+	    var urlConfigContainer = document$1.createElement("span");
 	    urlConfigContainer.innerHTML = getUrlConfigHtml();
 	    addClass(urlConfigContainer, "qunit-url-config");
 	    addEvents(urlConfigContainer.getElementsByTagName("input"), "change", toolbarChanged);
@@ -8227,7 +8231,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  }
 
 	  function abortTestsButton() {
-	    var button = document.createElement("button");
+	    var button = document$1.createElement("button");
 	    button.id = "qunit-abort-tests-button";
 	    button.innerHTML = "Abort";
 	    addEvent(button, "click", abortTests);
@@ -8235,10 +8239,10 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  }
 
 	  function toolbarLooseFilter() {
-	    var filter = document.createElement("form"),
-	        label = document.createElement("label"),
-	        input = document.createElement("input"),
-	        button = document.createElement("button");
+	    var filter = document$1.createElement("form"),
+	        label = document$1.createElement("label"),
+	        input = document$1.createElement("input"),
+	        button = document$1.createElement("button");
 	    addClass(filter, "qunit-filter");
 	    label.innerHTML = "Filter: ";
 	    input.type = "text";
@@ -8248,7 +8252,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    button.innerHTML = "Go";
 	    label.appendChild(input);
 	    filter.appendChild(label);
-	    filter.appendChild(document.createTextNode(" "));
+	    filter.appendChild(document$1.createTextNode(" "));
 	    filter.appendChild(button);
 	    addEvent(filter, "submit", interceptNavigation);
 	    return filter;
@@ -8272,16 +8276,16 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  function toolbarModuleFilter() {
 	    var commit,
 	        reset,
-	        moduleFilter = document.createElement("form"),
-	        label = document.createElement("label"),
-	        moduleSearch = document.createElement("input"),
-	        dropDown = document.createElement("div"),
-	        actions = document.createElement("span"),
-	        applyButton = document.createElement("button"),
-	        resetButton = document.createElement("button"),
-	        allModulesLabel = document.createElement("label"),
-	        allCheckbox = document.createElement("input"),
-	        dropDownList = document.createElement("ul"),
+	        moduleFilter = document$1.createElement("form"),
+	        label = document$1.createElement("label"),
+	        moduleSearch = document$1.createElement("input"),
+	        dropDown = document$1.createElement("div"),
+	        actions = document$1.createElement("span"),
+	        applyButton = document$1.createElement("button"),
+	        resetButton = document$1.createElement("button"),
+	        allModulesLabel = document$1.createElement("label"),
+	        allCheckbox = document$1.createElement("input"),
+	        dropDownList = document$1.createElement("ul"),
 	        dirty = false;
 	    moduleSearch.id = "qunit-modulefilter-search";
 	    moduleSearch.autocomplete = "off";
@@ -8309,7 +8313,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    }
 
 	    allModulesLabel.appendChild(allCheckbox);
-	    allModulesLabel.appendChild(document.createTextNode("All modules"));
+	    allModulesLabel.appendChild(document$1.createTextNode("All modules"));
 	    actions.id = "qunit-modulefilter-actions";
 	    actions.appendChild(applyButton);
 	    actions.appendChild(resetButton);
@@ -8340,8 +8344,8 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	      }
 
 	      dropDown.style.display = "block";
-	      addEvent(document, "click", hideHandler);
-	      addEvent(document, "keydown", hideHandler); // Hide on Escape keydown or outside-container click
+	      addEvent(document$1, "click", hideHandler);
+	      addEvent(document$1, "keydown", hideHandler); // Hide on Escape keydown or outside-container click
 
 	      function hideHandler(e) {
 	        var inContainer = moduleFilter.contains(e.target);
@@ -8352,8 +8356,8 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	          }
 
 	          dropDown.style.display = "none";
-	          removeEvent(document, "click", hideHandler);
-	          removeEvent(document, "keydown", hideHandler);
+	          removeEvent(document$1, "click", hideHandler);
+	          removeEvent(document$1, "keydown", hideHandler);
 	          moduleSearch.value = "";
 	          searchInput();
 	        }
@@ -8426,7 +8430,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	  }
 
 	  function toolbarFilters() {
-	    var toolbarFilters = document.createElement("span");
+	    var toolbarFilters = document$1.createElement("span");
 	    toolbarFilters.id = "qunit-toolbar-filters";
 	    toolbarFilters.appendChild(toolbarLooseFilter());
 	    toolbarFilters.appendChild(toolbarModuleFilter());
@@ -8439,7 +8443,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    if (toolbar) {
 	      toolbar.appendChild(toolbarUrlConfigContainer());
 	      toolbar.appendChild(toolbarFilters());
-	      toolbar.appendChild(document.createElement("div")).className = "clearfix";
+	      toolbar.appendChild(document$1.createElement("div")).className = "clearfix";
 	    }
 	  }
 
@@ -8470,7 +8474,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 
 	    if (tests) {
 	      tests.innerHTML = "";
-	      result = document.createElement("p");
+	      result = document$1.createElement("p");
 	      result.id = "qunit-testresult";
 	      result.className = "result";
 	      tests.parentNode.insertBefore(result, tests);
@@ -8498,7 +8502,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 
 	    if (userAgent) {
 	      userAgent.innerHTML = "";
-	      userAgent.appendChild(document.createTextNode("QUnit " + QUnit.version + "; " + navigator.userAgent));
+	      userAgent.appendChild(document$1.createTextNode("QUnit " + QUnit.version + "; " + navigator.userAgent));
 	    }
 	  }
 
@@ -8515,7 +8519,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    if (qunit) {
 	      // Since QUnit 1.3, these are created automatically if the page
 	      // contains id="qunit".
-	      qunit.innerHTML = "<h1 id='qunit-header'>" + escapeText(document.title) + "</h1>" + "<h2 id='qunit-banner'></h2>" + "<div id='qunit-testrunner-toolbar'></div>" + appendFilteredTest() + "<h2 id='qunit-userAgent'></h2>" + "<ol id='qunit-tests'></ol>";
+	      qunit.innerHTML = "<h1 id='qunit-header'>" + escapeText(document$1.title) + "</h1>" + "<h2 id='qunit-banner'></h2>" + "<div id='qunit-testrunner-toolbar'></div>" + appendFilteredTest() + "<h2 id='qunit-userAgent'></h2>" + "<ol id='qunit-tests'></ol>";
 	    }
 
 	    appendHeader();
@@ -8536,39 +8540,26 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	      return;
 	    }
 
-	    title = document.createElement("strong");
+	    title = document$1.createElement("strong");
 	    title.innerHTML = getNameHtml(name, moduleName);
-	    rerunTrigger = document.createElement("a");
+	    rerunTrigger = document$1.createElement("a");
 	    rerunTrigger.innerHTML = "Rerun";
 	    rerunTrigger.href = setUrl({
 	      testId: testId
 	    });
-	    testBlock = document.createElement("li");
+	    testBlock = document$1.createElement("li");
 	    testBlock.appendChild(title);
 	    testBlock.appendChild(rerunTrigger);
 	    testBlock.id = "qunit-test-output-" + testId;
-	    assertList = document.createElement("ol");
+	    assertList = document$1.createElement("ol");
 	    assertList.className = "qunit-assert-list";
 	    testBlock.appendChild(assertList);
 	    tests.appendChild(testBlock);
 	  } // HTML Reporter initialization and load
 
 
-	  QUnit.begin(function (details) {
-	    var i, moduleObj; // Sort modules by name for the picker
-
-	    for (i = 0; i < details.modules.length; i++) {
-	      moduleObj = details.modules[i];
-
-	      if (moduleObj.name) {
-	        modulesList.push(moduleObj.name);
-	      }
-	    }
-
-	    modulesList.sort(function (a, b) {
-	      return a.localeCompare(b);
-	    }); // Initialize QUnit elements
-
+	  QUnit.begin(function () {
+	    // Initialize QUnit elements
 	    appendInterface();
 	  });
 	  QUnit.done(function (details) {
@@ -8590,7 +8581,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	        if (test.className === "" || test.className === "running") {
 	          test.className = "aborted";
 	          assertList = test.getElementsByTagName("ol")[0];
-	          assertLi = document.createElement("li");
+	          assertLi = document$1.createElement("li");
 	          assertLi.className = "fail";
 	          assertLi.innerHTML = "Test aborted.";
 	          assertList.appendChild(assertLi);
@@ -8610,11 +8601,11 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	      id("qunit-testresult-display").innerHTML = html;
 	    }
 
-	    if (config.altertitle && document.title) {
+	    if (config.altertitle && document$1.title) {
 	      // Show ✖ for good, ✔ for bad suite result in title
 	      // use escape sequences in case file gets loaded with non-utf-8
 	      // charset
-	      document.title = [stats.failedTests ? "\u2716" : "\u2714", document.title.replace(/^[\u2714\u2716] /i, "")].join(" ");
+	      document$1.title = [stats.failedTests ? "\u2716" : "\u2714", document$1.title.replace(/^[\u2714\u2716] /i, "")].join(" ");
 	    } // Scroll back to top to show results
 
 
@@ -8722,7 +8713,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    }
 
 	    assertList = testItem.getElementsByTagName("ol")[0];
-	    assertLi = document.createElement("li");
+	    assertLi = document$1.createElement("li");
 	    assertLi.className = details.result ? "pass" : "fail";
 	    assertLi.innerHTML = message;
 	    assertList.appendChild(assertLi);
@@ -8782,7 +8773,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    if (details.skipped) {
 	      stats.skippedTests++;
 	      testItem.className = "skipped";
-	      skipped = document.createElement("em");
+	      skipped = document$1.createElement("em");
 	      skipped.className = "qunit-skipped-label";
 	      skipped.innerHTML = "skipped";
 	      testItem.insertBefore(skipped, testTitle);
@@ -8793,14 +8784,14 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	      testItem.className = testPassed ? "pass" : "fail";
 
 	      if (details.todo) {
-	        var todoLabel = document.createElement("em");
+	        var todoLabel = document$1.createElement("em");
 	        todoLabel.className = "qunit-todo-label";
 	        todoLabel.innerHTML = "todo";
 	        testItem.className += " todo";
 	        testItem.insertBefore(todoLabel, testTitle);
 	      }
 
-	      time = document.createElement("span");
+	      time = document$1.createElement("span");
 	      time.className = "runtime";
 	      time.innerHTML = details.runtime + " ms";
 	      testItem.insertBefore(time, assertList);
@@ -8816,7 +8807,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 
 
 	    if (details.source) {
-	      sourceName = document.createElement("p");
+	      sourceName = document$1.createElement("p");
 	      sourceName.innerHTML = "<strong>Source: </strong>" + escapeText(details.source);
 	      addClass(sourceName, "qunit-source");
 
@@ -8842,7 +8833,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
 	    return !(p && p.version && p.version.major > 0);
 	  }(window$1.phantom);
 
-	  if (notPhantom && document.readyState === "complete") {
+	  if (notPhantom && document$1.readyState === "complete") {
 	    QUnit.load();
 	  } else {
 	    addEvent(window$1, "load", QUnit.load);
@@ -10007,7 +9998,7 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
   QUnit.config.testTimeout = QUnit.urlParams.devmode ? null : 60000; //Default Test Timeout 60 Seconds
 })();
 
-(function () {
+var QUnitDOM = (function (exports) {
   'use strict';
 
   function exists(options, message) {
@@ -11453,25 +11444,52 @@ define("ember-testing/lib/test/waiters", ["exports"], function (_exports) {
       return DOMAssertions;
   }());
 
-  /* global QUnit */
-  QUnit.assert.dom = function (target, rootElement) {
-      if (!isValidRootElement(rootElement)) {
-          throw new Error(rootElement + " is not a valid root element");
-      }
-      rootElement = rootElement || this.dom.rootElement || document;
-      if (arguments.length === 0) {
-          target = rootElement;
-      }
-      return new DOMAssertions(target, rootElement, this);
-  };
-  function isValidRootElement(element) {
-      return (!element ||
-          (typeof element === 'object' &&
-              typeof element.querySelector === 'function' &&
-              typeof element.querySelectorAll === 'function'));
+  var _getRootElement = function () { return null; };
+  function overrideRootElement(fn) {
+      _getRootElement = fn;
+  }
+  function getRootElement() {
+      return _getRootElement();
   }
 
-}());
+  function install (assert) {
+      assert.dom = function (target, rootElement) {
+          if (!isValidRootElement(rootElement)) {
+              throw new Error(rootElement + " is not a valid root element");
+          }
+          rootElement = rootElement || this.dom.rootElement || getRootElement();
+          if (arguments.length === 0) {
+              target = rootElement instanceof Element ? rootElement : null;
+          }
+          return new DOMAssertions(target, rootElement, this);
+      };
+      function isValidRootElement(element) {
+          return (!element ||
+              (typeof element === 'object' &&
+                  typeof element.querySelector === 'function' &&
+                  typeof element.querySelectorAll === 'function'));
+      }
+  }
+
+  function setup(assert, options) {
+      if (options === void 0) { options = {}; }
+      install(assert);
+      var getRootElement = typeof options.getRootElement === 'function'
+          ? options.getRootElement
+          : function () { return document.querySelector('#ember-testing'); };
+      overrideRootElement(getRootElement);
+  }
+
+  /* global QUnit */
+  install(QUnit.assert);
+
+  exports.setup = setup;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+  return exports;
+
+}({}));
 
 Object.defineProperty(QUnit.assert.dom, 'rootElement', {
   get: function() {
@@ -17167,36 +17185,36 @@ var __ember_auto_import__ =
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../../AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/l.js":
-/*!***************************************************************************************************!*\
-  !*** C:/Users/Jimmy/AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/l.js ***!
-  \***************************************************************************************************/
+/***/ "../../../../AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/l.js":
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Jimmy/AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/l.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\nwindow._eai_r = require;\nwindow._eai_d = define;\n\n\n//# sourceURL=webpack://__ember_auto_import__/C:/Users/Jimmy/AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/l.js?");
+eval("\nwindow._eai_r = require;\nwindow._eai_d = define;\n\n\n//# sourceURL=webpack://__ember_auto_import__/C:/Users/Jimmy/AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/l.js?");
 
 /***/ }),
 
-/***/ "../../../../AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/tests.js":
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/Jimmy/AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/tests.js ***!
-  \*******************************************************************************************************/
+/***/ "../../../../AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/tests.js":
+/*!******************************************************************************************************!*\
+  !*** C:/Users/Jimmy/AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/tests.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("\nif (typeof document !== 'undefined') {\n  __webpack_require__.p = (function(){\n    var scripts = document.querySelectorAll('script');\n    return scripts[scripts.length - 1].src.replace(/\\/[^/]*$/, '/');\n  })();\n}\n\nmodule.exports = (function(){\n  var d = _eai_d;\n  var r = _eai_r;\n  window.emberAutoImportDynamic = function(specifier) {\n    return r('_eai_dyn_' + specifier);\n  };\n})();\n\n\n//# sourceURL=webpack://__ember_auto_import__/C:/Users/Jimmy/AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/tests.js?");
+eval("\nif (typeof document !== 'undefined') {\n  __webpack_require__.p = (function(){\n    var scripts = document.querySelectorAll('script');\n    return scripts[scripts.length - 1].src.replace(/\\/[^/]*$/, '/');\n  })();\n}\n\nmodule.exports = (function(){\n  var d = _eai_d;\n  var r = _eai_r;\n  window.emberAutoImportDynamic = function(specifier) {\n    return r('_eai_dyn_' + specifier);\n  };\n})();\n\n\n//# sourceURL=webpack://__ember_auto_import__/C:/Users/Jimmy/AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/tests.js?");
 
 /***/ }),
 
 /***/ 1:
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** multi C:/Users/Jimmy/AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/l.js C:/Users/Jimmy/AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/tests.js ***!
-  \*********************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** multi C:/Users/Jimmy/AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/l.js C:/Users/Jimmy/AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/tests.js ***!
+  \*******************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! C:\\Users\\Jimmy\\AppData\\Local\\Temp\\broccoli-13920N3oXgnJ9R911\\cache-245-bundler\\staging\\l.js */\"../../../../AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/l.js\");\nmodule.exports = __webpack_require__(/*! C:\\Users\\Jimmy\\AppData\\Local\\Temp\\broccoli-13920N3oXgnJ9R911\\cache-245-bundler\\staging\\tests.js */\"../../../../AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/tests.js\");\n\n\n//# sourceURL=webpack://__ember_auto_import__/multi_C:/Users/Jimmy/AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/l.js_C:/Users/Jimmy/AppData/Local/Temp/broccoli-13920N3oXgnJ9R911/cache-245-bundler/staging/tests.js?");
+eval("__webpack_require__(/*! C:\\Users\\Jimmy\\AppData\\Local\\Temp\\broccoli-1864iG5Mw7p3kn6n\\cache-257-bundler\\staging\\l.js */\"../../../../AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/l.js\");\nmodule.exports = __webpack_require__(/*! C:\\Users\\Jimmy\\AppData\\Local\\Temp\\broccoli-1864iG5Mw7p3kn6n\\cache-257-bundler\\staging\\tests.js */\"../../../../AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/tests.js\");\n\n\n//# sourceURL=webpack://__ember_auto_import__/multi_C:/Users/Jimmy/AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/l.js_C:/Users/Jimmy/AppData/Local/Temp/broccoli-1864iG5Mw7p3kn6n/cache-257-bundler/staging/tests.js?");
 
 /***/ })
 
