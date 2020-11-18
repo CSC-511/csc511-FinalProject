@@ -2,23 +2,18 @@
 
 
    
-<h1>{{tempUser.username}} #{{tempUser.idNum}}'s Profile <img id='selfie' src={{image}}> </h1>
+<h1>{{tempUser.username}}'s Profile <img id='selfie' src={{image}}> </h1>
 
 
 <p>Change Selfie:</p>
 <input type="file" class="form-control" id="image" onchange={{action uploadFile}}/>
 
 
-<br><br><br>
-
 <div>
   <p id='bio'>{{tempUser.bio}} </p>
-  
- <br><br>
 </div>
 
-
-<br><br>
+<br>
 
 <div>
   <h2>Current Bets {{tempUser.username}} Is a Part Of:</h2>
@@ -39,4 +34,6 @@
 
  {{/each}}
   
+
+  <br>
 

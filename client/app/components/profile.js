@@ -1,7 +1,15 @@
 import Component from '@glimmer/component';
 import {tracked} from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
+import $ from 'jquery';
+import ENV from 'client/config/environment';
 
 export default class profileComponent extends Component {
+    @tracked  activePage = 'profile';
+    @service router;
+
+    @tracked userInfo = [];
+
     @tracked username;
     @tracked idNum;
     @tracked bio;
@@ -11,13 +19,12 @@ export default class profileComponent extends Component {
     constructor(){
         super(...arguments);
         this.username = this.args.username;
-        this.idNum = this.args.idNum;
-        this.bio = this.args.bio;
         this.tempUser = this.args.tempUser;
-    
-
-    let tempUserData = [{username: "Victoria", 
-    idNum: "0001",
+       
+    let tempUserData = 
+    [{
+      username: "Daniel", 
+      idNum: "0001",
     // img: 
     }]
     this.temporaryUser = tempUserData;
