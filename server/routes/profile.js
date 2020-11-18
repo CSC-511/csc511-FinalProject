@@ -15,11 +15,33 @@ mongo.connect(url, {
         res.json("Test Profile");
     });
 
-    app.get('/profile/users', function(req, res) {
-        //req.app.get('locals.client').db('bettDb').collection('userAccounts').find().toArray((err, items) => {
-            res.json('hello');
-        //})
+
+    const db = client.db('bettDb');
+
+
+    //get user info
+    userAccountsCollection = db.collection('userAccounts');
+    app.get('/users', function(req, res) {
+        let user = req.query.username;
+        let query = {username: user};
+
+        userAccountsCollection.find(query).toArray((err, users) => {
+            res.json(users);
+        }); 
     });
+
+
+    //get user bet info
+    userBetsCollection = db.collection('userBets');
+    app.get('/apartOfBets', function(req, res) {
+        let username = req.query.username;
+        let query = {BetCreator: username};
+
+        userBetsCollection.find(query).toArray((err, items) => {
+            res.json(items);
+    });
+});
+
 
 });
 
