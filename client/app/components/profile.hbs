@@ -1,38 +1,39 @@
-{{#each this.temporaryUser as |tempUser|}}
+
+<h1>{{@model.username}}'s Profile</h1> <img id='preview-image' src='' alt='pfp'>
 
 
-   
-<h1>{{tempUser.username}}'s Profile <img id='selfie' src={{image}}> </h1>
+<p>Change Selfie:</p> 
+
+<input
+  multiple="true"
+  onchange={{action uploadFile}}
+  accept="image/png,image/jpeg,application/pdf"
+  type="file"
+  />
 
 
-<p>Change Selfie:</p>
-<input type="file" class="form-control" id="image" onchange={{action uploadFile}}/>
-
-
-<div>
+{{!-- <div>
   <p id='bio'>{{tempUser.bio}} </p>
-</div>
+</div> --}}
 
 <br>
 
 <div>
-  <h2>Current Bets {{tempUser.username}} Is a Part Of:</h2>
-  {{!-- The following is just an example as there is no data to pull yet --}}
-  <table>
-    <tr>
-      <td class='betDescription'>Football Game</td>
-      <td class='betAmount'>$100</td>
-      <td class='activityStatusActive'>Active</td>
-  </tr>
-   <tr>
-      <td class='betDescription'>Push Up Contest</td>
-      <td class='betAmount'>$50</td>
-      <td class='activityStatusInactive'>Inactive</td>
-  </tr>
-  </table>
+  <h2>Current Bets {{@model.username}} Is a Part Of:</h2>
+
+  <ul>
+    {{#each this.betsCreated key="index" as |betsCreated|}}
+        <li class="no-dots"> 
+            <LinkTo class="list-mybets-title" @route="bets" @query={{hash id=betsCreated._id}}>{{betsCreated.BetDescription}}</LinkTo>
+        </li>
+    {{/each}}
+    </ul>
+
+
+
+
 </div>
 
- {{/each}}
   
 
   <br>

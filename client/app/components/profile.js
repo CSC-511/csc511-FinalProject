@@ -7,27 +7,26 @@ import ENV from 'client/config/environment';
 export default class profileComponent extends Component {
     @tracked  activePage = 'profile';
     @service router;
-
-    @tracked userInfo = [];
-
     @tracked username;
-    @tracked idNum;
-    @tracked bio;
-
-    @tracked temporaryUser;
+    @tracked id;
+    @tracked desc;
+    
+    @tracked userInfo;
+    @tracked betsCreated = [];
 
     constructor(){
         super(...arguments);
         this.username = this.args.username;
-        this.tempUser = this.args.tempUser;
-       
-    let tempUserData = 
-    [{
-      username: "Daniel", 
-      idNum: "0001",
-    // img: 
-    }]
-    this.temporaryUser = tempUserData;
+        this.userInfo = null;
+        this.betsCreated = [];
+        //get user info
+        $.get(`${ENV.APP.API_ENDPOINT}/profile/getUsersBets?username=`+this.username).done(betsUserCreatedList => {
+          this.betsCreated = betsUserCreatedList;
+        });
+        //get bet info
+        $.get(`${ENV.APP.API_ENDPOINT}/profile/apartOfBets`, ({username: this.username}), (betsUserCreatedList) => {
+          this.betsCreated = betsUserCreatedList;
+      });
 }
 
     uploadFile(event) {
@@ -35,16 +34,17 @@ export default class profileComponent extends Component {
       const reader = new FileReader();
       const file = event.target.files[0];
       let imageData;
-  
-      reader.onload = function(){
-        imageData = reader.result;
-        self.set('image', imageData);
+
+      reader.onload = function() {
+      imageData = reader.result;
+      self = ('image', imageData);
       };
-  
+
       if (file) {
         reader.readAsDataURL(file);
       }
-    }
-  
 
-}
+      $('#preview-image').attr('src', event.target.result);
+
+  }
+};
