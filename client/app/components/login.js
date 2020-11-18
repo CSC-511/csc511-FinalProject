@@ -1,16 +1,19 @@
 import Component from '@glimmer/component';
 import {tracked} from '@glimmer/tracking';
+import { inject as service }from '@ember/service';
+import $ from 'jquery';
+import ENV from 'client/config/environment';
 
 export default class LoginComponent extends Component {
     @tracked userName = null;
     @tracked userPass = null;
-    @tracked loggedIn = false;
+    @tracked isLoggedIn = false;
     @tracked rememberMe = false;
+    @service router;
 
     checkInfo(){
-        //checks if info exists in database
-        //if true then loggedIn = true
-        //else false
+        this.router.transitionTo('/')
+        
     }
 
     checkRemember(){

@@ -348,7 +348,7 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, LoginUIComponent);
 });
-;define("client/components/login", ["exports", "@glimmer/component"], function (_exports, _component) {
+;define("client/components/login", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -356,7 +356,7 @@
   });
   _exports.default = void 0;
 
-  var _dec, _dec2, _dec3, _dec4, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
+  var _dec, _dec2, _dec3, _dec4, _dec5, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -368,7 +368,8 @@
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
-    <div class="welcome">
+    <form >
+  <div class="welcome">
       <h1>Welcome to TEMPNAME</h1>
   </div>
   <div class="login-box">
@@ -385,7 +386,7 @@
           <label><input type="checkbox" onchange={{action checkRemember}}>Remember me</label>
       </div>
       
-      <button class="btn" onclick={{action checkInfo}}>Log In</button>
+      <button type="submit" class="btn" onclick={{action checkInfo}}>Log In</button>
       <div class="sign-up">
           <p>Not a member? <LinkTo @route="signup">Sign up now!</LinkTo></p>
       </div>
@@ -393,20 +394,21 @@
           <a href="">Forgot your password?</a>
       </div>
   </div>
+  </form>
   
   <div class="tom">
       <img src="/assets/images/tom.png">
   </div>
   */
   {
-    "id": "BaHNsBHU",
-    "block": "{\"symbols\":[],\"statements\":[[10,\"div\"],[14,0,\"welcome\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Welcome to TEMPNAME\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[10,\"div\"],[14,0,\"login-box\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Login\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"       \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Username or Email\"],[14,\"maxlength\",\"40\"],[15,2,[34,0]],[15,\"onchange\",[30,[36,2],[[32,0],[35,1]],null]],[14,4,\"text\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-user\"],[12],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"        \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Password\"],[14,\"maxlength\",\"40\"],[15,2,[34,3]],[15,\"onchange\",[30,[36,2],[[32,0],[35,4]],null]],[14,4,\"password\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-lock\"],[12],[13],[2,\"  \\n    \"],[13],[2,\"  \\n    \"],[10,\"div\"],[14,0,\"remember\"],[12],[2,\"   \\n        \"],[10,\"label\"],[12],[10,\"input\"],[15,\"onchange\",[30,[36,2],[[32,0],[35,5]],null]],[14,4,\"checkbox\"],[12],[13],[2,\"Remember me\"],[13],[2,\"\\n    \"],[13],[2,\"\\n    \\n    \"],[10,\"button\"],[14,0,\"btn\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,6]],null]],[12],[2,\"Log In\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"sign-up\"],[12],[2,\"\\n        \"],[10,\"p\"],[12],[2,\"Not a member? \"],[8,\"link-to\",[],[[\"@route\"],[\"signup\"]],[[\"default\"],[{\"statements\":[[2,\"Sign up now!\"]],\"parameters\":[]}]]],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"forgot\"],[12],[2,\"\\n        \"],[10,\"a\"],[14,6,\"\"],[12],[2,\"Forgot your password?\"],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[14,0,\"tom\"],[12],[2,\"\\n    \"],[10,\"img\"],[14,\"src\",\"/assets/images/tom.png\"],[12],[13],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"userName\",\"getUsername\",\"action\",\"userPass\",\"getUserpass\",\"checkRemember\",\"checkInfo\"]}",
+    "id": "1RM/hA9q",
+    "block": "{\"symbols\":[],\"statements\":[[10,\"form\"],[12],[2,\"\\n\"],[10,\"div\"],[14,0,\"welcome\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Welcome to TEMPNAME\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[10,\"div\"],[14,0,\"login-box\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Login\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"       \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Username or Email\"],[14,\"maxlength\",\"40\"],[15,2,[34,0]],[15,\"onchange\",[30,[36,2],[[32,0],[35,1]],null]],[14,4,\"text\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-user\"],[12],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"        \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Password\"],[14,\"maxlength\",\"40\"],[15,2,[34,3]],[15,\"onchange\",[30,[36,2],[[32,0],[35,4]],null]],[14,4,\"password\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-lock\"],[12],[13],[2,\"  \\n    \"],[13],[2,\"  \\n    \"],[10,\"div\"],[14,0,\"remember\"],[12],[2,\"   \\n        \"],[10,\"label\"],[12],[10,\"input\"],[15,\"onchange\",[30,[36,2],[[32,0],[35,5]],null]],[14,4,\"checkbox\"],[12],[13],[2,\"Remember me\"],[13],[2,\"\\n    \"],[13],[2,\"\\n    \\n    \"],[10,\"button\"],[14,0,\"btn\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,6]],null]],[14,4,\"submit\"],[12],[2,\"Log In\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"sign-up\"],[12],[2,\"\\n        \"],[10,\"p\"],[12],[2,\"Not a member? \"],[8,\"link-to\",[],[[\"@route\"],[\"signup\"]],[[\"default\"],[{\"statements\":[[2,\"Sign up now!\"]],\"parameters\":[]}]]],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"forgot\"],[12],[2,\"\\n        \"],[10,\"a\"],[14,6,\"\"],[12],[2,\"Forgot your password?\"],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[14,0,\"tom\"],[12],[2,\"\\n    \"],[10,\"img\"],[14,\"src\",\"/assets/images/tom.png\"],[12],[13],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"userName\",\"getUsername\",\"action\",\"userPass\",\"getUserpass\",\"checkRemember\",\"checkInfo\"]}",
     "meta": {
       "moduleName": "client/components/login.hbs"
     }
   });
 
-  let LoginComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember._tracked, (_class = (_temp = class LoginComponent extends _component.default {
+  let LoginComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember._tracked, _dec5 = Ember.inject.service, (_class = (_temp = class LoginComponent extends _component.default {
     constructor(...args) {
       super(...args);
 
@@ -414,14 +416,15 @@
 
       _initializerDefineProperty(this, "userPass", _descriptor2, this);
 
-      _initializerDefineProperty(this, "loggedIn", _descriptor3, this);
+      _initializerDefineProperty(this, "isLoggedIn", _descriptor3, this);
 
       _initializerDefineProperty(this, "rememberMe", _descriptor4, this);
+
+      _initializerDefineProperty(this, "router", _descriptor5, this);
     }
 
-    checkInfo() {//checks if info exists in database
-      //if true then loggedIn = true
-      //else false
+    checkInfo() {
+      this.router.transitionTo('/');
     }
 
     checkRemember() {
@@ -452,7 +455,7 @@
     initializer: function () {
       return null;
     }
-  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "loggedIn", [_dec3], {
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "isLoggedIn", [_dec3], {
     configurable: true,
     enumerable: true,
     writable: true,
@@ -466,6 +469,11 @@
     initializer: function () {
       return false;
     }
+  }), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec5], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
   })), _class));
   _exports.default = LoginComponent;
 
@@ -687,7 +695,7 @@
   });
   _exports.default = void 0;
 
-  var _dec, _dec2, _class, _descriptor, _descriptor2, _temp;
+  var _dec, _dec2, _dec3, _class, _descriptor, _descriptor2, _descriptor3, _temp;
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -699,7 +707,8 @@
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
-    <div class="welcome">
+    <form >
+  <div class="welcome">
       <h1>Welcome to TEMPNAME</h1>
   </div>
   <div class="signup-box">
@@ -718,32 +727,33 @@
           <p>Already a member? <LinkTo @route="login">Log in now!</LinkTo></p>
       </div>
   </div>
-  
+  </form>
   
   <div class="tom">
       <img src="/assets/images/tom.png">
   </div>
   */
   {
-    "id": "XCPDvKp8",
-    "block": "{\"symbols\":[],\"statements\":[[10,\"div\"],[14,0,\"welcome\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Welcome to TEMPNAME\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[10,\"div\"],[14,0,\"signup-box\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"       \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Username\"],[14,\"maxlength\",\"40\"],[15,2,[34,0]],[15,\"onchange\",[30,[36,2],[[32,0],[35,1]],null]],[14,\"required\",\"\"],[14,4,\"text\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-user\"],[12],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"        \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Password\"],[14,\"maxlength\",\"40\"],[14,\"required\",\"\"],[14,\"minlength\",\"8\"],[15,2,[34,3]],[15,\"onchange\",[30,[36,2],[[32,0],[35,4]],null]],[14,4,\"password\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-lock\"],[12],[13],[2,\"  \\n    \"],[13],[2,\"  \\n    \\n    \"],[10,\"button\"],[14,0,\"btn\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,5]],null]],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"sign-up\"],[12],[2,\"\\n        \"],[10,\"p\"],[12],[2,\"Already a member? \"],[8,\"link-to\",[],[[\"@route\"],[\"login\"]],[[\"default\"],[{\"statements\":[[2,\"Log in now!\"]],\"parameters\":[]}]]],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\\n\"],[10,\"div\"],[14,0,\"tom\"],[12],[2,\"\\n    \"],[10,\"img\"],[14,\"src\",\"/assets/images/tom.png\"],[12],[13],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"userName\",\"getUsername\",\"action\",\"userPass\",\"getUserpass\",\"checkInfo\"]}",
+    "id": "jfb5dxio",
+    "block": "{\"symbols\":[],\"statements\":[[10,\"form\"],[12],[2,\"\\n\"],[10,\"div\"],[14,0,\"welcome\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Welcome to TEMPNAME\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[10,\"div\"],[14,0,\"signup-box\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"       \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Username\"],[14,\"maxlength\",\"40\"],[15,2,[34,0]],[15,\"onchange\",[30,[36,2],[[32,0],[35,1]],null]],[14,\"required\",\"\"],[14,4,\"text\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-user\"],[12],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"        \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Password\"],[14,\"maxlength\",\"40\"],[14,\"required\",\"\"],[14,\"minlength\",\"8\"],[15,2,[34,3]],[15,\"onchange\",[30,[36,2],[[32,0],[35,4]],null]],[14,4,\"password\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-lock\"],[12],[13],[2,\"  \\n    \"],[13],[2,\"  \\n    \\n    \"],[10,\"button\"],[14,0,\"btn\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,5]],null]],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"sign-up\"],[12],[2,\"\\n        \"],[10,\"p\"],[12],[2,\"Already a member? \"],[8,\"link-to\",[],[[\"@route\"],[\"login\"]],[[\"default\"],[{\"statements\":[[2,\"Log in now!\"]],\"parameters\":[]}]]],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[14,0,\"tom\"],[12],[2,\"\\n    \"],[10,\"img\"],[14,\"src\",\"/assets/images/tom.png\"],[12],[13],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"userName\",\"getUsername\",\"action\",\"userPass\",\"getUserpass\",\"checkInfo\"]}",
     "meta": {
       "moduleName": "client/components/signup.hbs"
     }
   });
 
-  let SignupComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, (_class = (_temp = class SignupComponent extends _component.default {
+  let SignupComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember.inject.service, (_class = (_temp = class SignupComponent extends _component.default {
     constructor(...args) {
       super(...args);
 
       _initializerDefineProperty(this, "userName", _descriptor, this);
 
       _initializerDefineProperty(this, "userPass", _descriptor2, this);
+
+      _initializerDefineProperty(this, "router", _descriptor3, this);
     }
 
-    checkInfo() {//checks if info exists in database
-      //if false then add it 
-      //else user already exists
+    checkInfo() {
+      this.router.transitionTo('/');
     }
 
     getUsername(input) {
@@ -768,6 +778,11 @@
     initializer: function () {
       return null;
     }
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec3], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
   })), _class));
   _exports.default = SignupComponent;
 
@@ -1046,14 +1061,31 @@
   _exports.default = void 0;
   const FAKE_COOKIES = 123123123;
 
-  class IndexRoute extends Ember.Route {// model() {
-    //     return $.get(`${ENV.APP.API_ENDPOINT}/auth/isloggedin?cookie=${FAKE_COOKIES}`);
-    // }
-    // afterModel(model, transition) {
-    //     if (!model) { // if there model is empty, take us to log in route
-    //       this.transitionTo('login');
-    //     }
-    //   }
+  class IndexRoute extends Ember.Route {
+    constructor() {
+      super(...arguments);
+      this.model();
+      this.afterModel(this.model());
+    }
+
+    model() {
+      const temp = _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/auth/isloggedin?cookie=${FAKE_COOKIES}`);
+
+      console.log(temp);
+      return temp;
+    }
+
+    afterModel(model) {
+      debugger;
+
+      if (!model) {
+        // if there model is empty, take us to log in route
+        this.transitionTo('login');
+      }
+
+      console.log(model);
+    }
+
   }
 
   _exports.default = IndexRoute;
@@ -1234,8 +1266,8 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "fTfwnBM/",
-    "block": "{\"symbols\":[],\"statements\":[[8,\"login\",[],[[],[]],null]],\"hasEval\":false,\"upvars\":[]}",
+    "id": "X9S6vlJX",
+    "block": "{\"symbols\":[],\"statements\":[[8,\"login\",[],[[],[]],null],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}",
     "meta": {
       "moduleName": "client/templates/login.hbs"
     }
@@ -1336,11 +1368,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-<<<<<<< HEAD
             require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0"});
-=======
-            require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+dcc8c75f"});
->>>>>>> acfc5f7144d0ed0ed42cdaa26d1fdb01d6e7a4eb
           }
         
 //# sourceMappingURL=client.map

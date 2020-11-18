@@ -1,14 +1,14 @@
 import Component from '@glimmer/component';
 import {tracked} from '@glimmer/tracking';
+import { inject as service }from '@ember/service';
 
 export default class SignupComponent extends Component {
     @tracked userName = null;
     @tracked userPass = null;
-
+    @service router;
+    
     checkInfo(){
-        //checks if info exists in database
-        //if false then add it 
-        //else user already exists
+        this.router.transitionTo('/')
     }
 
     getUsername(input){

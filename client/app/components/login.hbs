@@ -1,3 +1,4 @@
+<form >
 <div class="welcome">
     <h1>Welcome to TEMPNAME</h1>
 </div>
@@ -15,7 +16,7 @@
         <label><input type="checkbox" onchange={{action checkRemember}}>Remember me</label>
     </div>
     
-    <button class="btn" onclick={{action checkInfo}}>Log In</button>
+    <button type="submit" class="btn" onclick={{action checkInfo}}>Log In</button>
     <div class="sign-up">
         <p>Not a member? <LinkTo @route="signup">Sign up now!</LinkTo></p>
     </div>
@@ -23,6 +24,7 @@
         <a href="">Forgot your password?</a>
     </div>
 </div>
+</form>
 
 <div class="tom">
     <img src="/assets/images/tom.png">
