@@ -57,5 +57,15 @@ app.post('/logout', function(req, res) {
     });
 });
 
+const crypto = require('crypto')
+var shaString = function(){  
+    var sha1 = crypto.createHash('sha1').update('geeken_39959104382_1601811415').digest('hex');
+    
+    console.log(sha1)
+    return sha1;
+}
+
+module.exports = shaString;
+
 
 module.exports = app;

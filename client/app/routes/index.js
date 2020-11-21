@@ -12,7 +12,8 @@ export default class IndexRoute extends Route {
   }
 
     model() {
-      const temp = $.get(`${ENV.APP.API_ENDPOINT}/auth/isloggedin?cookie=${FAKE_COOKIES}`);
+      const cookie = localStorage.getItem('cookie')
+      const temp = $.get(`${ENV.APP.API_ENDPOINT}/auth/isloggedin?cookie=${cookie}`);
       console.log(temp)
       return temp;
     }

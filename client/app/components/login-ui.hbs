@@ -1,6 +1,27 @@
-<div style="border: 1px solid orange;">
-    LOGIN COMPONENT
-    <p>Username: <Input @value={{this.username}}/></p>
-    <p>Password: <Input @value={{this.password}}/></p>
-    <button onclick={{this.logIn}}>Log In</button>
+<div class="welcome">
+    <h1>Welcome to TEMPNAME</h1>
+</div>
+<div class="login-box">
+    <h1>Login</h1>
+    <div class="input-box">       
+        <input type="text" placeholder="Username or Email" maxlength="40" value={{userName}} onchange={{action getUsername}}>
+        <i class="icon fa fa-user"></i>
+    </div>
+    <div class="input-box">        
+        <input type="password" placeholder="Password" maxlength="40" value={{userPass}} onchange={{action getUserpass}}>
+        <i class="icon fa fa-lock"></i>  
+    </div>  
+    
+    <button type="submit" class="btn" onclick={{action checkInfo}}>Log In</button>
+    <div class="sign-up">
+        <p>Not a member? <LinkTo @route="signup">Sign up now!</LinkTo></p>
+    </div>
+    <div class="forgot">
+        <a href="">Forgot your password?</a>
+    </div>
+</div>
+
+
+<div class="tom">
+    <img src="/assets/images/tom.png">
 </div>
