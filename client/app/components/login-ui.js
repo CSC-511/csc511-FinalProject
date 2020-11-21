@@ -16,6 +16,7 @@ export default class LoginUIComponent extends Component {
 
     @tracked username;
     @tracked password;
+    @tracked logInSuccess = true;
 
     @action
     logIn(){
@@ -24,10 +25,18 @@ export default class LoginUIComponent extends Component {
                 if(result && result.isLoggedIn){
                     localStorage.setItem('cookie',result.cookie);
                     this.router.transitionTo('/');
+                    this.logInSuccess = true;
+
+                }
+
+                else
+                {
+                    this.logInSuccess = false;
                 }
               });
-
+             
         }
+
     }
 
 }
