@@ -16,6 +16,9 @@ export default class IndividualBetComponent extends Component {
 @tracked currentBetTitleValue;
 @tracked currentBetAmountValue;
 @tracked currentDescriptionValue;
+    
+
+
 
 constructor(){
     super(...arguments)
@@ -73,17 +76,14 @@ loadSampleData(){
     console.log(this.nameList)
     console.log(this.individualBet.betData.betParticipants.length)
 }
-c
+
 createBet(title, amount, detail, side){
     this.currentTime = new Date();
-    this.newData();
     this.individualBet = {
-
-        betID: '001',
         betData: {             
             betTitle: title,
             betAmount: amount,
-            betAdmin: 'AdminUserID',
+            betAdmin: this.userData[0].username, // should be a unique key as identifier it is currently the cookie
             isAdmin: true, 
             betResolution: false,
             betDetail: detail,
@@ -91,7 +91,8 @@ createBet(title, amount, detail, side){
 
         }
     }
-    this.individualBet.betData.betParticipants.pushObject({userID:'AdminUserID',userData:{userName: 'AdminUserName', userTime: this.currentTime, betSide: this.betAgainst, }})
+    this.getTimeAndDate()
+    this.individualBet.betData.betParticipants.pushObject({userID:this.userIdNum,userData:{userName: this.userData[0].username, userTime: this.currentTime, betSide: this.betAgainst, }})
     this.nameList = this.individualBet.betData.betParticipants;
     this.displayCreateBet = false;
     console.log(this.individualBet)
@@ -101,13 +102,14 @@ createBet(title, amount, detail, side){
 
 }
 
+joinBet(){
 
-joinBet(user, name){
-    this.currentTime = new Date();
+    console.log(this.userData)
+    this.getTimeAndDate()
     this.individualBet.betData.betParticipants.pushObject({
-        userID: 'userID',
+        userID: this.userIdNum, // users unique ID to be logged
         userData:{
-            userName: 'userName', 
+            userName: this.userData[0].username, // use the ID to retrieve the name
             userTime: this.currentTime,
             betSide: this.betAgainst, 
         }
@@ -133,27 +135,24 @@ loadFakeData(){
     this.displayCreateBet = false
     console.log(this.isAdmin)
 }
-changeUser(){
-    this.displayCreateBet = false    
 
-}
-changeAdmin(){
-    this.newData()
-    this.displayCreateBet = true
-}
+changeUser() {this.displayCreateBet = false}
+
+changeAdmin() {this.displayCreateBet = true}
+
 changeAdminUnResolvedBet(){
     this.betResolution = true;
     this.betDataEntered = true;
 }
+
 changeUserUnResolvedBet(){
     this.betResolution = true;
     this.betDataEntered = false;
 }
+
 changeAdminResolvedBet(){
     this.betResolution = false;
-
 }
 
- 
 
 }
