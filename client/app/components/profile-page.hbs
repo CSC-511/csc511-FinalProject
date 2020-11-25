@@ -4,9 +4,10 @@
 </div>
 
 <div>
-    <FriendsList/>
-</div>
-
-<div>
-    <AddFriend/>
+    <Profile @model={{@model}}/>
+    <BetsUserCreated 
+        @username={{@model.username}}
+        @changePage={{@changePage}}
+        @betInfoHandler={{@betInfoHandler}}
+    />
 </div>
