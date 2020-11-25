@@ -1,10 +1,9 @@
 var express = require('express');
 var app = express();
 
-<<<<<<< HEAD
 app.get('/', function(req, res) {
-    res.json("Test Bets");
-=======
+    res.json("Test Bets")});
+    
 app.get('/requestdata', function(req, res) {
     var betNum = req.query.betID; 
 
@@ -62,10 +61,6 @@ app.get('/updatedata', function(req, res) {
                     else 
                         {res.json('data not updated');}
                 })
-        
-        
-  
-
    
 });
 
@@ -92,7 +87,6 @@ app.post('/login', function(req, res) {
 
         }
       })
->>>>>>> 097fba00... added sign up, updated db requests
 });
 
 
