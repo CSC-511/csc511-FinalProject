@@ -5,11 +5,11 @@ import { inject as service } from '@ember/service';
 
 const FAKE_COOKIE = 123123123;
 export default class IndexRoute extends Route {
-  constructor(){
-    super(...arguments)
-    this.model();
-    this.afterModel(this.model());
-  }
+  // constructor(){
+  //   super(...arguments)
+  //   this.model();
+  //   this.afterModel(this.model());
+  // }
 
     model() {
       const cookie = localStorage.getItem('cookie')
@@ -19,7 +19,6 @@ export default class IndexRoute extends Route {
     }
 
     afterModel(model) {
-      debugger
       if (!model) { // if there model is empty, take us to log in route
         this.transitionTo('login');
       }

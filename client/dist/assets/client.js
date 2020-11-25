@@ -725,7 +725,7 @@
   });
   _exports.default = void 0;
 
-  var _dec, _dec2, _dec3, _dec4, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
+  var _dec, _dec2, _dec3, _dec4, _dec5, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -737,26 +737,31 @@
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
-    <div class="welcome">
+    <div class="alert {{alert status}}">
+      <div class="message">
+          <i class="fa fa-exclamation-circle"></i>
+          {{message}}
+          <span class="closeBtn"onclick={{action dismissAlert}}><i class="fa fa-times"></i></span>
+      </div>
+  </div>
+  
+  <div class="welcome">
       <h1>Welcome to TEMPNAME</h1>
   </div>
-  <div class="login-box">
+  <div class="login_box">
       <h1>Login</h1>
-      <div class="input-box">       
-          <input type="text" placeholder="Username or Email" maxlength="40" value={{userName}} onchange={{action getUsername}}>
+      <div class="input_box">       
+          <input type="text" placeholder="Username" maxlength="40" value={{userName}} onchange={{action getUsername}}>
           <i class="icon fa fa-user"></i>
       </div>
-      <div class="input-box">        
+      <div class="input_box">        
           <input type="password" placeholder="Password" maxlength="40" value={{userPass}} onchange={{action getUserpass}}>
           <i class="icon fa fa-lock"></i>  
       </div>  
       
       <button type="submit" class="btn" onclick={{action checkInfo}}>Log In</button>
-      <div class="sign-up">
+      <div class="sign_up">
           <p>Not a member? <LinkTo @route="signup">Sign up now!</LinkTo></p>
-      </div>
-      <div class="forgot">
-          <a href="">Forgot your password?</a>
       </div>
   </div>
   
@@ -766,29 +771,36 @@
   </div>
   */
   {
-    "id": "DFRKKBN/",
-    "block": "{\"symbols\":[],\"statements\":[[10,\"div\"],[14,0,\"welcome\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Welcome to TEMPNAME\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[10,\"div\"],[14,0,\"login-box\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Login\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"       \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Username or Email\"],[14,\"maxlength\",\"40\"],[15,2,[34,0]],[15,\"onchange\",[30,[36,2],[[32,0],[35,1]],null]],[14,4,\"text\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-user\"],[12],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"        \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Password\"],[14,\"maxlength\",\"40\"],[15,2,[34,3]],[15,\"onchange\",[30,[36,2],[[32,0],[35,4]],null]],[14,4,\"password\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-lock\"],[12],[13],[2,\"  \\n    \"],[13],[2,\"  \\n    \\n    \"],[10,\"button\"],[14,0,\"btn\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,5]],null]],[14,4,\"submit\"],[12],[2,\"Log In\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"sign-up\"],[12],[2,\"\\n        \"],[10,\"p\"],[12],[2,\"Not a member? \"],[8,\"link-to\",[],[[\"@route\"],[\"signup\"]],[[\"default\"],[{\"statements\":[[2,\"Sign up now!\"]],\"parameters\":[]}]]],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"forgot\"],[12],[2,\"\\n        \"],[10,\"a\"],[14,6,\"\"],[12],[2,\"Forgot your password?\"],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\\n\"],[10,\"div\"],[14,0,\"tom\"],[12],[2,\"\\n    \"],[10,\"img\"],[14,\"src\",\"/assets/images/tom.png\"],[12],[13],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"userName\",\"getUsername\",\"action\",\"userPass\",\"getUserpass\",\"checkInfo\"]}",
+    "id": "RX/TejL1",
+    "block": "{\"symbols\":[],\"statements\":[[10,\"div\"],[15,0,[31,[\"alert \",[30,[36,1],[[35,0]],null]]]],[12],[2,\"\\n    \"],[10,\"div\"],[14,0,\"message\"],[12],[2,\"\\n        \"],[10,\"i\"],[14,0,\"fa fa-exclamation-circle\"],[12],[13],[2,\"\\n        \"],[1,[34,2]],[2,\"\\n        \"],[10,\"span\"],[14,0,\"closeBtn\"],[15,\"onclick\",[30,[36,4],[[32,0],[35,3]],null]],[12],[10,\"i\"],[14,0,\"fa fa-times\"],[12],[13],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[14,0,\"welcome\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Welcome to TEMPNAME\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[10,\"div\"],[14,0,\"login_box\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Login\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input_box\"],[12],[2,\"       \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Username\"],[14,\"maxlength\",\"40\"],[15,2,[34,5]],[15,\"onchange\",[30,[36,4],[[32,0],[35,6]],null]],[14,4,\"text\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-user\"],[12],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input_box\"],[12],[2,\"        \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Password\"],[14,\"maxlength\",\"40\"],[15,2,[34,7]],[15,\"onchange\",[30,[36,4],[[32,0],[35,8]],null]],[14,4,\"password\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-lock\"],[12],[13],[2,\"  \\n    \"],[13],[2,\"  \\n    \\n    \"],[10,\"button\"],[14,0,\"btn\"],[15,\"onclick\",[30,[36,4],[[32,0],[35,9]],null]],[14,4,\"submit\"],[12],[2,\"Log In\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"sign_up\"],[12],[2,\"\\n        \"],[10,\"p\"],[12],[2,\"Not a member? \"],[8,\"link-to\",[],[[\"@route\"],[\"signup\"]],[[\"default\"],[{\"statements\":[[2,\"Sign up now!\"]],\"parameters\":[]}]]],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\\n\"],[10,\"div\"],[14,0,\"tom\"],[12],[2,\"\\n    \"],[10,\"img\"],[14,\"src\",\"/assets/images/tom.png\"],[12],[13],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"status\",\"alert\",\"message\",\"dismissAlert\",\"action\",\"userName\",\"getUsername\",\"userPass\",\"getUserpass\",\"checkInfo\"]}",
     "meta": {
       "moduleName": "client/components/login-ui.hbs"
     }
   });
 
-  let LoginComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember.inject.service, (_class = (_temp = class LoginComponent extends _component.default {
-    constructor(...args) {
-      super(...args);
+  let LoginComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember._tracked, _dec5 = Ember.inject.service, (_class = (_temp = class LoginComponent extends _component.default {
+    constructor() {
+      debugger;
+      super(...arguments);
 
       _initializerDefineProperty(this, "userName", _descriptor, this);
 
       _initializerDefineProperty(this, "userPass", _descriptor2, this);
 
-      _initializerDefineProperty(this, "isLoggedIn", _descriptor3, this);
+      _initializerDefineProperty(this, "message", _descriptor3, this);
 
-      _initializerDefineProperty(this, "router", _descriptor4, this);
+      _initializerDefineProperty(this, "status", _descriptor4, this);
+
+      _initializerDefineProperty(this, "router", _descriptor5, this);
+
+      this.status = true;
+      console.log(this.message); //debu
+
+      this.message = this.router.currentRouteName.message;
+      this.hideAlert();
     }
 
     checkInfo() {
-      debugger;
-
       if (this.userName && this.userPass) {
         _jquery.default.post(`${_environment.default.APP.API_ENDPOINT}/auth/login`, {
           username: this.userName,
@@ -797,8 +809,16 @@
           if (result && result.isLoggedIn) {
             localStorage.setItem('cookie', result.cookie);
             this.router.transitionTo('/');
+          } else {
+            this.message = "Wrong username or password!";
+            this.status = true;
+            this.hideAlert();
           }
         });
+      } else {
+        this.message = "Please enter a username or password!";
+        this.status = true;
+        this.hideAlert();
       }
     }
 
@@ -808,6 +828,19 @@
 
     getUserpass(input) {
       this.userPass = input.target.value;
+    }
+
+    hideAlert() {
+      if (this.status == true) {
+        setTimeout(() => {
+          this.status = false;
+          this.message = null;
+        }, 3000);
+      }
+    }
+
+    dismissAlert() {
+      this.status = false;
     }
 
   }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "userName", [_dec], {
@@ -824,14 +857,21 @@
     initializer: function () {
       return null;
     }
-  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "isLoggedIn", [_dec3], {
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "message", [_dec3], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return null;
+    }
+  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "status", [_dec4], {
     configurable: true,
     enumerable: true,
     writable: true,
     initializer: function () {
       return false;
     }
-  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec4], {
+  }), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec5], {
     configurable: true,
     enumerable: true,
     writable: true,
@@ -1055,7 +1095,7 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, ProfilePageComponent);
 });
-;define("client/components/signup", ["exports", "@glimmer/component"], function (_exports, _component) {
+;define("client/components/signup", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -1063,7 +1103,7 @@
   });
   _exports.default = void 0;
 
-  var _dec, _dec2, _dec3, _class, _descriptor, _descriptor2, _descriptor3, _temp;
+  var _dec, _dec2, _dec3, _dec4, _dec5, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -1075,22 +1115,30 @@
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
-    <div class="welcome">
+    <div class="alert {{alert status}}">
+      <div class="message">
+          <i class="fa fa-exclamation-circle"></i>
+          {{message}}
+          <span class="closeBtn"onclick={{action dismissAlert}}><i class="fa fa-times"></i></span>
+      </div>
+  </div>
+  
+  <div class="welcome">
       <h1>Welcome to TEMPNAME</h1>
   </div>
-  <div class="signup-box">
+  <div class="signup_box">
       <h1>Sign Up</h1>
-      <div class="input-box">       
+      <div class="input_box">       
           <input type="text" placeholder="Username" maxlength="40" value={{userName}} onchange={{action getUsername}} required>
           <i class="icon fa fa-user"></i>
       </div>
-      <div class="input-box">        
+      <div class="input_box">        
           <input type="password" placeholder="Password" maxlength="40" required minlength="8" value={{userPass}} onchange={{action getUserpass}}>
           <i class="icon fa fa-lock"></i>  
       </div>  
       
-      <button class="btn" onclick={{action checkInfo}}>Sign Up</button>
-      <div class="sign-up">
+      <button type="submit" class="btn" onclick={{action checkInfo}}>Sign Up</button>
+      <div class="sign_up">
           <p>Already a member? <LinkTo @route="login">Log in now!</LinkTo></p>
       </div>
   </div>
@@ -1101,26 +1149,51 @@
   </div>
   */
   {
-    "id": "XCPDvKp8",
-    "block": "{\"symbols\":[],\"statements\":[[10,\"div\"],[14,0,\"welcome\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Welcome to TEMPNAME\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[10,\"div\"],[14,0,\"signup-box\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"       \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Username\"],[14,\"maxlength\",\"40\"],[15,2,[34,0]],[15,\"onchange\",[30,[36,2],[[32,0],[35,1]],null]],[14,\"required\",\"\"],[14,4,\"text\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-user\"],[12],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input-box\"],[12],[2,\"        \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Password\"],[14,\"maxlength\",\"40\"],[14,\"required\",\"\"],[14,\"minlength\",\"8\"],[15,2,[34,3]],[15,\"onchange\",[30,[36,2],[[32,0],[35,4]],null]],[14,4,\"password\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-lock\"],[12],[13],[2,\"  \\n    \"],[13],[2,\"  \\n    \\n    \"],[10,\"button\"],[14,0,\"btn\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,5]],null]],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"sign-up\"],[12],[2,\"\\n        \"],[10,\"p\"],[12],[2,\"Already a member? \"],[8,\"link-to\",[],[[\"@route\"],[\"login\"]],[[\"default\"],[{\"statements\":[[2,\"Log in now!\"]],\"parameters\":[]}]]],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\\n\"],[10,\"div\"],[14,0,\"tom\"],[12],[2,\"\\n    \"],[10,\"img\"],[14,\"src\",\"/assets/images/tom.png\"],[12],[13],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"userName\",\"getUsername\",\"action\",\"userPass\",\"getUserpass\",\"checkInfo\"]}",
+    "id": "Fw8sKzCt",
+    "block": "{\"symbols\":[],\"statements\":[[10,\"div\"],[15,0,[31,[\"alert \",[30,[36,1],[[35,0]],null]]]],[12],[2,\"\\n    \"],[10,\"div\"],[14,0,\"message\"],[12],[2,\"\\n        \"],[10,\"i\"],[14,0,\"fa fa-exclamation-circle\"],[12],[13],[2,\"\\n        \"],[1,[34,2]],[2,\"\\n        \"],[10,\"span\"],[14,0,\"closeBtn\"],[15,\"onclick\",[30,[36,4],[[32,0],[35,3]],null]],[12],[10,\"i\"],[14,0,\"fa fa-times\"],[12],[13],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[14,0,\"welcome\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Welcome to TEMPNAME\"],[13],[2,\"\\n\"],[13],[2,\"\\n\"],[10,\"div\"],[14,0,\"signup_box\"],[12],[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input_box\"],[12],[2,\"       \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Username\"],[14,\"maxlength\",\"40\"],[15,2,[34,5]],[15,\"onchange\",[30,[36,4],[[32,0],[35,6]],null]],[14,\"required\",\"\"],[14,4,\"text\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-user\"],[12],[13],[2,\"\\n    \"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"input_box\"],[12],[2,\"        \\n        \"],[10,\"input\"],[14,\"placeholder\",\"Password\"],[14,\"maxlength\",\"40\"],[14,\"required\",\"\"],[14,\"minlength\",\"8\"],[15,2,[34,7]],[15,\"onchange\",[30,[36,4],[[32,0],[35,8]],null]],[14,4,\"password\"],[12],[13],[2,\"\\n        \"],[10,\"i\"],[14,0,\"icon fa fa-lock\"],[12],[13],[2,\"  \\n    \"],[13],[2,\"  \\n    \\n    \"],[10,\"button\"],[14,0,\"btn\"],[15,\"onclick\",[30,[36,4],[[32,0],[35,9]],null]],[14,4,\"submit\"],[12],[2,\"Sign Up\"],[13],[2,\"\\n    \"],[10,\"div\"],[14,0,\"sign_up\"],[12],[2,\"\\n        \"],[10,\"p\"],[12],[2,\"Already a member? \"],[8,\"link-to\",[],[[\"@route\"],[\"login\"]],[[\"default\"],[{\"statements\":[[2,\"Log in now!\"]],\"parameters\":[]}]]],[13],[2,\"\\n    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\\n\"],[10,\"div\"],[14,0,\"tom\"],[12],[2,\"\\n    \"],[10,\"img\"],[14,\"src\",\"/assets/images/tom.png\"],[12],[13],[2,\"\\n\"],[13]],\"hasEval\":false,\"upvars\":[\"status\",\"alert\",\"message\",\"dismissAlert\",\"action\",\"userName\",\"getUsername\",\"userPass\",\"getUserpass\",\"checkInfo\"]}",
     "meta": {
       "moduleName": "client/components/signup.hbs"
     }
   });
 
-  let SignupComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember.inject.service, (_class = (_temp = class SignupComponent extends _component.default {
-    constructor(...args) {
-      super(...args);
+  let SignupComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember.inject.service, _dec4 = Ember._tracked, _dec5 = Ember._tracked, (_class = (_temp = class SignupComponent extends _component.default {
+    constructor() {
+      super(...arguments);
 
       _initializerDefineProperty(this, "userName", _descriptor, this);
 
       _initializerDefineProperty(this, "userPass", _descriptor2, this);
 
       _initializerDefineProperty(this, "router", _descriptor3, this);
+
+      _initializerDefineProperty(this, "message", _descriptor4, this);
+
+      _initializerDefineProperty(this, "status", _descriptor5, this);
+
+      this.hideAlert();
     }
 
     checkInfo() {
-      this.router.transitionTo('/');
+      if (this.userName && this.userPass) {
+        _jquery.default.post(`${_environment.default.APP.API_ENDPOINT}/auth/signup`, {
+          username: this.userName,
+          password: this.userPass
+        }, result => {
+          if (result) {
+            this.message = "Signed up successfully!";
+            this.status = true;
+            this.router.transitionTo('/login?message="blah"');
+          } else {
+            this.message = "User already exists!";
+            this.status = true;
+            this.hideAlert();
+          }
+        });
+      } else {
+        this.message = "Please enter a username or password!";
+        this.status = true;
+        this.hideAlert();
+      }
     }
 
     getUsername(input) {
@@ -1129,6 +1202,19 @@
 
     getUserpass(input) {
       this.userPass = input.target.value;
+    }
+
+    hideAlert() {
+      if (this.status == true) {
+        setTimeout(() => {
+          this.status = false;
+          this.message = null;
+        }, 3000);
+      }
+    }
+
+    dismissAlert() {
+      this.status = false;
     }
 
   }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "userName", [_dec], {
@@ -1150,6 +1236,20 @@
     enumerable: true,
     writable: true,
     initializer: null
+  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "message", [_dec4], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return null;
+    }
+  }), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "status", [_dec5], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return false;
+    }
   })), _class));
   _exports.default = SignupComponent;
 
@@ -1168,6 +1268,29 @@
     }
   });
 });
+;define("client/controllers/login", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  class LoginController extends Ember.Controller {
+    constructor(...args) {
+      super(...args);
+
+      _defineProperty(this, "queryParams", ['signedin']);
+
+      _defineProperty(this, "signedin", false);
+    }
+
+  }
+
+  _exports.default = LoginController;
+});
 ;define("client/data-adapter", ["exports", "@ember-data/debug"], function (_exports, _debug) {
   "use strict";
 
@@ -1180,6 +1303,26 @@
       return _debug.default;
     }
   });
+});
+;define("client/helpers/alert", ["exports"], function (_exports) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  function alert(args) {
+    if (args == 'true') {
+      return 'show';
+    } else {
+      return 'hide';
+    }
+  }
+
+  var _default = Ember.Helper.helper(alert);
+
+  _exports.default = _default;
 });
 ;define("client/helpers/app-version", ["exports", "client/config/environment", "ember-cli-app-version/utils/regexp"], function (_exports, _environment, _regexp) {
   "use strict";
@@ -1429,12 +1572,11 @@
   const FAKE_COOKIE = 123123123;
 
   class IndexRoute extends Ember.Route {
-    constructor() {
-      super(...arguments);
-      this.model();
-      this.afterModel(this.model());
-    }
-
+    // constructor(){
+    //   super(...arguments)
+    //   this.model();
+    //   this.afterModel(this.model());
+    // }
     model() {
       const cookie = localStorage.getItem('cookie');
 
@@ -1445,8 +1587,6 @@
     }
 
     afterModel(model) {
-      debugger;
-
       if (!model) {
         // if there model is empty, take us to log in route
         this.transitionTo('login');
@@ -1470,8 +1610,6 @@
 
   class LoginRoute extends Ember.Route {
     model() {
-      debugger;
-
       const temp = _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/auth/isloggedin?cookie=${FAKE_COOKIES}`);
 
       console.log(temp);
@@ -1479,8 +1617,6 @@
     }
 
     afterModel(model, transition) {
-      debugger;
-
       if (model && model.isLoggedin) {
         // if there model is empty, take us to log in route
         this.transitionTo('/');

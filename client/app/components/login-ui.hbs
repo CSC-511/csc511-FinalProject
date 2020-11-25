@@ -1,23 +1,28 @@
+<div class="alert {{alert status}}">
+    <div class="message">
+        <i class="fa fa-exclamation-circle"></i>
+        {{message}}
+        <span class="closeBtn"onclick={{action dismissAlert}}><i class="fa fa-times"></i></span>
+    </div>
+</div>
+
 <div class="welcome">
     <h1>Welcome to TEMPNAME</h1>
 </div>
-<div class="login-box">
+<div class="login_box">
     <h1>Login</h1>
-    <div class="input-box">       
-        <input type="text" placeholder="Username or Email" maxlength="40" value={{userName}} onchange={{action getUsername}}>
+    <div class="input_box">       
+        <input type="text" placeholder="Username" maxlength="40" value={{userName}} onchange={{action getUsername}}>
         <i class="icon fa fa-user"></i>
     </div>
-    <div class="input-box">        
+    <div class="input_box">        
         <input type="password" placeholder="Password" maxlength="40" value={{userPass}} onchange={{action getUserpass}}>
         <i class="icon fa fa-lock"></i>  
     </div>  
     
     <button type="submit" class="btn" onclick={{action checkInfo}}>Log In</button>
-    <div class="sign-up">
+    <div class="sign_up">
         <p>Not a member? <LinkTo @route="signup">Sign up now!</LinkTo></p>
-    </div>
-    <div class="forgot">
-        <a href="">Forgot your password?</a>
     </div>
 </div>
 
