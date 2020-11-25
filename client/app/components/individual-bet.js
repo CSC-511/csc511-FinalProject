@@ -22,11 +22,66 @@ export default class IndividualBetComponent extends Component {
 
 constructor(){
     super(...arguments)
-    this.loadSampleData();
+    this.currentBetID = '' ; 
+
+
+
+    this.userIdNum = this.args.betId;
+    this.setDisplay();
+
+
+
+    // when you join a bet from a list of existing bets in the home, 
+    // bet that gets loaded and updated is the existing betID that needs to be pulled from the database
+    this.userIdNum = localStorage.getItem('cookie');
+    //this.loadSampleData();
+    this.requestData();
+    this.requestUserData(); // when you are at this page you need to get the current user to create a bet and join
+    //this.getTimeAndDate();
+    console.log(this.userIdNum);
 
 }
 
-newData(){
+
+setDisplay(){
+    if(this.userIdNum)
+        this.displayCreateBet = false;
+}
+
+getTimeAndDate(){
+var hour = null;
+var min = null;
+var sec = null;
+var day = null;
+var month = null;
+var year = null;
+var amPM = 'AM';
+
+    var t = new Date();
+    month = t.getMonth() + 1;
+    day = t.getDate();
+    year = t.getFullYear();
+
+    hour = t.getHours();
+    if(hour > 12){ // Get 12 Hour clock
+        hour = hour - 12;
+        amPM = 'PM';
+    }
+    if(hour == 0){
+        hour = 12;
+        amPM = 'AM'
+    }
+    
+    min = t.getMinutes();
+    if(min < 10){ // 0 infront of minutes if less than 10
+        min = "0" + min;
+    }
+    sec = t.getSeconds();
+    if(sec < 10){ // 0 infront of seconds if less than 10
+        sec = "0" + sec;
+    }
+this.currentTime = '' + month + '/' + day + '/' + year + ' ' + hour + ':' + min + ':' + sec + ' ' + amPM
+console.log(this.currentTime)
 
     this.individualBet = {
 
