@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-
+import $ from 'jquery';
+import ENV from 'client/config/environment';
 
 export default class IndividualBetComponent extends Component {
 
@@ -8,7 +9,7 @@ export default class IndividualBetComponent extends Component {
 
 @tracked betResolution = true;
 @tracked betDataEntered = true;
-@tracked displayCreateBet = true;
+@tracked displayCreateBet;
 @tracked nameList = [];
 @tracked individualBet = {}
 @tracked betAgainst = null;
@@ -24,13 +25,6 @@ constructor(){
     super(...arguments)
     this.currentBetID = '' ; 
 
-
-
-    this.userIdNum = this.args.betId;
-    this.setDisplay();
-
-
-
     // when you join a bet from a list of existing bets in the home, 
     // bet that gets loaded and updated is the existing betID that needs to be pulled from the database
     this.userIdNum = localStorage.getItem('cookie');
@@ -42,10 +36,9 @@ constructor(){
 
 }
 
-
-setDisplay(){
-    if(this.userIdNum)
-        this.displayCreateBet = false;
+get getDisplay(){
+    this.displayCreateBet = this.args.displayCreateBet;
+    return this.displayCreateBet;
 }
 
 getTimeAndDate(){
@@ -184,7 +177,40 @@ inputBetDescriptionValue(input){
     this.currentBetDescriptionValue  = input.target.value;    
 }
 
-// Testing Buttons
+requestData(){
+    console.log(this.args.betId)
+    $.get(`${ENV.APP.API_ENDPOINT}/bets/requestdata`, {betID: this.userIdNum}).done( bets=> { 
+    // this pulls all bets that match the ID
+      this.retrievedData = bets;
+      console.log(this.retrievedData)
+    })
+}
+
+requestUserData(){
+    $.get(`${ENV.APP.API_ENDPOINT}/bets/requestuserdata`, {userIdNum: this.userIdNum}).done( user=> { 
+    // pulls the users data using local storage 'cookie' from login
+      this.userData = user;
+      console.log(this.userData)
+    })
+}
+updateData(){
+    $.get(`${ENV.APP.API_ENDPOINT}/bets/updatedata`, {
+    // pulls the users data using local storage 'cookie' from login
+    // bedID should already exist it shouldnt update
+        betID: this.currentBetID, 
+        betData: this.individualBet.betData
+        }
+    )}
+
+createData(){
+    this.currentBetID = Date.parse(new Date()), 
+    $.get(`${ENV.APP.API_ENDPOINT}/bets/createdata`, {
+    // creates a unique ID from date, pass the bet data thru query
+        betID: this.currentBetID, 
+        betData: this.individualBet.betData,
+        
+        }
+    )}
 
 loadFakeData(){
     this.displayCreateBet = false
