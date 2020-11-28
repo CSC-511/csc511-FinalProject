@@ -1,0 +1,38 @@
+<h1>{{@model.username}}'s Profile</h1> <img id='preview-image' src='' alt='pfp'>
+
+
+<p>Change Selfie:</p> 
+
+<input
+  multiple="true"
+  onchange={{action uploadFile}}
+  accept="image/png,image/jpeg,application/pdf"
+  type="file"
+  />
+
+
+{{!-- <div>
+  <p id='bio'>{{tempUser.bio}} </p>
+</div> --}}
+
+<br>
+
+<div>
+  <h3>Current Bets {{@model.username}} Is a Part Of:</h3>
+  <ul>
+  {{#if this.notEmptyArray}}
+    {{#each this.betsApartOf key="index" as |apart|}}
+        <li class="no-dots"> 
+            <p class="time-created">{{apart.betData.betParticipants.0.userData.userTime}}</p> 
+            <a href="#" class="list-mybets-title" onclick={{fn redirectToIndiv apart.betID}}>{{apart.betData.betTitle}}</a>
+        </li>
+    {{/each}}
+  {{else}}
+        <p class="no-created-bets">You are not apart of any bets</p>
+  {{/if}}
+  </ul>
+</div>
+
+  
+
+  <br>
