@@ -780,7 +780,6 @@
 
   let LoginComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember._tracked, _dec5 = Ember.inject.service, (_class = (_temp = class LoginComponent extends _component.default {
     constructor() {
-      debugger;
       super(...arguments);
 
       _initializerDefineProperty(this, "userName", _descriptor, this);
@@ -793,10 +792,13 @@
 
       _initializerDefineProperty(this, "router", _descriptor5, this);
 
-      this.status = true;
-      console.log(this.message); //debu
+      this.status = this.router.currentRoute.queryParams.signedup;
 
-      this.message = this.router.currentRouteName.message;
+      if (this.status == 'true') {
+        this.status = true;
+        this.message = "Signed up Sucessfully!";
+      }
+
       this.hideAlert();
     }
 
@@ -1182,7 +1184,11 @@
           if (result) {
             this.message = "Signed up successfully!";
             this.status = true;
-            this.router.transitionTo('/login?message="blah"');
+            this.router.transitionTo('login', {
+              queryParams: {
+                signedup: this.status
+              }
+            });
           } else {
             this.message = "User already exists!";
             this.status = true;
@@ -1282,9 +1288,9 @@
     constructor(...args) {
       super(...args);
 
-      _defineProperty(this, "queryParams", ['signedin']);
+      _defineProperty(this, "queryParams", ['signedup']);
 
-      _defineProperty(this, "signedin", false);
+      _defineProperty(this, "signedup", null);
     }
 
   }
@@ -1612,7 +1618,6 @@
     model() {
       const temp = _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/auth/isloggedin?cookie=${FAKE_COOKIES}`);
 
-      console.log(temp);
       return temp;
     }
 
@@ -1893,7 +1898,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0"});
+            require("client/app")["default"].create({"API_ENDPOINT":"http://localhost:4500","name":"client","version":"0.0.0+b7c96500"});
           }
         
 //# sourceMappingURL=client.map

@@ -6,7 +6,6 @@ const FAKE_COOKIES = 123123123
 export default class LoginRoute extends Route {
     model() {
         const temp = $.get(`${ENV.APP.API_ENDPOINT}/auth/isloggedin?cookie=${FAKE_COOKIES}`);
-        console.log(temp)
         return temp;
     }
 

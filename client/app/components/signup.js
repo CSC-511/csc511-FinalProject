@@ -22,7 +22,7 @@ export default class SignupComponent extends Component {
                 if(result){
                     this.message = "Signed up successfully!"
                     this.status = true;
-                    this.router.transitionTo('/login?message="blah"');              
+                    this.router.transitionTo('login', {queryParams: {signedup: this.status}});              
                 }
                 else{
                     this.message = "User already exists!"

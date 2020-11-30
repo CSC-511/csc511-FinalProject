@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import {tracked} from '@glimmer/tracking';
 import { inject as service }from '@ember/service';
+import { get } from '@ember/object'
 import $ from 'jquery';
 import ENV from 'client/config/environment';
 
@@ -12,12 +13,12 @@ export default class LoginComponent extends Component {
     @service router;
 
     constructor(){
-        debugger
         super(...arguments);
-        this.status = true;
-        console.log(this.message);
-        //debu
-        this.message = this.router.currentRouteName.message;
+        this.status = this.router.currentRoute.queryParams.signedup;
+        if(this.status == 'true'){
+            this.status = true;
+            this.message = "Signed up Sucessfully!"
+        }
         this.hideAlert();
     }
 
