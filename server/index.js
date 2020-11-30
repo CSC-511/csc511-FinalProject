@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
@@ -14,6 +15,7 @@ const TEMPORARY_DEMO_COOKIE_2 = 123;
 
 const mongo = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017';
+
 mongo.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -33,7 +35,74 @@ mongo.connect(url, {
     activeBetsCollection = db3.collection('activeBets');
     const db4 = client.db('bettDb');
     userBetsCollection = db4.collection('userBets');
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 57ca8691d83df91198257435cee9e1a9223095c1
+    const db5 = client.db('bettDb');
+    indivBetCollection = db5.collection('indivBet');
 
+    indivBetCollection.insertOne({
+
+        betID: '001',
+        betData: {             
+            betTitle: 'Jerry wont Fail',
+            betAmount: 20,
+            betAdmin: 'Rick',
+            isAdmin: true, 
+            betResolution: false,
+            displayCreateBet: false,
+            betDetail: 'Jerry will fail to impress Rick',
+            betParticipants:[
+                {userID:'101',userData:{userName: 'Rick', userTime: '1:00', betSide: false, }},
+                {userID:'102',userData:{userName: 'Rick', userTime: '1:00', betSide: false, }}
+            ],
+
+        }
+    })
+    indivBetCollection.insertOne({
+
+        betID: '002',
+        betData: {             
+            betTitle: 'Jerry wont Fail',
+            betAmount: 20,
+            betAdmin: 'Beth',
+            isAdmin: true, 
+            betResolution: false,
+            displayCreateBet: false,
+            betDetail: 'Jerry will fail to impress Rick',
+            betParticipants:[
+                {userID:'101',userData:{userName: 'Rick', userTime: '1:00', betSide: false, }},
+                {userID:'102',userData:{userName: 'Summer', userTime: '1:00', betSide: false, }}
+            ],
+
+        }
+    })
+    indivBetCollection.insertOne({
+
+        betID: '003',
+        betData: {             
+            betTitle: 'Morty outsmarts Jerry',
+            betAmount: 20,
+            betAdmin: 'Rick',
+            isAdmin: true, 
+            betResolution: false,
+            displayCreateBet: false,
+            betDetail: 'Morty is smart enough to realize Jerry has no pants',
+            betParticipants:[
+                {userID:'101',userData:{userName: 'Summer', userTime: '1:00', betSide: false, }},
+                {userID:'102',userData:{userName: 'Jerry', userTime: '1:00', betSide: false, }}
+            ],
+
+        }
+    })
+    
+
+<<<<<<< HEAD
+>>>>>>> 097fba00... added sign up, updated db requests
+=======
+>>>>>>> 57ca8691d83df91198257435cee9e1a9223095c1
     simpleTestCollection.insertOne({
         name: 'ben',
         age: 56
@@ -42,8 +111,6 @@ mongo.connect(url, {
         username: 'daniel',
         password: '12345',
         userBalance: 100,
-        //userMadeBets []
-        //userBetsAsParticipant []
         isLoggedIn: 'true',
         cookie: TEMPORARY_DEMO_COOKIE_1
     })
