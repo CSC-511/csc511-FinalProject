@@ -3,9 +3,12 @@ var express = require('express');
 var app = express();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.get('/', function(req, res) {
     res.json("Test Profile");
 =======
+=======
+>>>>>>> 57ca8691d83df91198257435cee9e1a9223095c1
 const mongo = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017';
 mongo.connect(url, {
@@ -69,6 +72,7 @@ mongo.connect(url, {
             res.json(tempArray);
         });
     });
+<<<<<<< HEAD
 });
 
 
@@ -78,4 +82,9 @@ mongo.connect(url, {
 
 =======
 >>>>>>> f4d2f7b1... User's Created Bets
+=======
+});
+
+
+>>>>>>> 57ca8691d83df91198257435cee9e1a9223095c1
 module.exports = app;
