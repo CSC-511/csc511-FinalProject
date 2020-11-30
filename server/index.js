@@ -36,7 +36,10 @@ mongo.connect(url, {
     const db4 = client.db('bettDb');
     userBetsCollection = db4.collection('userBets');
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 57ca8691d83df91198257435cee9e1a9223095c1
     const db5 = client.db('bettDb');
     indivBetCollection = db5.collection('indivBet');
 
@@ -96,7 +99,10 @@ mongo.connect(url, {
     })
     
 
+<<<<<<< HEAD
 >>>>>>> 097fba00... added sign up, updated db requests
+=======
+>>>>>>> 57ca8691d83df91198257435cee9e1a9223095c1
     simpleTestCollection.insertOne({
         name: 'ben',
         age: 56
@@ -140,6 +146,9 @@ mongo.connect(url, {
             res.json(items);
         })
     });
+    app.get('/test', function(req, res) {
+ res.json(req.query.username)
+});
     app.get('/user', function(req, res) {
         req.app.get('locals.client').db('bettDb').collection('userAccounts').find().toArray((err, items) => {
             res.json(items);

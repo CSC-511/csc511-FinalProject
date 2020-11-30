@@ -13,6 +13,10 @@ export default class IndividualBetComponent extends Component {
 @tracked nameList = [];
 @tracked individualBet = {}
 @tracked betAgainst = null;
+@tracked userIdNum;
+@tracked retrievedData;
+@tracked userData;
+@tracked currentBetID; //depends on which bet you join get the ID of the bet
 
 @tracked currentBetTitleValue;
 @tracked currentBetAmountValue;
@@ -79,40 +83,21 @@ var amPM = 'AM';
 this.currentTime = '' + month + '/' + day + '/' + year + ' ' + hour + ':' + min + ':' + sec + ' ' + amPM
 console.log(this.currentTime)
 
-    this.individualBet = {
-
-        betID: '', 
-        betData: {             
-            betTitle: '',
-            betAmount: 0,
-            betAdmin: '',
-            isAdmin: false, 
-            betResolution: false,
-            betDetail: '',
-            betParticipants:{
-                userID: '',
-                userData:{
-                    userName: '',
-                    userTime: '',
-                    betSide: true,
-                    }
-                }
-        }
-    }
-    this.nameList = [];
 }
+
 
 loadSampleData(){
 
     this.individualBet = {
 
-        betID: '001', 
+        //betID: '001',
         betData: {             
             betTitle: 'Jerry wont Fail',
             betAmount: 20,
             betAdmin: 'Rick',
             isAdmin: true, 
             betResolution: false,
+            displayCreateBet: false,
             betDetail: 'Jerry will fail to impress Rick',
             betParticipants:[],
 
@@ -126,9 +111,10 @@ loadSampleData(){
     this.nameList = this.individualBet.betData.betParticipants;
     console.log(this.nameList)
     console.log(this.individualBet.betData.betParticipants.length)
+    this.createData();
 }
 
-createBet(title, amount, detail, side){
+createBet(title, amount, detail){
     this.currentTime = new Date();
     this.individualBet = {
         betData: {             
@@ -139,18 +125,13 @@ createBet(title, amount, detail, side){
             betResolution: false,
             betDetail: detail,
             betParticipants:[],
-
         }
     }
     this.getTimeAndDate()
     this.individualBet.betData.betParticipants.pushObject({userID:this.userIdNum,userData:{userName: this.userData[0].username, userTime: this.currentTime, betSide: this.betAgainst, }})
     this.nameList = this.individualBet.betData.betParticipants;
     this.displayCreateBet = false;
-    console.log(this.individualBet)
-    console.log(this.nameList)
-
-
-
+    this.createData();
 }
 
 joinBet(){
@@ -166,6 +147,7 @@ joinBet(){
         }
     })
     console.log(this.individualBet.betData.betParticipants)
+    this.updateData();
 }
 resolveBet(){
     this.individualBet.betData.betResolution = true
@@ -212,10 +194,11 @@ createData(){
         }
     )}
 
-loadFakeData(){
-    this.displayCreateBet = false
-    console.log(this.isAdmin)
+updateResolution(){
+    $.get(`${ENV.APP.API_ENDPOINT}/bets/updatebetresolution`, {
+        betID: this.userIdNum})
 }
+loadFakeData() {this.displayCreateBet = false}
 
 changeUser() {this.displayCreateBet = false}
 
@@ -233,6 +216,8 @@ changeUserUnResolvedBet(){
 
 changeAdminResolvedBet(){
     this.betResolution = false;
+    this.updateResolution();
+    this.updateData();
 }
 
 
