@@ -1,15 +1,16 @@
-<div class = 'left'>
+<div style="border: 1px solid red;">
     <p>{{@model.username}}'s Profile Page</p>
     <p>Your are {{@model.age}} years old</p>
-    <Profile 
-        @model={{@model}}
-        @changePage={{@changePage}}
-        @betInfoHandler={{@betInfoHandler}}
-    />
-    
-    <BetsUserCreated 
-        @model={{@model}}
-        @changePage={{@changePage}}
-        @betInfoHandler={{@betInfoHandler}}
-    />
+</div>
+
+<div>
+    <Profile @model={{@model}}/>
+</div>
+
+<div>
+    <FriendsList/>
+</div>
+
+<div>
+    <AddFriend/>
 </div>
