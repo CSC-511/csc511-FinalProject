@@ -27,32 +27,6 @@ app.post('/login', function(req, res) {
       })
 });
 
-app.post('/signup', function(req, res){
-    const username = req.param('username').toLowerCase();
-    const password = req.param('password').toLowerCase();
-    let ranNum = Math.floor(Math.random() * 1000000)
-    const db = req.app.get('locals.client').db('bettDb').collection('userAccounts');
-    db.findOne({ username }, (err, items) => {
-        console.log(err, items, username)
-        if(items){
-            console.log('User already exists')
-            res.json(false)
-        }
-
-        if(!items){
-            console.log("Can sign up!")
-            db.insertOne({
-                username: username,
-                password: password,
-                userBalance: 100,
-                isLoggedIn: 'false',
-                cookie: ranNum
-            })
-            res.json(true);
-        }
-    })
-});
-
 app.get('/isloggedin', function(req, res) {
     const cookie = parseInt(req.query.cookie);
     console.log('checking if is logged in', cookie);
