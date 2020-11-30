@@ -35,11 +35,6 @@ mongo.connect(url, {
     activeBetsCollection = db3.collection('activeBets');
     const db4 = client.db('bettDb');
     userBetsCollection = db4.collection('userBets');
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 57ca8691d83df91198257435cee9e1a9223095c1
     const db5 = client.db('bettDb');
     indivBetCollection = db5.collection('indivBet');
 
@@ -98,11 +93,6 @@ mongo.connect(url, {
         }
     })
     
-
-<<<<<<< HEAD
->>>>>>> 097fba00... added sign up, updated db requests
-=======
->>>>>>> 57ca8691d83df91198257435cee9e1a9223095c1
     simpleTestCollection.insertOne({
         name: 'ben',
         age: 56
