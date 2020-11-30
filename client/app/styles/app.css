@@ -1,9 +1,8 @@
-
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import "https://fonts.googleapis.com/css2?family=Raleway:wght@200";
+@import "login.css";
+@import "signup.css";
 /* Add a black background color to the top navigation */
-
-body {
-	margin: 0;
-}
 
 nav.topnav {
 	background-color: #333;
@@ -149,103 +148,96 @@ nav.topnav {
 	padding: 10px;
 }
 
-.bet_participant_table tr {
-	border: 1px solid #ddd;
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url("https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjExMzk2fQ&w=1000&q=80");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Raleway', sans-serif;
 }
 
-.bet_participant_table th {
-	border: 1px solid #ddd;
-	padding: 10px;
-	width: 200px;
+.welcome h1{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 45px;
+    text-align: center;
+    width: 600px;
 }
 
-.bet_participant_table tr:nth-child(0) {
-	background-color: #c0bfbf;
+.icon{
+    font-size: 20px;
 }
 
-.bet_participant_table tr:nth-child(odd) {
-	background-color: #c0bfbf;
+.input_box{
+    width: 100%;
+    padding: 10px 0;
+    margin: 10px 0;
+    text-align: center;
+    position: relative;
 }
 
-.bet_participant_table tr:hover {
-	background-color: rgb(255, 254, 254);
+.input_box i{
+    position: absolute;
+    left: 0;
+    top: 8px;
+    padding: 10px 0px 10px 57px;
+    width: 20px;
+    color: #aaa;
+    transition: .3s;
 }
 
-.bet_resolved_text {
-	float: right;
-	border: 1px solid black;
-	padding: 10px;
-	background-color: rgb(84, 84, 84);
-	color: #ff5900;
+input:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
 }
 
-.button_resolve {
-	float: right;
-	border: 1px solid black;
-	padding: 20px;
-	background-color: rgb(84, 84, 84);
-	color: #ff5900;
+.input_box input[type="text"]:focus + i, .input-box input[type="password"]:focus + i{
+    color: dodgerblue;
 }
 
-.button_resolve:hover {
-	background-color: rgb(196, 189, 189);
+.input_box input[type="password"], input[type="text"]{
+    padding-left: 30px;
+    width: 220px;
+    height: 30px;
+    font-size: 17px;
+    outline: none;
+    border-radius: 4px;
 }
 
-.bet_button_join {
-	float: left;
+.btn{
+    margin: auto;
+    width: 80%;
+    border: 2px solid;
+    padding: 10px ;
+    font-size: 16px;
+    border-radius: 20px;
+    display: flex; 
+    justify-content: center; 
+    border-color: dodgerblue;
 }
 
-.create_bet {
-	padding-right: 30px;
-	padding-left: 30px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	background-color: rgb(68, 67, 67);
-}
-
-.bet_detail_input {
-	height: 100px;
-	width: 300px;
-}
-
-.bet_info {
-	max-width: 421px;
-	width: 100%;
-	margin: auto;
-	width: auto;
-	padding: 40px;
-	background-color: rgb(225, 218, 218);
-	border-collapse: collapse;
-	padding: 10px;
-	margin: auto;
-}
-
-.create_bet_button {
-	float: right;
-	background-color: rgb(68, 67, 67);
-	padding: 20px;
-	color: #ff5900;
-}
-
-.left{
-	float: left;
-	width: 85%;
-	position: absolute;
-
-}
-.right{
-	float: right;
-	width: 15%;
-	padding-left: 15px;
-	border-left: 1px solid #ff5900;
-
-}
-
-
-/* Add a color to the active/current link */
-
-
-/* .topnav button.active {
-    background-color: #4CAF50;
+.btn:hover{
+    cursor: pointer;
+    background-color: dodgerblue;
     color: white;
-  } */
+    box-shadow: 0 0 8px 0 dodgerblue;
+    transition-duration: .5s;
+}
+button:focus{
+    outline: none;
+}
+
+.tom{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+a{
+    color: black;
+}

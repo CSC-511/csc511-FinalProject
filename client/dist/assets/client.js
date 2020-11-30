@@ -176,6 +176,102 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, AddFriendComponent);
 });
+;define("client/components/bets-user-created", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _dec, _dec2, _dec3, _class, _descriptor, _descriptor2, _temp;
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
+  /*
+    <div class="">
+      <h3 class="mybets-heading">Active Bets {{@model.username}} Has Created</h3>
+      <ul data-test-bets-user-created>
+      {{#if this.notEmptyArray}}
+      {{#each this.betsCreated key="index" as |betsCreated|}}
+          <li class="no-dots"> 
+              <p class="time-created">{{betsCreated.betData.betParticipants.0.userData.userTime}}</p> 
+              <a href="#" class="list-mybets-title" onclick={{fn redirectToIndiv betsCreated.betID}}>{{betsCreated.betData.betTitle}}</a>
+          </li>
+      {{/each}}
+      {{else}}
+          <p class="no-created-bets">You have not created any bets</p>
+      {{/if}}
+      </ul>
+  </div>
+  
+  {{yield}}
+  */
+  {
+    "id": "75DpBdh8",
+    "block": "{\"symbols\":[\"betsCreated\",\"@model\",\"&default\"],\"statements\":[[10,\"div\"],[14,0,\"\"],[12],[2,\"\\n    \"],[10,\"h3\"],[14,0,\"mybets-heading\"],[12],[2,\"Active Bets \"],[1,[32,2,[\"username\"]]],[2,\" Has Created\"],[13],[2,\"\\n    \"],[10,\"ul\"],[14,\"data-test-bets-user-created\",\"\"],[12],[2,\"\\n\"],[6,[37,4],[[32,0,[\"notEmptyArray\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[6,[37,3],[[30,[36,2],[[30,[36,2],[[32,0,[\"betsCreated\"]]],null]],null]],[[\"key\"],[\"index\"]],[[\"default\"],[{\"statements\":[[2,\"        \"],[10,\"li\"],[14,0,\"no-dots\"],[12],[2,\" \\n            \"],[10,\"p\"],[14,0,\"time-created\"],[12],[1,[32,1,[\"betData\",\"betParticipants\",\"0\",\"userData\",\"userTime\"]]],[13],[2,\" \\n            \"],[10,\"a\"],[14,6,\"#\"],[14,0,\"list-mybets-title\"],[15,\"onclick\",[30,[36,1],[[35,0],[32,1,[\"betID\"]]],null]],[12],[1,[32,1,[\"betData\",\"betTitle\"]]],[13],[2,\"\\n        \"],[13],[2,\"\\n\"]],\"parameters\":[1]}]]]],\"parameters\":[]},{\"statements\":[[2,\"        \"],[10,\"p\"],[14,0,\"no-created-bets\"],[12],[2,\"You have not created any bets\"],[13],[2,\"\\n\"]],\"parameters\":[]}]]],[2,\"    \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[18,3,null]],\"hasEval\":false,\"upvars\":[\"redirectToIndiv\",\"fn\",\"-track-array\",\"each\",\"if\"]}",
+    "meta": {
+      "moduleName": "client/components/bets-user-created.hbs"
+    }
+  });
+
+  let BetsUserCreatedComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._action, (_class = (_temp = class BetsUserCreatedComponent extends _component.default {
+    constructor() {
+      super(...arguments);
+
+      _initializerDefineProperty(this, "betsCreated", _descriptor, this);
+
+      _initializerDefineProperty(this, "cookie", _descriptor2, this);
+
+      this.betsCreated = [];
+      this.cookie = this.args.model.cookie;
+      this.findBetsCreated();
+    }
+
+    findBetsCreated() {
+      _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/profile/getUsersBets?userCookie=` + this.cookie).done(betsUserCreatedList => {
+        this.betsCreated = betsUserCreatedList;
+      });
+    } // get getTime(betInstance){
+    //     return betInstance.betData.betParticipants[0].userData.userData;
+    // }
+
+
+    redirectToIndiv(id) {
+      this.args.betInfoHandler(id);
+      this.args.changePage('createbet');
+    }
+
+    get notEmptyArray() {
+      if (this.betsCreated.length == 0) return false;else return true;
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "betsCreated", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return [];
+    }
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "cookie", [_dec2], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return null;
+    }
+  }), _applyDecoratedDescriptor(_class.prototype, "redirectToIndiv", [_dec3], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToIndiv"), _class.prototype)), _class));
+  _exports.default = BetsUserCreatedComponent;
+
+  Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, BetsUserCreatedComponent);
+});
 ;define("client/components/friends-list", ["exports", "@glimmer/component"], function (_exports, _component) {
   "use strict";
 
@@ -261,7 +357,7 @@
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, FriendsListComponent);
 });
-;define("client/components/individual-bet", ["exports", "@glimmer/component"], function (_exports, _component) {
+;define("client/components/individual-bet", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
@@ -269,7 +365,7 @@
   });
   _exports.default = void 0;
 
-  var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _temp;
+  var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _temp;
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -288,12 +384,12 @@
   <button class = "bet_button_join" onclick={{action this.changeAdminUnResolvedBet}}> Admin Unresolved</button>
   <button class = "bet_button_join" onclick={{action this.changeUserUnResolvedBet}}> User Unresolved</button>
   <button class = "bet_button_join" onclick={{action this.loadSampleData}}> Sample Data</button>
-  <button class = "bet_button_join" onclick={{action this.newData}}> Clear Data</button>
+  
   <br>
   
   <body class= "main_bet_page">
   
-  {{#if displayCreateBet}}
+  {{#if this.getDisplay}}
       <h1 class = "create_bet" > Create a Bet</h1>
   
           <table class ="bet_input_field_table">
@@ -356,26 +452,25 @@
                   currentBetAmountValue 
                   currentBetDescriptionValue
                   betSide
-  
-              }}>
+          }}>
           Create Bet</button>
   
   {{else}}
-      <h1 class= "bet_title">{{individualBet.betData.betName}}</h1>
+          <h1 class= "bet_title"></h1>
   
-  {{#if betDataEntered}}
-      <h2 class = "display_individual_bet" > My Bet</h2>
-      {{else}}
-          <h2 class = "display_individual_bet" > {{individualBet.betData.betAdmin}}'s Bet</h2>
+      {{#if betDataEntered}}
+          <h2 class = "display_individual_bet" >{{this.individualBet.betData.betTitle}}</h2>
+          {{else}}
+              <h2 class = "display_individual_bet" > {{individualBet.betData.betAdmin}}'s Bet</h2>
   
-  {{/if}}
+      {{/if}}
   
-      <div class = "bet_info">
-          <h3>Current bet Amount : $ {{individualBet.betData.betAmount}}.00 </h3>
-          <h4> Description: <br><br> <p>{{individualBet.betData.betDetail}}</p></h4>
-      </div>
+          <div class = "bet_info">
+              <h3>Current bet Amount : $ {{individualBet.betData.betAmount}}.00 </h3>
+              <h4> Description: <br><br> <p>{{individualBet.betData.betDetail}}</p></h4>
+          </div>
   
-  <table class = "bet_participant_table">
+          <table class = "bet_participant_table">
       
   
   
@@ -385,7 +480,7 @@
                    <th>Date Joined</th>
                    <th>Bet Standing</th>
                   </tr>
-          {{#each nameList key = "index" as |nameList index| }}
+          {{#each individualBet.betData.betParticipants key = "index" as |nameList index| }}
                   <tr>
                   <td>{{nameList.userData.userName}}</td>
                   <td>{{nameList.userData.userTime}}</td>
@@ -409,10 +504,12 @@
                   </td>
                   </tr>      
               {{/each}}
+              
       {{/if}}
   
   
   </table>
+  <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Bet Against me on BetYa!" data-url="http://localhost:4200/" data-hashtags="BetYa" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <br><br><br><br>
           
       {{#if betDataEntered}}
@@ -421,7 +518,6 @@
                   <button class = "button_resolve"> Bet Unresolved</button>
                   {{else}}
                   <h3 class = "bet_resolved_text"> Bet Resolved</h3>
-  
                   {{/if}}
               {{else}}
               <input 
@@ -438,22 +534,22 @@
               <button 
                   class = "button_resolve"  
                   onclick = {{ action joinBet}}>
-                  Join Bet</button>
-  
+                  Join Bet</button>        
       {{/if}}
   {{/if}}
   </body>
   
   */
   {
-    "id": "Z5376i/R",
-    "block": "{\"symbols\":[\"nameList\",\"index\",\"nameList\",\"index\"],\"statements\":[[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeUser\"]]],null]],[12],[2,\"  User\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeAdmin\"]]],null]],[12],[2,\"  Admin\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeAdminResolvedBet\"]]],null]],[12],[2,\"  Resolved\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeAdminUnResolvedBet\"]]],null]],[12],[2,\" Admin Unresolved\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeUserUnResolvedBet\"]]],null]],[12],[2,\" User Unresolved\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"loadSampleData\"]]],null]],[12],[2,\" Sample Data\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"newData\"]]],null]],[12],[2,\" Clear Data\"],[13],[2,\"\\n\"],[10,\"br\"],[12],[13],[2,\"\\n\\n\"],[10,\"body\"],[14,0,\"main_bet_page\"],[12],[2,\"\\n\\n\"],[6,[37,5],[[35,19]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"    \"],[10,\"h1\"],[14,0,\"create_bet\"],[12],[2,\" Create a Bet\"],[13],[2,\"\\n\\n        \"],[10,\"table\"],[14,0,\"bet_input_field_table\"],[12],[2,\"\\n            \"],[10,\"tr\"],[12],[2,\"\\n            \"],[10,\"td\"],[12],[2,\"\\n                \"],[10,\"label\"],[14,\"for\",\"name\"],[12],[10,\"b\"],[12],[2,\"Bet Title\"],[13],[13],[2,\"\\n                \"],[10,\"input\"],[14,1,\"bet_title\"],[15,2,[34,11]],[15,\"oninput\",[30,[36,2],[[32,0],[35,12]],null]],[14,4,\"string\"],[12],[13],[2,\"\\n            \"],[13],[2,\"\\n            \"],[13],[2,\"\\n\\n            \"],[10,\"tr\"],[12],[2,\"\\n            \"],[10,\"td\"],[12],[2,\"\\n                \"],[10,\"label\"],[14,\"for\",\"name\"],[12],[10,\"b\"],[12],[2,\"Amount\"],[13],[13],[2,\"\\n                \"],[10,\"input\"],[14,1,\"bet_amount\"],[15,2,[34,13]],[15,\"oninput\",[30,[36,2],[[32,0],[35,14]],null]],[14,4,\"number\"],[12],[13],[2,\"\\n            \"],[13],[2,\"\\n            \"],[13],[2,\"\\n\\n            \"],[10,\"tr\"],[12],[2,\"\\n            \"],[10,\"td\"],[12],[10,\"br\"],[12],[13],[2,\"\\n                \"],[10,\"label\"],[12],[10,\"b\"],[12],[2,\"Description of Bet\"],[13],[13],[2,\" \"],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n                \"],[10,\"input\"],[14,0,\"bet_detail_input\"],[14,1,\"bet_description\"],[15,2,[34,15]],[15,\"oninput\",[30,[36,2],[[32,0],[35,16]],null]],[14,4,\"string\"],[12],[13],[2,\"\\n                    \\n            \"],[13],[2,\"\\n            \"],[13],[2,\"\\n        \"],[13],[2,\" \"],[10,\"br\"],[12],[13],[2,\"\\n\\n            \"],[10,\"input\"],[14,3,\"betside\"],[15,\"onclick\",[30,[36,2],[[32,0],[30,[36,1],[[35,0]],null],true],null]],[14,4,\"radio\"],[12],[13],[2,\"\\n            \"],[10,\"label\"],[12],[2,\"Bet For\"],[13],[2,\"\\n            \"],[10,\"input\"],[14,3,\"betside\"],[15,\"onclick\",[30,[36,2],[[32,0],[30,[36,1],[[35,0]],null],false],null]],[14,4,\"radio\"],[12],[13],[2,\"\\n            \"],[10,\"label\"],[12],[2,\"Bet Against\"],[13],[2,\" \"],[10,\"br\"],[12],[13],[2,\"\\n\\n    \"],[10,\"button\"],[14,0,\"create_bet_button\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,18],[35,11],[35,13],[35,15],[35,17]],null]],[12],[2,\"\\n        Create Bet\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"    \"],[10,\"h1\"],[14,0,\"bet_title\"],[12],[1,[35,9,[\"betData\",\"betName\"]]],[13],[2,\"\\n\\n\"],[6,[37,5],[[35,10]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"    \"],[10,\"h2\"],[14,0,\"display_individual_bet\"],[12],[2,\" My Bet\"],[13],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"        \"],[10,\"h2\"],[14,0,\"display_individual_bet\"],[12],[2,\" \"],[1,[35,9,[\"betData\",\"betAdmin\"]]],[2,\"'s Bet\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]}]]],[2,\"\\n    \"],[10,\"div\"],[14,0,\"bet_info\"],[12],[2,\"\\n        \"],[10,\"h3\"],[12],[2,\"Current bet Amount : $ \"],[1,[35,9,[\"betData\",\"betAmount\"]]],[2,\".00 \"],[13],[2,\"\\n        \"],[10,\"h4\"],[12],[2,\" Description: \"],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\" \"],[10,\"p\"],[12],[1,[35,9,[\"betData\",\"betDetail\"]]],[13],[13],[2,\"\\n    \"],[13],[2,\"\\n\\n\"],[10,\"table\"],[14,0,\"bet_participant_table\"],[12],[2,\"\\n    \\n\\n\\n\"],[6,[37,5],[[35,4]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"                \"],[10,\"tr\"],[12],[2,\"\\n                 \"],[10,\"th\"],[12],[2,\"Whose in on this Bet\"],[13],[2,\"\\n                 \"],[10,\"th\"],[12],[2,\"Date Joined\"],[13],[2,\"\\n                 \"],[10,\"th\"],[12],[2,\"Bet Standing\"],[13],[2,\"\\n                \"],[13],[2,\"\\n\"],[6,[37,8],[[30,[36,7],[[30,[36,7],[[35,6]],null]],null]],[[\"key\"],[\"index\"]],[[\"default\"],[{\"statements\":[[2,\"                \"],[10,\"tr\"],[12],[2,\"\\n                \"],[10,\"td\"],[12],[1,[32,3,[\"userData\",\"userName\"]]],[13],[2,\"\\n                \"],[10,\"td\"],[12],[1,[32,3,[\"userData\",\"userTime\"]]],[13],[2,\"\\n                \"],[10,\"td\"],[12],[6,[37,5],[[32,3,[\"userData\",\"betSide\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\" Betting For\\n                    \"]],\"parameters\":[]},{\"statements\":[[2,\" Betting Against \"]],\"parameters\":[]}]]],[2,\"\\n                \"],[13],[2,\"\\n                \"],[13],[2,\"      \\n\"]],\"parameters\":[3,4]}]]],[2,\"    \\n\"]],\"parameters\":[]},{\"statements\":[[2,\"                \"],[10,\"tr\"],[12],[2,\"\\n                \"],[10,\"th\"],[12],[2,\"Whose in on this Bet\"],[13],[2,\"\\n                \"],[10,\"th\"],[12],[2,\"Outcome\"],[13],[2,\"\\n                \"],[13],[2,\"\\n\"],[6,[37,8],[[30,[36,7],[[30,[36,7],[[35,6]],null]],null]],[[\"key\"],[\"index\"]],[[\"default\"],[{\"statements\":[[2,\"                \"],[10,\"tr\"],[12],[2,\"\\n                \"],[10,\"td\"],[12],[1,[32,1,[\"userData\",\"userName\"]]],[13],[2,\"\\n                \"],[10,\"td\"],[12],[2,\"\\n                    \"],[6,[37,5],[[32,1,[\"userData\",\"betSide\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\" Winner\\n                    \"]],\"parameters\":[]},{\"statements\":[[2,\" Loser \"]],\"parameters\":[]}]]],[2,\"\\n                \"],[13],[2,\"\\n                \"],[13],[2,\"      \\n\"]],\"parameters\":[1,2]}]]]],\"parameters\":[]}]]],[2,\"\\n\\n\"],[13],[2,\"\\n\"],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n        \\n\"],[6,[37,5],[[35,10]],null,[[\"default\",\"else\"],[{\"statements\":[[6,[37,5],[[35,4]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"                \"],[10,\"button\"],[14,0,\"button_resolve\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeAdminResolvedBet\"]]],null]],[12],[2,\" Bet Resolve\"],[13],[2,\"\\n                \"],[10,\"button\"],[14,0,\"button_resolve\"],[12],[2,\" Bet Unresolved\"],[13],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"                \"],[10,\"h3\"],[14,0,\"bet_resolved_text\"],[12],[2,\" Bet Resolved\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]}]]]],\"parameters\":[]},{\"statements\":[[2,\"            \"],[10,\"input\"],[14,3,\"betside\"],[15,\"onclick\",[30,[36,2],[[32,0],[30,[36,1],[[35,0]],null],true],null]],[14,4,\"radio\"],[12],[13],[2,\"\\n            \"],[10,\"label\"],[12],[2,\"Bet For\"],[13],[2,\"\\n            \"],[10,\"input\"],[14,3,\"betside\"],[15,\"onclick\",[30,[36,2],[[32,0],[30,[36,1],[[35,0]],null],false],null]],[14,4,\"radio\"],[12],[13],[2,\"\\n            \"],[10,\"label\"],[12],[2,\"Bet Against\"],[13],[2,\" \"],[10,\"br\"],[12],[13],[2,\"\\n            \\n            \"],[10,\"button\"],[14,0,\"button_resolve\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,3]],null]],[12],[2,\"\\n                Join Bet\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]}]]]],\"parameters\":[]}]]],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"betAgainst\",\"mut\",\"action\",\"joinBet\",\"betResolution\",\"if\",\"nameList\",\"-track-array\",\"each\",\"individualBet\",\"betDataEntered\",\"currentBetTitleValue\",\"inputBetTitleValue\",\"currentBetAmountValue\",\"inputBetAmountValue\",\"currentBetDescriptionValue\",\"inputBetDescriptionValue\",\"betSide\",\"createBet\",\"displayCreateBet\"]}",
+    "id": "ff5d+tc/",
+    "block": "{\"symbols\":[\"nameList\",\"index\",\"nameList\",\"index\"],\"statements\":[[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeUser\"]]],null]],[12],[2,\"  User\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeAdmin\"]]],null]],[12],[2,\"  Admin\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeAdminResolvedBet\"]]],null]],[12],[2,\"  Resolved\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeAdminUnResolvedBet\"]]],null]],[12],[2,\" Admin Unresolved\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeUserUnResolvedBet\"]]],null]],[12],[2,\" User Unresolved\"],[13],[2,\"\\n\"],[10,\"button\"],[14,0,\"bet_button_join\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"loadSampleData\"]]],null]],[12],[2,\" Sample Data\"],[13],[2,\"\\n\\n\"],[10,\"br\"],[12],[13],[2,\"\\n\\n\"],[10,\"body\"],[14,0,\"main_bet_page\"],[12],[2,\"\\n\\n\"],[6,[37,5],[[32,0,[\"getDisplay\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"    \"],[10,\"h1\"],[14,0,\"create_bet\"],[12],[2,\" Create a Bet\"],[13],[2,\"\\n\\n        \"],[10,\"table\"],[14,0,\"bet_input_field_table\"],[12],[2,\"\\n            \"],[10,\"tr\"],[12],[2,\"\\n            \"],[10,\"td\"],[12],[2,\"\\n                \"],[10,\"label\"],[14,\"for\",\"name\"],[12],[10,\"b\"],[12],[2,\"Bet Title\"],[13],[13],[2,\"\\n                \"],[10,\"input\"],[14,1,\"bet_title\"],[15,2,[34,11]],[15,\"oninput\",[30,[36,2],[[32,0],[35,12]],null]],[14,4,\"string\"],[12],[13],[2,\"\\n            \"],[13],[2,\"\\n            \"],[13],[2,\"\\n\\n            \"],[10,\"tr\"],[12],[2,\"\\n            \"],[10,\"td\"],[12],[2,\"\\n                \"],[10,\"label\"],[14,\"for\",\"name\"],[12],[10,\"b\"],[12],[2,\"Amount\"],[13],[13],[2,\"\\n                \"],[10,\"input\"],[14,1,\"bet_amount\"],[15,2,[34,13]],[15,\"oninput\",[30,[36,2],[[32,0],[35,14]],null]],[14,4,\"number\"],[12],[13],[2,\"\\n            \"],[13],[2,\"\\n            \"],[13],[2,\"\\n\\n            \"],[10,\"tr\"],[12],[2,\"\\n            \"],[10,\"td\"],[12],[10,\"br\"],[12],[13],[2,\"\\n                \"],[10,\"label\"],[12],[10,\"b\"],[12],[2,\"Description of Bet\"],[13],[13],[2,\" \"],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n                \"],[10,\"input\"],[14,0,\"bet_detail_input\"],[14,1,\"bet_description\"],[15,2,[34,15]],[15,\"oninput\",[30,[36,2],[[32,0],[35,16]],null]],[14,4,\"string\"],[12],[13],[2,\"\\n                    \\n            \"],[13],[2,\"\\n            \"],[13],[2,\"\\n        \"],[13],[2,\" \"],[10,\"br\"],[12],[13],[2,\"\\n\\n            \"],[10,\"input\"],[14,3,\"betside\"],[15,\"onclick\",[30,[36,2],[[32,0],[30,[36,1],[[35,0]],null],true],null]],[14,4,\"radio\"],[12],[13],[2,\"\\n            \"],[10,\"label\"],[12],[2,\"Bet For\"],[13],[2,\"\\n            \"],[10,\"input\"],[14,3,\"betside\"],[15,\"onclick\",[30,[36,2],[[32,0],[30,[36,1],[[35,0]],null],false],null]],[14,4,\"radio\"],[12],[13],[2,\"\\n            \"],[10,\"label\"],[12],[2,\"Bet Against\"],[13],[2,\" \"],[10,\"br\"],[12],[13],[2,\"\\n\\n    \"],[10,\"button\"],[14,0,\"create_bet_button\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,18],[35,11],[35,13],[35,15],[35,17]],null]],[12],[2,\"\\n        Create Bet\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"        \"],[10,\"h1\"],[14,0,\"bet_title\"],[12],[13],[2,\"\\n\\n\"],[6,[37,5],[[35,10]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"        \"],[10,\"h2\"],[14,0,\"display_individual_bet\"],[12],[1,[32,0,[\"individualBet\",\"betData\",\"betTitle\"]]],[13],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"            \"],[10,\"h2\"],[14,0,\"display_individual_bet\"],[12],[2,\" \"],[1,[35,9,[\"betData\",\"betAdmin\"]]],[2,\"'s Bet\"],[13],[2,\"\\n\\n\"]],\"parameters\":[]}]]],[2,\"\\n        \"],[10,\"div\"],[14,0,\"bet_info\"],[12],[2,\"\\n            \"],[10,\"h3\"],[12],[2,\"Current bet Amount : $ \"],[1,[35,9,[\"betData\",\"betAmount\"]]],[2,\".00 \"],[13],[2,\"\\n            \"],[10,\"h4\"],[12],[2,\" Description: \"],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\" \"],[10,\"p\"],[12],[1,[35,9,[\"betData\",\"betDetail\"]]],[13],[13],[2,\"\\n        \"],[13],[2,\"\\n\\n        \"],[10,\"table\"],[14,0,\"bet_participant_table\"],[12],[2,\"\\n    \\n\\n\\n\"],[6,[37,5],[[35,4]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"                \"],[10,\"tr\"],[12],[2,\"\\n                 \"],[10,\"th\"],[12],[2,\"Whose in on this Bet\"],[13],[2,\"\\n                 \"],[10,\"th\"],[12],[2,\"Date Joined\"],[13],[2,\"\\n                 \"],[10,\"th\"],[12],[2,\"Bet Standing\"],[13],[2,\"\\n                \"],[13],[2,\"\\n\"],[6,[37,8],[[30,[36,7],[[30,[36,7],[[35,9,[\"betData\",\"betParticipants\"]]],null]],null]],[[\"key\"],[\"index\"]],[[\"default\"],[{\"statements\":[[2,\"                \"],[10,\"tr\"],[12],[2,\"\\n                \"],[10,\"td\"],[12],[1,[32,3,[\"userData\",\"userName\"]]],[13],[2,\"\\n                \"],[10,\"td\"],[12],[1,[32,3,[\"userData\",\"userTime\"]]],[13],[2,\"\\n                \"],[10,\"td\"],[12],[6,[37,5],[[32,3,[\"userData\",\"betSide\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\" Betting For\\n                    \"]],\"parameters\":[]},{\"statements\":[[2,\" Betting Against \"]],\"parameters\":[]}]]],[2,\"\\n                \"],[13],[2,\"\\n                \"],[13],[2,\"      \\n\"]],\"parameters\":[3,4]}]]],[2,\"    \\n\"]],\"parameters\":[]},{\"statements\":[[2,\"                \"],[10,\"tr\"],[12],[2,\"\\n                \"],[10,\"th\"],[12],[2,\"Whose in on this Bet\"],[13],[2,\"\\n                \"],[10,\"th\"],[12],[2,\"Outcome\"],[13],[2,\"\\n                \"],[13],[2,\"\\n\"],[6,[37,8],[[30,[36,7],[[30,[36,7],[[35,6]],null]],null]],[[\"key\"],[\"index\"]],[[\"default\"],[{\"statements\":[[2,\"                \"],[10,\"tr\"],[12],[2,\"\\n                \"],[10,\"td\"],[12],[1,[32,1,[\"userData\",\"userName\"]]],[13],[2,\"\\n                \"],[10,\"td\"],[12],[2,\"\\n                    \"],[6,[37,5],[[32,1,[\"userData\",\"betSide\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\" Winner\\n                    \"]],\"parameters\":[]},{\"statements\":[[2,\" Loser \"]],\"parameters\":[]}]]],[2,\"\\n                \"],[13],[2,\"\\n                \"],[13],[2,\"      \\n\"]],\"parameters\":[1,2]}]]],[2,\"            \\n\"]],\"parameters\":[]}]]],[2,\"\\n\\n\"],[13],[2,\"\\n\"],[10,\"a\"],[14,6,\"https://twitter.com/share?ref_src=twsrc%5Etfw\"],[14,0,\"twitter-share-button\"],[14,\"data-text\",\"Bet Against me on BetYa!\"],[14,\"data-url\",\"http://localhost:4200/\"],[14,\"data-hashtags\",\"BetYa\"],[14,\"data-show-count\",\"false\"],[12],[2,\"Tweet\"],[13],[10,\"script\"],[14,\"async\",\"\"],[14,\"src\",\"https://platform.twitter.com/widgets.js\"],[14,\"charset\",\"utf-8\"],[12],[13],[2,\"\\n\"],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[10,\"br\"],[12],[13],[2,\"\\n        \\n\"],[6,[37,5],[[35,10]],null,[[\"default\",\"else\"],[{\"statements\":[[6,[37,5],[[35,4]],null,[[\"default\",\"else\"],[{\"statements\":[[2,\"                \"],[10,\"button\"],[14,0,\"button_resolve\"],[15,\"onclick\",[30,[36,2],[[32,0],[32,0,[\"changeAdminResolvedBet\"]]],null]],[12],[2,\" Bet Resolve\"],[13],[2,\"\\n                \"],[10,\"button\"],[14,0,\"button_resolve\"],[12],[2,\" Bet Unresolved\"],[13],[2,\"\\n\"]],\"parameters\":[]},{\"statements\":[[2,\"                \"],[10,\"h3\"],[14,0,\"bet_resolved_text\"],[12],[2,\" Bet Resolved\"],[13],[2,\"\\n\"]],\"parameters\":[]}]]]],\"parameters\":[]},{\"statements\":[[2,\"            \"],[10,\"input\"],[14,3,\"betside\"],[15,\"onclick\",[30,[36,2],[[32,0],[30,[36,1],[[35,0]],null],true],null]],[14,4,\"radio\"],[12],[13],[2,\"\\n            \"],[10,\"label\"],[12],[2,\"Bet For\"],[13],[2,\"\\n            \"],[10,\"input\"],[14,3,\"betside\"],[15,\"onclick\",[30,[36,2],[[32,0],[30,[36,1],[[35,0]],null],false],null]],[14,4,\"radio\"],[12],[13],[2,\"\\n            \"],[10,\"label\"],[12],[2,\"Bet Against\"],[13],[2,\" \"],[10,\"br\"],[12],[13],[2,\"\\n            \\n            \"],[10,\"button\"],[14,0,\"button_resolve\"],[15,\"onclick\",[30,[36,2],[[32,0],[35,3]],null]],[12],[2,\"\\n                Join Bet\"],[13],[2,\"        \\n\"]],\"parameters\":[]}]]]],\"parameters\":[]}]]],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[\"betAgainst\",\"mut\",\"action\",\"joinBet\",\"betResolution\",\"if\",\"nameList\",\"-track-array\",\"each\",\"individualBet\",\"betDataEntered\",\"currentBetTitleValue\",\"inputBetTitleValue\",\"currentBetAmountValue\",\"inputBetAmountValue\",\"currentBetDescriptionValue\",\"inputBetDescriptionValue\",\"betSide\",\"createBet\"]}",
     "meta": {
       "moduleName": "client/components/individual-bet.hbs"
     }
   });
 
-  let IndividualBetComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember._tracked, _dec5 = Ember._tracked, _dec6 = Ember._tracked, _dec7 = Ember._tracked, _dec8 = Ember._tracked, _dec9 = Ember._tracked, _dec10 = Ember._tracked, (_class = (_temp = class IndividualBetComponent extends _component.default {
+  let IndividualBetComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember._tracked, _dec5 = Ember._tracked, _dec6 = Ember._tracked, _dec7 = Ember._tracked, _dec8 = Ember._tracked, _dec9 = Ember._tracked, _dec10 = Ember._tracked, _dec11 = Ember._tracked, _dec12 = Ember._tracked, _dec13 = Ember._tracked, _dec14 = Ember._tracked, (_class = (_temp = class IndividualBetComponent extends _component.default {
+    //depends on which bet you join get the ID of the bet
     constructor() {
       super(...arguments);
 
@@ -471,49 +567,95 @@
 
       _initializerDefineProperty(this, "betAgainst", _descriptor7, this);
 
-      _initializerDefineProperty(this, "currentBetTitleValue", _descriptor8, this);
+      _initializerDefineProperty(this, "userIdNum", _descriptor8, this);
 
-      _initializerDefineProperty(this, "currentBetAmountValue", _descriptor9, this);
+      _initializerDefineProperty(this, "retrievedData", _descriptor9, this);
 
-      _initializerDefineProperty(this, "currentDescriptionValue", _descriptor10, this);
+      _initializerDefineProperty(this, "userData", _descriptor10, this);
 
-      _defineProperty(this, "c", void 0);
+      _initializerDefineProperty(this, "currentBetID", _descriptor11, this);
 
-      this.loadSampleData();
+      _initializerDefineProperty(this, "currentBetTitleValue", _descriptor12, this);
+
+      _initializerDefineProperty(this, "currentBetAmountValue", _descriptor13, this);
+
+      _initializerDefineProperty(this, "currentDescriptionValue", _descriptor14, this);
+
+      this.currentBetID = ''; // when you join a bet from a list of existing bets in the home, 
+      // bet that gets loaded and updated is the existing betID that needs to be pulled from the database
+
+      this.userIdNum = localStorage.getItem('cookie'); //this.loadSampleData();
+
+      this.requestData();
+      this.requestUserData(); // when you are at this page you need to get the current user to create a bet and join
+      //this.getTimeAndDate();
+
+      console.log(this.userIdNum);
     }
 
-    newData() {
-      this.individualBet = {
-        betID: '',
-        betData: {
-          betTitle: '',
-          betAmount: 0,
-          betAdmin: '',
-          isAdmin: false,
-          betResolution: false,
-          betDetail: '',
-          betParticipants: {
-            userID: '',
-            userData: {
-              userName: '',
-              userTime: '',
-              betSide: true
-            }
-          }
-        }
-      };
-      this.nameList = [];
+    get getDisplay() {
+      this.displayCreateBet = this.args.displayCreateBet;
+
+      if (!this.displayCreateBet) {
+        this.requestData(this.args.betId);
+      }
+
+      return this.displayCreateBet;
+    }
+
+    getTimeAndDate() {
+      var hour = null;
+      var min = null;
+      var sec = null;
+      var day = null;
+      var month = null;
+      var year = null;
+      var amPM = 'AM';
+      var t = new Date();
+      month = t.getMonth() + 1;
+      day = t.getDate();
+      year = t.getFullYear();
+      hour = t.getHours();
+
+      if (hour > 12) {
+        // Get 12 Hour clock
+        hour = hour - 12;
+        amPM = 'PM';
+      }
+
+      if (hour == 0) {
+        hour = 12;
+        amPM = 'AM';
+      }
+
+      min = t.getMinutes();
+
+      if (min < 10) {
+        // 0 infront of minutes if less than 10
+        min = "0" + min;
+      }
+
+      sec = t.getSeconds();
+
+      if (sec < 10) {
+        // 0 infront of seconds if less than 10
+        sec = "0" + sec;
+      }
+
+      this.currentTime = '' + month + '/' + day + '/' + year + ' ' + hour + ':' + min + ':' + sec + ' ' + amPM;
+      console.log(this.currentTime);
     }
 
     loadSampleData() {
       this.individualBet = {
-        betID: '001',
+        //betID: '001',
         betData: {
           betTitle: 'Jerry wont Fail',
           betAmount: 20,
           betAdmin: 'Rick',
           isAdmin: true,
           betResolution: false,
+          displayCreateBet: false,
           betDetail: 'Jerry will fail to impress Rick',
           betParticipants: []
         }
@@ -561,48 +703,52 @@
       this.nameList = this.individualBet.betData.betParticipants;
       console.log(this.nameList);
       console.log(this.individualBet.betData.betParticipants.length);
+      this.createData();
     }
 
-    createBet(title, amount, detail, side) {
+    createBet(title, amount, detail) {
       this.currentTime = new Date();
-      this.newData();
       this.individualBet = {
-        betID: '001',
         betData: {
           betTitle: title,
           betAmount: amount,
-          betAdmin: 'AdminUserID',
+          betAdmin: this.userData[0].username,
+          // should be a unique key as identifier it is currently the cookie
           isAdmin: true,
           betResolution: false,
           betDetail: detail,
           betParticipants: []
         }
       };
+      this.getTimeAndDate();
       this.individualBet.betData.betParticipants.pushObject({
-        userID: 'AdminUserID',
+        userID: this.userIdNum,
         userData: {
-          userName: 'AdminUserName',
+          userName: this.userData[0].username,
           userTime: this.currentTime,
           betSide: this.betAgainst
         }
       });
       this.nameList = this.individualBet.betData.betParticipants;
       this.displayCreateBet = false;
-      console.log(this.individualBet);
-      console.log(this.nameList);
+      this.createData();
     }
 
-    joinBet(user, name) {
-      this.currentTime = new Date();
+    joinBet() {
+      console.log(this.userData);
+      this.getTimeAndDate();
       this.individualBet.betData.betParticipants.pushObject({
-        userID: 'userID',
+        userID: this.userIdNum,
+        // users unique ID to be logged
         userData: {
-          userName: 'userName',
+          userName: this.userData[0].username,
+          // use the ID to retrieve the name
           userTime: this.currentTime,
           betSide: this.betAgainst
         }
       });
       console.log(this.individualBet.betData.betParticipants);
+      this.updateData();
     }
 
     resolveBet() {
@@ -619,12 +765,49 @@
 
     inputBetDescriptionValue(input) {
       this.currentBetDescriptionValue = input.target.value;
-    } // Testing Buttons
+    }
 
+    requestData(betID) {
+      _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/bets/requestdata?betID=` + betID).done(bets => {
+        this.individualBet = bets[0];
+      });
+    }
+
+    requestUserData() {
+      _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/bets/requestuserdata`, {
+        userIdNum: this.userIdNum
+      }).done(user => {
+        // pulls the users data using local storage 'cookie' from login
+        this.userData = user;
+        console.log(this.userData);
+      });
+    }
+
+    updateData() {
+      _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/bets/updatedata`, {
+        // pulls the users data using local storage 'cookie' from login
+        // bedID should already exist it shouldnt update
+        betID: this.currentBetID,
+        betData: this.individualBet.betData
+      });
+    }
+
+    createData() {
+      this.currentBetID = Date.parse(new Date()), _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/bets/createdata`, {
+        // creates a unique ID from date, pass the bet data thru query
+        betID: this.currentBetID,
+        betData: this.individualBet.betData
+      });
+    }
+
+    updateResolution() {
+      _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/bets/updatebetresolution`, {
+        betID: this.userIdNum
+      });
+    }
 
     loadFakeData() {
       this.displayCreateBet = false;
-      console.log(this.isAdmin);
     }
 
     changeUser() {
@@ -632,7 +815,6 @@
     }
 
     changeAdmin() {
-      this.newData();
       this.displayCreateBet = true;
     }
 
@@ -648,6 +830,8 @@
 
     changeAdminResolvedBet() {
       this.betResolution = false;
+      this.updateResolution();
+      this.updateData();
     }
 
   }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "currentTime", [_dec], {
@@ -673,9 +857,7 @@
     configurable: true,
     enumerable: true,
     writable: true,
-    initializer: function () {
-      return true;
-    }
+    initializer: null
   }), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "nameList", [_dec5], {
     configurable: true,
     enumerable: true,
@@ -697,17 +879,37 @@
     initializer: function () {
       return null;
     }
-  }), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, "currentBetTitleValue", [_dec8], {
+  }), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, "userIdNum", [_dec8], {
     configurable: true,
     enumerable: true,
     writable: true,
     initializer: null
-  }), _descriptor9 = _applyDecoratedDescriptor(_class.prototype, "currentBetAmountValue", [_dec9], {
+  }), _descriptor9 = _applyDecoratedDescriptor(_class.prototype, "retrievedData", [_dec9], {
     configurable: true,
     enumerable: true,
     writable: true,
     initializer: null
-  }), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, "currentDescriptionValue", [_dec10], {
+  }), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, "userData", [_dec10], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor11 = _applyDecoratedDescriptor(_class.prototype, "currentBetID", [_dec11], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor12 = _applyDecoratedDescriptor(_class.prototype, "currentBetTitleValue", [_dec12], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor13 = _applyDecoratedDescriptor(_class.prototype, "currentBetAmountValue", [_dec13], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor14 = _applyDecoratedDescriptor(_class.prototype, "currentDescriptionValue", [_dec14], {
     configurable: true,
     enumerable: true,
     writable: true,
@@ -891,7 +1093,7 @@
   });
   _exports.default = void 0;
 
-  var _dec, _dec2, _dec3, _dec4, _class, _descriptor, _descriptor2, _temp;
+  var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -906,6 +1108,7 @@
     <div>
       <Navbar
           @changePage={{this.navigateTo}}
+          @betInfoHandler={{this.betInfoHandler}}
       />
       <button onclick={{this.logOut}}>LogOut</button>
   
@@ -913,32 +1116,62 @@
   
   
   {{#if this.isProfilePage}}
-      <ProfilePage
+      <div class = 'left'>
+      <ProfilePage 
           @model={{@model}}
+          @changePage={{this.navigateTo}}
+          @betInfoHandler={{this.betInfoHandler}}
       />
+      </div>
+  
+      <div class = 'right'>
+      <FriendsList/>
+      <AddFriend/>
+      </div>
+      
   {{/if}}
   
   {{#if this.isCreateBetPage}}
-      <IndividualBet
+      <div class = 'left'>
+      <IndividualBet 
+          @model={{@model}}
+          @betId={{this.betID}}
+          @displayCreateBet={{this.displayCreateBet}}
+      />
+      </div>
+  
+      <div class = 'right'>
+      <FriendsList/>
+      <AddFriend/>
+      </div>
+      
+  {{/if}}
+  
+  {{#if this.isSignUpPage}}
+      <SignUp
           @model={{@model}}
       />
   {{/if}}
   */
   {
-    "id": "hMNBlASk",
-    "block": "{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[12],[2,\"\\n    \"],[8,\"navbar\",[],[[\"@changePage\"],[[32,0,[\"navigateTo\"]]]],null],[2,\"\\n    \"],[10,\"button\"],[15,\"onclick\",[32,0,[\"logOut\"]]],[12],[2,\"LogOut\"],[13],[2,\"\\n\\n\"],[13],[2,\"\\n\\n\\n\"],[6,[37,0],[[32,0,[\"isProfilePage\"]]],null,[[\"default\"],[{\"statements\":[[2,\"    \"],[8,\"profile-page\",[],[[\"@model\"],[[32,1]]],null],[2,\"\\n\"]],\"parameters\":[]}]]],[2,\"\\n\"],[6,[37,0],[[32,0,[\"isCreateBetPage\"]]],null,[[\"default\"],[{\"statements\":[[2,\"    \"],[8,\"individual-bet\",[],[[\"@model\"],[[32,1]]],null],[2,\"\\n\"]],\"parameters\":[]}]]]],\"hasEval\":false,\"upvars\":[\"if\"]}",
+    "id": "BkOgm5FB",
+    "block": "{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[12],[2,\"\\n    \"],[8,\"navbar\",[],[[\"@changePage\",\"@betInfoHandler\"],[[32,0,[\"navigateTo\"]],[32,0,[\"betInfoHandler\"]]]],null],[2,\"\\n    \"],[10,\"button\"],[15,\"onclick\",[32,0,[\"logOut\"]]],[12],[2,\"LogOut\"],[13],[2,\"\\n\\n\"],[13],[2,\"\\n\\n\\n\"],[6,[37,0],[[32,0,[\"isProfilePage\"]]],null,[[\"default\"],[{\"statements\":[[2,\"    \"],[10,\"div\"],[14,0,\"left\"],[12],[2,\"\\n    \"],[8,\"profile-page\",[],[[\"@model\",\"@changePage\",\"@betInfoHandler\"],[[32,1],[32,0,[\"navigateTo\"]],[32,0,[\"betInfoHandler\"]]]],null],[2,\"\\n    \"],[13],[2,\"\\n\\n    \"],[10,\"div\"],[14,0,\"right\"],[12],[2,\"\\n    \"],[8,\"friends-list\",[],[[],[]],null],[2,\"\\n    \"],[8,\"add-friend\",[],[[],[]],null],[2,\"\\n    \"],[13],[2,\"\\n    \\n\"]],\"parameters\":[]}]]],[2,\"\\n\"],[6,[37,0],[[32,0,[\"isCreateBetPage\"]]],null,[[\"default\"],[{\"statements\":[[2,\"    \"],[10,\"div\"],[14,0,\"left\"],[12],[2,\"\\n    \"],[8,\"individual-bet\",[],[[\"@model\",\"@betId\",\"@displayCreateBet\"],[[32,1],[32,0,[\"betID\"]],[32,0,[\"displayCreateBet\"]]]],null],[2,\"\\n    \"],[13],[2,\"\\n\\n    \"],[10,\"div\"],[14,0,\"right\"],[12],[2,\"\\n    \"],[8,\"friends-list\",[],[[],[]],null],[2,\"\\n    \"],[8,\"add-friend\",[],[[],[]],null],[2,\"\\n    \"],[13],[2,\"\\n    \\n\"]],\"parameters\":[]}]]],[2,\"\\n\"],[6,[37,0],[[32,0,[\"isSignUpPage\"]]],null,[[\"default\"],[{\"statements\":[[2,\"    \"],[8,\"sign-up\",[],[[\"@model\"],[[32,1]]],null],[2,\"\\n\"]],\"parameters\":[]}]]]],\"hasEval\":false,\"upvars\":[\"if\"]}",
     "meta": {
       "moduleName": "client/components/main-application.hbs"
     }
   });
 
-  let MainApplicationComponent = (_dec = Ember._tracked, _dec2 = Ember.inject.service, _dec3 = Ember._action, _dec4 = Ember._action, (_class = (_temp = class MainApplicationComponent extends _component.default {
+  let MainApplicationComponent = (_dec = Ember._tracked, _dec2 = Ember._tracked, _dec3 = Ember._tracked, _dec4 = Ember.inject.service, _dec5 = Ember._action, _dec6 = Ember._action, _dec7 = Ember._action, (_class = (_temp = class MainApplicationComponent extends _component.default {
     constructor(...args) {
       super(...args);
 
       _initializerDefineProperty(this, "activePage", _descriptor, this);
 
-      _initializerDefineProperty(this, "router", _descriptor2, this);
+      _initializerDefineProperty(this, "betID", _descriptor2, this);
+
+      _initializerDefineProperty(this, "displayCreateBet", _descriptor3, this);
+
+      _initializerDefineProperty(this, "router", _descriptor4, this);
     }
 
     get isProfilePage() {
@@ -953,8 +1186,17 @@
       return this.activePage === 'createbet';
     }
 
+    get isSignUpPage() {
+      return this.activePage === 'signup';
+    }
+
     navigateTo(page) {
       this.activePage = page;
+    }
+
+    betInfoHandler(id) {
+      this.betID = id;
+      if (this.betID) this.displayCreateBet = false;else this.displayCreateBet = true;
     }
 
     logOut() {
@@ -979,12 +1221,26 @@
     initializer: function () {
       return 'profile';
     }
-  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec2], {
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "betID", [_dec2], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return null;
+    }
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "displayCreateBet", [_dec3], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return true;
+    }
+  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec4], {
     configurable: true,
     enumerable: true,
     writable: true,
     initializer: null
-  }), _applyDecoratedDescriptor(_class.prototype, "navigateTo", [_dec3], Object.getOwnPropertyDescriptor(_class.prototype, "navigateTo"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "logOut", [_dec4], Object.getOwnPropertyDescriptor(_class.prototype, "logOut"), _class.prototype)), _class));
+  }), _applyDecoratedDescriptor(_class.prototype, "navigateTo", [_dec5], Object.getOwnPropertyDescriptor(_class.prototype, "navigateTo"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "betInfoHandler", [_dec6], Object.getOwnPropertyDescriptor(_class.prototype, "betInfoHandler"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "logOut", [_dec7], Object.getOwnPropertyDescriptor(_class.prototype, "logOut"), _class.prototype)), _class));
   _exports.default = MainApplicationComponent;
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, MainApplicationComponent);
@@ -1041,6 +1297,7 @@
     }
 
     redirectToCreateBetPage() {
+      this.args.betInfoHandler(null);
       this.args.changePage('createbet'); //this.router.transitionTo('createbet');
     }
 
@@ -1069,23 +1326,26 @@
 
   const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
   /*
-    <div style="border: 1px solid red;">
+    <div class = 'left'>
       <p>{{@model.username}}'s Profile Page</p>
       <p>Your are {{@model.age}} years old</p>
-  </div>
-  
-  <div>
-      <FriendsList/>
-  </div>
-  
-  <div>
-      <AddFriend/>
+      <Profile 
+          @model={{@model}}
+          @changePage={{@changePage}}
+          @betInfoHandler={{@betInfoHandler}}
+      />
+      
+      <BetsUserCreated 
+          @model={{@model}}
+          @changePage={{@changePage}}
+          @betInfoHandler={{@betInfoHandler}}
+      />
   </div>
   
   */
   {
-    "id": "lhGQqVD6",
-    "block": "{\"symbols\":[\"@model\"],\"statements\":[[10,\"div\"],[14,5,\"border: 1px solid red;\"],[12],[2,\"\\n    \"],[10,\"p\"],[12],[1,[32,1,[\"username\"]]],[2,\"'s Profile Page\"],[13],[2,\"\\n    \"],[10,\"p\"],[12],[2,\"Your are \"],[1,[32,1,[\"age\"]]],[2,\" years old\"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"friends-list\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n    \"],[8,\"add-friend\",[],[[],[]],null],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}",
+    "id": "pCWUrlqy",
+    "block": "{\"symbols\":[\"@model\",\"@changePage\",\"@betInfoHandler\"],\"statements\":[[10,\"div\"],[14,0,\"left\"],[12],[2,\"\\n    \"],[10,\"p\"],[12],[1,[32,1,[\"username\"]]],[2,\"'s Profile Page\"],[13],[2,\"\\n    \"],[10,\"p\"],[12],[2,\"Your are \"],[1,[32,1,[\"age\"]]],[2,\" years old\"],[13],[2,\"\\n    \"],[8,\"profile\",[],[[\"@model\",\"@changePage\",\"@betInfoHandler\"],[[32,1],[32,2],[32,3]]],null],[2,\"\\n    \\n    \"],[8,\"bets-user-created\",[],[[\"@model\",\"@changePage\",\"@betInfoHandler\"],[[32,1],[32,2],[32,3]]],null],[2,\"\\n\"],[13],[2,\"\\n\"]],\"hasEval\":false,\"upvars\":[]}",
     "meta": {
       "moduleName": "client/components/profile-page.hbs"
     }
@@ -1096,6 +1356,174 @@
   _exports.default = ProfilePageComponent;
 
   Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, ProfilePageComponent);
+});
+;define("client/components/profile", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _temp;
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  const __COLOCATED_TEMPLATE__ = Ember.HTMLBars.template(
+  /*
+    <h1>{{@model.username}}'s Profile</h1> <img id='preview-image' src='' alt='pfp'>
+  
+  
+  <p>Change Selfie:</p> 
+  
+  <input
+    multiple="true"
+    onchange={{action uploadFile}}
+    accept="image/png,image/jpeg,application/pdf"
+    type="file"
+    />
+  
+  
+  {{!-- <div>
+    <p id='bio'>{{tempUser.bio}} </p>
+  </div> --}}
+  
+  <br>
+  
+  <div>
+    <h3>Current Bets {{@model.username}} Is a Part Of:</h3>
+    <ul>
+    {{#if this.notEmptyArray}}
+      {{#each this.betsApartOf key="index" as |apart|}}
+          <li class="no-dots"> 
+              <p class="time-created">{{apart.betData.betParticipants.0.userData.userTime}}</p> 
+              <a href="#" class="list-mybets-title" onclick={{fn redirectToIndiv apart.betID}}>{{apart.betData.betTitle}}</a>
+          </li>
+      {{/each}}
+    {{else}}
+          <p class="no-created-bets">You are not apart of any bets</p>
+    {{/if}}
+    </ul>
+  </div>
+  
+    
+  
+    <br>
+  */
+  {
+    "id": "6712G9XT",
+    "block": "{\"symbols\":[\"apart\",\"@model\"],\"statements\":[[10,\"h1\"],[12],[1,[32,2,[\"username\"]]],[2,\"'s Profile\"],[13],[2,\" \"],[10,\"img\"],[14,1,\"preview-image\"],[14,\"src\",\"\"],[14,\"alt\",\"pfp\"],[12],[13],[2,\"\\n\\n\\n\"],[10,\"p\"],[12],[2,\"Change Selfie:\"],[13],[2,\" \\n\\n\"],[10,\"input\"],[14,\"multiple\",\"true\"],[15,\"onchange\",[30,[36,5],[[32,0],[35,4]],null]],[14,\"accept\",\"image/png,image/jpeg,application/pdf\"],[14,4,\"file\"],[12],[13],[2,\"\\n\\n\\n\"],[2,\"\\n\"],[10,\"br\"],[12],[13],[2,\"\\n\\n\"],[10,\"div\"],[12],[2,\"\\n  \"],[10,\"h3\"],[12],[2,\"Current Bets \"],[1,[32,2,[\"username\"]]],[2,\" Is a Part Of:\"],[13],[2,\"\\n  \"],[10,\"ul\"],[12],[2,\"\\n\"],[6,[37,6],[[32,0,[\"notEmptyArray\"]]],null,[[\"default\",\"else\"],[{\"statements\":[[6,[37,3],[[30,[36,2],[[30,[36,2],[[32,0,[\"betsApartOf\"]]],null]],null]],[[\"key\"],[\"index\"]],[[\"default\"],[{\"statements\":[[2,\"        \"],[10,\"li\"],[14,0,\"no-dots\"],[12],[2,\" \\n            \"],[10,\"p\"],[14,0,\"time-created\"],[12],[1,[32,1,[\"betData\",\"betParticipants\",\"0\",\"userData\",\"userTime\"]]],[13],[2,\" \\n            \"],[10,\"a\"],[14,6,\"#\"],[14,0,\"list-mybets-title\"],[15,\"onclick\",[30,[36,1],[[35,0],[32,1,[\"betID\"]]],null]],[12],[1,[32,1,[\"betData\",\"betTitle\"]]],[13],[2,\"\\n        \"],[13],[2,\"\\n\"]],\"parameters\":[1]}]]]],\"parameters\":[]},{\"statements\":[[2,\"        \"],[10,\"p\"],[14,0,\"no-created-bets\"],[12],[2,\"You are not apart of any bets\"],[13],[2,\"\\n\"]],\"parameters\":[]}]]],[2,\"  \"],[13],[2,\"\\n\"],[13],[2,\"\\n\\n  \\n\\n  \"],[10,\"br\"],[12],[13]],\"hasEval\":false,\"upvars\":[\"redirectToIndiv\",\"fn\",\"-track-array\",\"each\",\"uploadFile\",\"action\",\"if\"]}",
+    "meta": {
+      "moduleName": "client/components/profile.hbs"
+    }
+  });
+
+  let profileComponent = (_dec = Ember._tracked, _dec2 = Ember.inject.service, _dec3 = Ember._tracked, _dec4 = Ember._tracked, _dec5 = Ember._tracked, _dec6 = Ember._tracked, _dec7 = Ember._tracked, _dec8 = Ember._action, (_class = (_temp = class profileComponent extends _component.default {
+    constructor() {
+      super(...arguments);
+
+      _initializerDefineProperty(this, "activePage", _descriptor, this);
+
+      _initializerDefineProperty(this, "router", _descriptor2, this);
+
+      _initializerDefineProperty(this, "username", _descriptor3, this);
+
+      _initializerDefineProperty(this, "id", _descriptor4, this);
+
+      _initializerDefineProperty(this, "desc", _descriptor5, this);
+
+      _initializerDefineProperty(this, "userInfo", _descriptor6, this);
+
+      _initializerDefineProperty(this, "betsApartOf", _descriptor7, this);
+
+      this.username = this.args.username;
+      this.userInfo = null;
+      this.betsCreated = []; //get bet info
+
+      _jquery.default.get(`${_environment.default.APP.API_ENDPOINT}/profile/apartOfBets`, {
+        username: this.args.model.cookie
+      }).done(betsApartOfList => {
+        this.betsApartOf = betsApartOfList;
+      });
+    }
+
+    uploadFile(event) {
+      var self = this;
+      const reader = new FileReader();
+      const file = event.target.files[0];
+      let imageData;
+
+      reader.onload = function () {
+        imageData = reader.result;
+        self = ('image', imageData);
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+
+      (0, _jquery.default)('#preview-image').attr('src', event.target.result);
+    }
+
+    get notEmptyArray() {
+      if (this.betsApartOf.length == 0) return false;else return true;
+    }
+
+    redirectToIndiv(id) {
+      this.args.betInfoHandler(id);
+      this.args.changePage('createbet');
+    }
+
+  }, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "activePage", [_dec], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return 'profile';
+    }
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "router", [_dec2], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "username", [_dec3], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "id", [_dec4], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "desc", [_dec5], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, "userInfo", [_dec6], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, "betsApartOf", [_dec7], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return [];
+    }
+  }), _applyDecoratedDescriptor(_class.prototype, "redirectToIndiv", [_dec8], Object.getOwnPropertyDescriptor(_class.prototype, "redirectToIndiv"), _class.prototype)), _class));
+  _exports.default = profileComponent;
+  ;
+
+  Ember._setComponentTemplate(__COLOCATED_TEMPLATE__, profileComponent);
 });
 ;define("client/components/signup", ["exports", "@glimmer/component", "jquery", "client/config/environment"], function (_exports, _component, _jquery, _environment) {
   "use strict";
