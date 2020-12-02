@@ -15,6 +15,7 @@ export default class IndividualBetComponent extends Component {
 @tracked individualBet = {}
 @tracked betAgainst = null;
 @tracked userIdNum;
+@tracked username;
 @tracked retrievedData;
 @tracked userData;
 @tracked currentBetID; //depends on which bet you join get the ID of the bet
@@ -28,16 +29,15 @@ export default class IndividualBetComponent extends Component {
 
 constructor(){
     super(...arguments)
-    this.currentBetID = '' ; 
+    this.loadSampleData();
+    this.requestData()
+    console.log(this.args.model);
+    console.log(this.args.model._id);
+    this.userIdNum = this.args.model._id;
+    this.username = this.args.model.username;
+}
 
-    // when you join a bet from a list of existing bets in the home, 
-    // bet that gets loaded and updated is the existing betID that needs to be pulled from the database
-    this.userIdNum = localStorage.getItem('cookie');
-    //this.loadSampleData();
-    this.requestData();
-    this.requestUserData(); // when you are at this page you need to get the current user to create a bet and join
-    //this.getTimeAndDate();
-    //console.log(this.userIdNum);
+newData(){
 
 }
 
@@ -89,6 +89,10 @@ this.currentTime = '' + month + '/' + day + '/' + year + ' ' + hour + ':' + min 
 
 loadSampleData(){
 
+    /*loadSampleData creates new data every time Create Bet page is clicked,
+    instead should look for preexisting data and load that
+    */
+
     this.individualBet = {
 
         //betID: '001',
@@ -121,15 +125,14 @@ createBet(title, amount, detail){
         betData: {             
             betTitle: title,
             betAmount: amount,
-            betAdmin: this.userData[0].username, // should be a unique key as identifier it is currently the cookie
+            betAdmin: this.userIdNum,
             isAdmin: true, 
             betResolution: false,
             betDetail: detail,
             betParticipants:[],
         }
     }
-    this.getTimeAndDate()
-    this.individualBet.betData.betParticipants.pushObject({userID:this.userIdNum,userData:{userName: this.userData[0].username, userTime: this.currentTime, betSide: this.betAgainst, }})
+    this.individualBet.betData.betParticipants.pushObject({userID: this.userIdNum,userData:{userName: this.username, userTime: this.currentTime, betSide: this.betAgainst, }})
     this.nameList = this.individualBet.betData.betParticipants;
     this.displayCreateBet = false;
     this.createData();
@@ -147,7 +150,7 @@ joinBet(){
             betSide: this.betAgainst, 
         }
     })
-    //console.log(this.individualBet.betData.betParticipants)
+    console.log(this.individualBet.betData.betParticipants)
     this.updateData();
 }
 resolveBet(){
