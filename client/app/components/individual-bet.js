@@ -15,6 +15,7 @@ export default class IndividualBetComponent extends Component {
 @tracked individualBet = {}
 @tracked betAgainst = null;
 @tracked userIdNum = '102';
+@tracked username;
 @tracked retrievedData;
 @tracked sendData;
 
@@ -26,7 +27,10 @@ constructor(){
     super(...arguments)
     this.loadSampleData();
     this.requestData()
-
+    console.log(this.args.model);
+    console.log(this.args.model._id);
+    this.userIdNum = this.args.model._id;
+    this.username = this.args.model.username;
 }
 
 newData(){
@@ -56,6 +60,10 @@ newData(){
 }
 
 loadSampleData(){
+
+    /*loadSampleData creates new data every time Create Bet page is clicked,
+    instead should look for preexisting data and load that
+    */
 
     this.individualBet = {
 
@@ -92,14 +100,14 @@ createBet(title, amount, detail, side){
         betData: {             
             betTitle: title,
             betAmount: amount,
-            betAdmin: 'AdminUserID',
+            betAdmin: this.userIdNum,
             isAdmin: true, 
             betResolution: false,
             betDetail: detail,
             betParticipants:[],
         }
     }
-    this.individualBet.betData.betParticipants.pushObject({userID:'AdminUserID',userData:{userName: 'AdminUserName', userTime: this.currentTime, betSide: this.betAgainst, }})
+    this.individualBet.betData.betParticipants.pushObject({userID: this.userIdNum,userData:{userName: this.username, userTime: this.currentTime, betSide: this.betAgainst, }})
     this.nameList = this.individualBet.betData.betParticipants;
     this.displayCreateBet = false;
     this.createData();
@@ -117,7 +125,7 @@ joinBet(user, name){
         }
     })
     console.log(this.individualBet.betData.betParticipants)
-    updateData();
+    this.updateData();
 }
 resolveBet(){
     this.individualBet.betData.betResolution = true
