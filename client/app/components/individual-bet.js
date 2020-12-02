@@ -31,8 +31,6 @@ constructor(){
     super(...arguments)
     this.loadSampleData();
     this.requestData()
-    console.log(this.args.model);
-    console.log(this.args.model._id);
     this.userIdNum = this.args.model._id;
     this.username = this.args.model.username;
 }

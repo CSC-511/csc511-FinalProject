@@ -9,7 +9,6 @@
 <br>
 
 <body class= "main_bet_page">
-<p>{{@model.username}}'s Betting Page</p>
 {{#if displayCreateBet}}
     <h1 class = "create_bet" > Create a Bet</h1>
 
@@ -134,7 +133,6 @@
 <br><br><br><br>
         
     {{#if (eq userIdNum individualBet.betData.betAdmin)}}
-        <p>{{betDataEntered}}</p>
         {{#if betResolution}}
         <button class = "button_resolve" onclick={{action this.changeAdminResolvedBet}}> Bet Resolve</button>
         <button class = "button_resolve"> Bet Unresolved</button>
