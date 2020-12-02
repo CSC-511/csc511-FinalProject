@@ -35,11 +35,24 @@ export default class NavbarComponent extends Component {
 
     @action 
     logOut(){
-        const cookie = localStorage.getItem('cookie');       
-        $.post(`${ENV.APP.API_ENDPOINT}/auth/logout`, ({cookie:cookie}), (result)=>{
-            if(result){
-                this.router.transitionTo('login');
-            }
-        });  
+            $.post(`${ENV.APP.API_ENDPOINT}/auth/logout`, { cookie: FAKE_COOKIES }).done(didLogOut => {
+                if(didLogOut){
+                    this.router.transitionTo('login')
+
+                }
+            })
+        
     }
+
+    @action
+    signOut(){
+        $.post(`${ENV.APP.API_ENDPOINT}/auth/signOut`, { cookie: FAKE_COOKIES }).done(didSignOut => {
+            if(didSignOut){
+                this.router.transitionTo('login')
+                // this.args.changePage('login')
+
+            }
+        })  
+    }
+
 }

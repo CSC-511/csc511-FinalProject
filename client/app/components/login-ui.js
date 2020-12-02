@@ -25,7 +25,13 @@ export default class LoginComponent extends Component {
         if(this.userName && this.userPass){
             $.post(`${ENV.APP.API_ENDPOINT}/auth/login`, ({username: this.userName,password: this.userPass}), (result)=>{
                 if(result && result.isLoggedIn){
+                    //I just put this in to check if session storage is working
+                    console.log("Cookie id: " + result.cookie);
+                    sessionStorage.setItem('cookie', result.cookie);
+                    // sessionStorage.removeItem('Cookie');
+                    
                     localStorage.setItem('cookie',result.cookie);
+                     //localStorage.removeItem('cookie');
                     this.router.transitionTo('/');
                 }
                 else{
