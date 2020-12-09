@@ -1,7 +1,9 @@
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import "https://fonts.googleapis.com/css2?family=Raleway:wght@200";
-@import "login.css";
-@import "signup.css";
+@import "suli.css";
+@import "friend.css";
+@import "bet.css";
+@import "navbar.css";
 
 body{
     margin: 0;
@@ -14,6 +16,7 @@ body{
     font-family: 'Raleway', sans-serif;
 }
 
+<<<<<<< HEAD
 .welcome h1{
     position: absolute;
     top: 10%;
@@ -325,6 +328,8 @@ nav.topnav {
 	color: #ff5900;
 }
 
+=======
+>>>>>>> c7383f23... fixed css
 .left{
 	float: left;
 	width: 85%;
@@ -339,6 +344,7 @@ nav.topnav {
 
 }
 
+<<<<<<< HEAD
 .user-created-bets{
 	text-align: center;
 }
@@ -374,3 +380,9 @@ nav.topnav {
 .list-mybets-title:hover{
     text-decoration: underline;
 }
+=======
+.temp{
+    margin: 16px 0px;
+    padding: 0;
+}
+>>>>>>> c7383f23... fixed css
