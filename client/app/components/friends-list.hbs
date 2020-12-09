@@ -10,7 +10,7 @@
     {{#each this.friendsListData as |friendData|}}
     
     
-    <img class="profile-pic" src={{friendData.img}} alt={{friendData.username}} />
+    <img id="profile-pic" src='/assets/images/pfp.jpg' alt={{friendData.username}} />
     <p class="friend-name"> {{friendData.username}} </p>
     <button onclick={{fn deleteFriend friendData.username}}>Delete</button>
     <br>

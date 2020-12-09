@@ -41,7 +41,7 @@ export default class profileComponent extends Component {
         reader.readAsDataURL(file);
       }
 
-      $('#preview-image').attr('src', event.target.result);
+      $('#profile-pic').attr('src', event.target.result);
 
   }
 
