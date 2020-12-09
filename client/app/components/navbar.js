@@ -46,7 +46,9 @@ export default class NavbarComponent extends Component {
 
     @action
     signOut(){
-        $.post(`${ENV.APP.API_ENDPOINT}/auth/signOut`, { cookie: FAKE_COOKIES }).done(didSignOut => {
+        const cookie = localStorage.getItem('cookie'); 
+        const coke = sessionStorage.getItem('cookie'); 
+        $.post(`${ENV.APP.API_ENDPOINT}/auth/signOut`, { cookie: coke }).done(didSignOut => {
             if(didSignOut){
                 this.router.transitionTo('login')
                 // this.args.changePage('login')
