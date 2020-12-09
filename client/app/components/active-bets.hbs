@@ -1,6 +1,6 @@
 <div class="container">
  <div class="table-responsive">          
-  <table class="table">
+  <table class="table table-dark table-hover ">
     <thead>
       <tr>
         <th>Bet Title</th>
@@ -11,14 +11,18 @@
 {{#each this.betList key = 'index' as |betList|}}
     <tbody>
       <tr>
-        <td><a href='#' class="bet_list" onclick={{fn redirectToIndiv betList.betID}}> {{betList.betData.betTitle}}</a> </td>
+        <td> {{betList.betData.betTitle}}</td>
         <td>$ {{betList.betData.betAmount}}.00</td>
         <td>{{betList.betData.betParticipants.0.userData.userTime}}</td>
+<<<<<<< HEAD
           <th>
             <button><a href='#' class="bet_list" onclick={{fn redirectToIndiv betList.betID}}>
               {{if (eq @model.username betList.betData.betAdmin) "Resolve" "Join"}}
             </a></button>
           </th>
+=======
+          <th><button class="btn btn-success" onclick={{fn redirectToIndiv betList.betID}}> Join</button></th>  
+>>>>>>> 8e7cd9e6... updated ui
       </tr>
     </tbody>
 {{/each}}
