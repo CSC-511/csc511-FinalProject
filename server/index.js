@@ -13,7 +13,19 @@ const TEMPORARY_DEMO_COOKIE_2 = 123;
 
 
 const mongo = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://localhost:27017'
+// const url = "mongodb+srv://username:password@cluster0.eueny.mongodb.net/<dbname>?retryWrites=true&w=majority"
+// try {
+//     // Connect to the MongoDB cluster
+//      mongoose.connect(
+//       url,
+//       { useNewUrlParser: true, useUnifiedTopology: true },
+//       () => console.log(" Mongoose is connected")
+//     );
+
+//   } catch (e) {
+//     console.log("could not connect");
+//   }
 
 mongo.connect(url, {
     useNewUrlParser: true,
