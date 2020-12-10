@@ -26,24 +26,24 @@ export default class profileComponent extends Component {
       });
 }
 
-    uploadFile(event) {
-      //var self = this;
-      const reader = new FileReader();
-      const file = event.target.files[0];
-      //let imageData;
+  //   uploadFile(event) {
+  //     //var self = this;
+  //     const reader = new FileReader();
+  //     const file = event.target.files[0];
+  //     //let imageData;
 
-      reader.onload = function() {
-      //imageData = reader.result;
-      //self = ('image', imageData);
-      };
+  //     reader.onload = function() {
+  //     //imageData = reader.result;
+  //     //self = ('image', imageData);
+  //     };
 
-      if (file) {
-        reader.readAsDataURL(file);
-      }
+  //     if (file) {
+  //       reader.readAsDataURL(file);
+  //     }
 
-      $('#profile-pic').attr('src', event.target.result);
+  //     $('#profile-pic').attr('src', event.target.result);
 
-  }
+  // }
 
   get notEmptyArray(){
     if(this.betsApartOf.length == 0)
