@@ -17,10 +17,9 @@ body{
     color: white;
   } */
 
-.profile-pic {
-	/* height */
-	height: 100px;
-	width: 100px;
+#profilePic {
+	height: 50px;
+	width: 50px;
 	border-radius: 50%;
 }
 

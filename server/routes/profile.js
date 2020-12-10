@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 const mongo = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017';
+
 mongo.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -26,6 +27,7 @@ mongo.connect(url, {
             res.json(users);
         }); 
     });
+
 
 
  
