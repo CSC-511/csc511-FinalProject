@@ -15,14 +15,11 @@ body{
     background-size: cover;
     font-family: 'Raleway', sans-serif;
     color: white;
-<<<<<<< HEAD
-=======
   } */
 
-.profile-pic {
-	/* height */
-	height: 100px;
-	width: 100px;
+#profilePic {
+	height: 50px;
+	width: 50px;
 	border-radius: 50%;
 }
 
@@ -166,7 +163,6 @@ body{
 	background-color: rgb(68, 67, 67);
 	padding: 20px;
 	color: #ff5900;
->>>>>>> 98505ae9... bug fixes
 }
 
 .left{
@@ -181,8 +177,6 @@ body{
 	float: right;
 	width: 250px;
 	padding-left: 15px;
-<<<<<<< HEAD
-=======
 	border-left: 1px solid #ff5900;
 
 }
@@ -191,12 +185,7 @@ body{
 	text-align: center;
 }
 
-/* Add a color to the active/current link */
->>>>>>> 98505ae9... bug fixes
 
-    padding-bottom: 30px;
-
-}
 
 .temp{
     margin: 16px 0px;
