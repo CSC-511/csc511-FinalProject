@@ -21,29 +21,29 @@ export default class profileComponent extends Component {
         this.userInfo = null;
         this.betsCreated = [];
         //get bet info
-        $.get(`${ENV.APP.API_ENDPOINT}/profile/apartOfBets`, {username: this.args.model.cookie}).done(betsApartOfList => {
+        $.get(`${ENV.APP.API_ENDPOINT}/profile/apartOfBets`, {userCookie: this.args.model.cookie}).done(betsApartOfList => {
           this.betsApartOf = betsApartOfList;
       });
 }
 
-    uploadFile(event) {
-      //var self = this;
-      const reader = new FileReader();
-      const file = event.target.files[0];
-      //let imageData;
+  //   uploadFile(event) {
+  //     //var self = this;
+  //     const reader = new FileReader();
+  //     const file = event.target.files[0];
+  //     //let imageData;
 
-      reader.onload = function() {
-      //imageData = reader.result;
-      //self = ('image', imageData);
-      };
+  //     reader.onload = function() {
+  //     //imageData = reader.result;
+  //     //self = ('image', imageData);
+  //     };
 
-      if (file) {
-        reader.readAsDataURL(file);
-      }
+  //     if (file) {
+  //       reader.readAsDataURL(file);
+  //     }
 
-      $('#preview-image').attr('src', event.target.result);
+  //     $('#profile-pic').attr('src', event.target.result);
 
-  }
+  // }
 
   get notEmptyArray(){
     if(this.betsApartOf.length == 0)

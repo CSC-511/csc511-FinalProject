@@ -13,6 +13,8 @@ export default class IndividualBetComponent extends Component {
 @tracked displayCreateBet;
 @tracked nameList = [];
 @tracked individualBet = {}
+
+@tracked validAmount = true
 @tracked betAgainst = null;
 @tracked userIdNum;
 @tracked userData;
@@ -84,6 +86,23 @@ getTimeAndDate(){
 }
 
 createBet(title, amount, detail){
+
+    
+    if (title==null)
+    {
+        alert("The bet is missing a title try again");
+    }
+    else if (amount==null)
+    {
+        alert("The bet is missing an amount try again!!");
+    }
+
+    else if (detail==null)
+    {
+        alert("The bet is missing a description try again!!");
+    }
+    
+    else{
     this.currentTime = new Date();
     this.individualBet = {
         betData: {             
@@ -92,13 +111,15 @@ createBet(title, amount, detail){
             betAdmin: this.userData[0].username,
             betResolution: false,
             betDetail: detail,
-            betParticipants:[],
+            betParticipants:[]
         }
     }
     this.getTimeAndDate()
     this.individualBet.betData.betParticipants.pushObject({userID:this.userIdNum,userData:{userName: this.userData[0].username, userTime: this.currentTime, betSide: this.betAgainst, }})
     this.displayCreateBet = false;
     this.createData();
+    alert("The bet Has been successfully created");
+}
 }
 
 joinBet(){
@@ -113,7 +134,9 @@ joinBet(){
             betSide: this.betAgainst, 
         }
     })
+    
     this.updateData();
+    
 }
 resolveBet(){
     this.individualBet.betData.betResolution = true
@@ -122,6 +145,7 @@ inputBetTitleValue(input){
     this.currentBetTitleValue  = input.target.value;    
 }
 inputBetAmountValue(input){
+   
     this.currentBetAmountValue  = input.target.value;   
 }
 inputBetDescriptionValue(input){
@@ -155,7 +179,6 @@ createData(){
     $.get(`${ENV.APP.API_ENDPOINT}/bets/createdata`, {
         betID: this.currentBetID, 
         betData: this.individualBet.betData,
-        
         }
     )}
 

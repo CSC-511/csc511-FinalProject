@@ -10,6 +10,9 @@ export default class LoginComponent extends Component {
     @tracked message = null;
     @tracked status = false;
     @service router;
+    // @tracked username;
+    // @tracked password;
+    // @tracked logInSuccess = true;
 
     constructor(){
         super(...arguments);
@@ -55,6 +58,7 @@ export default class LoginComponent extends Component {
             this.hideAlert();
         }
     }
+            
 
     getUsername(input){
         this.userName = input.target.value;
@@ -69,9 +73,13 @@ export default class LoginComponent extends Component {
             setTimeout(()=> {
                 this.status = false;
                 this.message = null;
-            }, 3000)            
+            }, 3000)    
+        }        
+             
         }
-    }
+        
+
+    
 
     dismissAlert(){
         this.status = false;

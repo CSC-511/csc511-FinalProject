@@ -132,11 +132,18 @@ mongo.connect(url, {
         isLoggedIn: 'true',
         cookie: TEMPORARY_DEMO_COOKIE_3
     })
+    userAccountsCollection.insertOne({
+        username: 'Victoria',
+        password: '232',
+        userBalance: 100,
+        isLoggedIn: 'true',
+        cookie: 11111
+    })
 
     friendsCollection.insertOne({
         username: 'daniel',
         friendsWith: [
-            {username: 'Jasper'}
+            {username: 'jasper'}
         ]
     }, (err, result) => {})
     activeBetsCollection.insertOne({
@@ -184,6 +191,8 @@ mongo.connect(url, {
         })
     });
 })
+
+
 
 //Routers for coinsiding requests
 //Add if I missed yours

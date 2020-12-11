@@ -3,15 +3,17 @@
 
 {{!-- Right now, this won't be shown anywhere until the hbs file is called in the profile component. --}}
 
-<div class="container">
+<div class="friends-list">
 <h3>Friends List</h3>
 {{#if this.friendsListData}}
     
     {{#each this.friendsListData as |friendData|}}
     
     
-    <img class="profile-pic" src={{friendData.img}} alt={{friendData.firstName}} />
-    <p class="friend-name"> {{friendData.firstName}} {{friendData.lastName}}</p>
+    <img id="profilePic" src='/assets/images/pfp.jpg' alt={{friendData.username}} />
+    <p class="friend-name"> {{friendData.username}} </p>
+    <button class="btn btn-success" onclick={{fn deleteFriend friendData.username}}> Delete</button>
+    <br>
 
     {{/each}}
 

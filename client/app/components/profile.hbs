@@ -1,21 +1,16 @@
-<h1>{{@model.username}}'s Profile</h1> <img id='preview-image' src='' alt='pfp'>
+<h1>{{@model.username}}'s Profile</h1> <img id='profilePic' src='/assets/images/pfp.jpg' alt='pfp'>
 
 
 <p>Change Selfie:</p> 
 
-<input
+{{!-- <input
   multiple="true"
   onchange={{action uploadFile}}
   accept="image/png,image/jpeg,application/pdf"
   type="file"
-  />
+  /> --}}
 
-
-{{!-- <div>
-  <p id='bio'>{{tempUser.bio}} </p>
-</div> --}}
-
-<br>
+<br><br>
 
 <div>
   <h3>Current Bets {{@model.username}} Is a Part Of:</h3>
