@@ -13,7 +13,7 @@ const TEMPORARY_DEMO_COOKIE_2 = 123;
 
 
 const mongo = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27017'
+const url = 'mongodb+srv://Ben:1234@cluster0.eueny.mongodb.net/test'
 // const url = "mongodb+srv://username:password@cluster0.eueny.mongodb.net/<dbname>?retryWrites=true&w=majority"
 // try {
 //     // Connect to the MongoDB cluster
