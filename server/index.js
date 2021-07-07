@@ -6,10 +6,23 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+/**
+ * Each new Account creation would use a this function to generate a unique Cookie id
+ */
+function uniqueCookie(){
+    let _id = () =>{
+        return Math.floor((1 +Math.random()) * 0X10000);
+    }
+    return _id() + _id()  + _id();
+}
+
+
+
 const cors = require('cors');
 app.use(cors());
 const TEMPORARY_DEMO_COOKIE_1 = 123123123;
 const TEMPORARY_DEMO_COOKIE_2 = 123;
+const TEMPORARY_DEMO_COOKIE_3 = uniqueCookie();
 
 
 const mongo = require('mongodb').MongoClient
@@ -124,6 +137,13 @@ mongo.connect(url, {
         cookie: TEMPORARY_DEMO_COOKIE_2
     })
 
+    userAccountsCollection.insertOne({
+        username: 'anuoluwapo',
+        password: 'anu',
+        userBalance: 10000,
+        isLoggedIn: 'true',
+        cookie: TEMPORARY_DEMO_COOKIE_3
+    })
     userAccountsCollection.insertOne({
         username: 'Victoria',
         password: '232',
